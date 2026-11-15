@@ -1,0 +1,13 @@
+# path: PROGRAM/reload.c
+# sha256-before: 7bbf46403876d4f0797acb05973b19fe7b9552f6341a84398e15cab8bfa59f9a
+# sha256-after: b1aa1fb05ec8a908bd4c82e648c06cdd39ee4d187c06b364bf464aa5364b34ff
+# eol-before: crlf
+# eol-after: crlf
+# final-newline: no
+--- a/PROGRAM/reload.c
++++ b/PROGRAM/reload.c
+@@ -93,0 +94,2 @@
++	// do not leave the global aref dangling between transitions
++	makearef(reload_locator_ref, reload_xaddress);
+@@ -309,0 +312 @@
++	makearef(reload_locator_ref, reload_xaddress);

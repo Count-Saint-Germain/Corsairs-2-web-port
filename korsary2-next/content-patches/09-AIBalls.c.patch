@@ -1,0 +1,14 @@
+# path: PROGRAM/SEA_AI/AIBalls.c
+# sha256-before: a422e1561635287c60c97281a3bea7acc7be75ceb2649187e855a36591af742d
+# sha256-after: a59ec6ddfb0c9895a6f6f4d4324edc2baf1a216e51dc17e1ef7fbd89368b5c4a
+# eol-before: crlf
+# eol-after: crlf
+# final-newline: no
+--- a/PROGRAM/SEA_AI/AIBalls.c
++++ b/PROGRAM/SEA_AI/AIBalls.c
+@@ -11,0 +12,5 @@
++	// keep the global arefs away from the deleted AIBalls entity
++	makearef(Grapes,NullCharacter);
++	makearef(Knippels,NullCharacter);
++	makearef(Balls,NullCharacter);
++	makearef(Bombs,NullCharacter);

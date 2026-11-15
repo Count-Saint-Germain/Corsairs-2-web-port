@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import {spawnSync} from 'node:child_process';import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),game=path.join(root,'korsary2-work/game/ENGINE.exe');
+test('lists expected imports of the original game executable',{skip:!fs.existsSync(game)},()=>{for(const tool of ['korsary2-next/tools/imports.mjs','korsary2-work/tools/imports.mjs']){const r=spawnSync(process.execPath,[path.join(root,tool),game],{encoding:'utf8'});assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/KERNEL32\.dll : .*CreateFileA/);assert.match(r.stdout,/USER32\.dll : .*CreateWindowExA/);}});
+test('reports a usage error without input',()=>{const r=spawnSync(process.execPath,[path.join(root,'korsary2-next/tools/imports.mjs')],{encoding:'utf8'});assert.notEqual(r.status,0);assert.match(r.stderr,/Usage/);});

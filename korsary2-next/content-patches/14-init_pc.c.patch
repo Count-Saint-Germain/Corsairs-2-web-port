@@ -1,0 +1,11 @@
+# path: PROGRAM/CONTROLS/init_pc.c
+# sha256-before: 0b9ade3ab56b00b473fe1be434f263a3e1433ad74ff5e714aa4135a91f4505e4
+# sha256-after: e379904f5199c1e3ed36ca0d8b90115d4028695165d71fc202930cec4f1ceb91
+# eol-before: crlf
+# eol-after: crlf
+# final-newline: yes
+--- a/PROGRAM/CONTROLS/init_pc.c
++++ b/PROGRAM/CONTROLS/init_pc.c
+@@ -118 +118 @@
+-	CI_CreateAndSetControls( "WorldMapControls", "WMapSkipEncounter", CI_GetKeyCode("VK_B"), 0, true );
++	CI_CreateAndSetControls( "WorldMapControls", "WMapSkipEncounter", CI_GetKeyCode("KEY_B"), 0, true );

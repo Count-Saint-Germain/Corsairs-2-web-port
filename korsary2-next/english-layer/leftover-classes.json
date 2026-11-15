@@ -1,0 +1,545 @@
+{
+ "format": 1,
+ "description": "Классификация литералов PROGRAM, остающихся русскими в английском слое (они русские и в американской версии 1.0). identifier — ключ/путь/идентификатор (голос, имя ресурса): ПЕРЕВОДИТЬ НЕЛЬЗЯ; debug — отладочный Trace или нескомпилируемый справочник: игроку не показывается; ambiguous — показ игроку не установлен или файл не подключается: не переводится. prepare_english.py: ручная строка на литерал этого списка — отказ; остаток без записи и запись без остатка — отказ. Переведённые видимые литералы (class visible) в списке не нужны: они в manual-strings.json. Текста игры здесь нет, только хэши, ординалы и пояснения.",
+ "entries": [
+  {
+   "file": "PROGRAM/DIALOGS/Docker Generated_dialog.c",
+   "index": 47,
+   "ru_sha256": "16f5a1189e016a871f76fee65f2aed7955d334ab2a5968555bea0934063db5c8",
+   "class": "debug",
+   "why": "trace \"Айдишник персонажа\" (только system.log)"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Docker Generated_dialog.c",
+   "index": 51,
+   "ru_sha256": "16f5a1189e016a871f76fee65f2aed7955d334ab2a5968555bea0934063db5c8",
+   "class": "debug",
+   "why": "trace \"Айдишник персонажа\" (только system.log)"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Ralph Damerell_dialog.c",
+   "index": 70,
+   "ru_sha256": "16f5a1189e016a871f76fee65f2aed7955d334ab2a5968555bea0934063db5c8",
+   "class": "debug",
+   "why": "trace \"Айдишник персонажа\" (только system.log)"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Ralph Damerell_dialog.c",
+   "index": 74,
+   "ru_sha256": "16f5a1189e016a871f76fee65f2aed7955d334ab2a5968555bea0934063db5c8",
+   "class": "debug",
+   "why": "trace \"Айдишник персонажа\" (только system.log)"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.c",
+   "index": 10,
+   "ru_sha256": "2fbbce857dfe451ca8f3ec995f8d776c28912cc23817554eed475d50d070f97c",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.c не подключается ни #include, ни Dialog.Filename (Dialog_func.c включает PROGRAM/Rumour_Data.c, он переведён американской парой); NPC_information[] нигде не читается"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.c",
+   "index": 11,
+   "ru_sha256": "f1af5ee4b2b00ad06a57cbee7ced0e4162859483d93c47bab926ae81fd05162b",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.c не подключается ни #include, ни Dialog.Filename (Dialog_func.c включает PROGRAM/Rumour_Data.c, он переведён американской парой); NPC_information[] нигде не читается"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.c",
+   "index": 12,
+   "ru_sha256": "5e7f0f7933e2019291d146f2785ba0b184161e6bf9149651ff1b29eff416319e",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.c не подключается ни #include, ни Dialog.Filename (Dialog_func.c включает PROGRAM/Rumour_Data.c, он переведён американской парой); NPC_information[] нигде не читается"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.c",
+   "index": 13,
+   "ru_sha256": "cb8a83950de660b220892d85019666f52322a446c51648849d162b049b4c6c5a",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.c не подключается ни #include, ни Dialog.Filename (Dialog_func.c включает PROGRAM/Rumour_Data.c, он переведён американской парой); NPC_information[] нигде не читается"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.c",
+   "index": 14,
+   "ru_sha256": "6c31cbd9f84c99620d3924164735808189346ab4c4ea4c320df71a69b59dbd85",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.c не подключается ни #include, ни Dialog.Filename (Dialog_func.c включает PROGRAM/Rumour_Data.c, он переведён американской парой); NPC_information[] нигде не читается"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.c",
+   "index": 15,
+   "ru_sha256": "14f79007c013b60e2fe8f013cd55dc4e4079e05a4a1ec6a92f319830fb6fd634",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.c не подключается ни #include, ни Dialog.Filename (Dialog_func.c включает PROGRAM/Rumour_Data.c, он переведён американской парой); NPC_information[] нигде не читается"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.c",
+   "index": 16,
+   "ru_sha256": "28922523b0313cb78fb301b3ca1c4937b567646dfbe49548e3e2fac750f6fe1c",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.c не подключается ни #include, ни Dialog.Filename (Dialog_func.c включает PROGRAM/Rumour_Data.c, он переведён американской парой); NPC_information[] нигде не читается"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.c",
+   "index": 17,
+   "ru_sha256": "43ecd69112aaa81d3dc19a018a0da7e01467c53ee572bb18e6e859411b46879d",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.c не подключается ни #include, ни Dialog.Filename (Dialog_func.c включает PROGRAM/Rumour_Data.c, он переведён американской парой); NPC_information[] нигде не читается"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.h",
+   "index": 0,
+   "ru_sha256": "bf713a28b3f0bc594752473f4d753c09878e6517ff95caedcd0ca5ece01ca595",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.h подключается только мёртвым DIALOGS/Rumour_Data.c; слухи игры берутся из PROGRAM/Rumour_Data.c"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.h",
+   "index": 1,
+   "ru_sha256": "84ac917fd5291b910e35c101cac8304d86877e0b29391364ee54d29cf8e803e9",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.h подключается только мёртвым DIALOGS/Rumour_Data.c; слухи игры берутся из PROGRAM/Rumour_Data.c"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.h",
+   "index": 2,
+   "ru_sha256": "bd765a6c7cba77eb6e2e0ec6dcf908533c37b80d33e99837762a78b1af75543d",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.h подключается только мёртвым DIALOGS/Rumour_Data.c; слухи игры берутся из PROGRAM/Rumour_Data.c"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.h",
+   "index": 3,
+   "ru_sha256": "923464113873653f715cfc9209b90536630d341a6f15e5bc24a4ccc2e8618d30",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.h подключается только мёртвым DIALOGS/Rumour_Data.c; слухи игры берутся из PROGRAM/Rumour_Data.c"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.h",
+   "index": 4,
+   "ru_sha256": "a3b72afe2788acf164c9443dd281fda8f48b052c434f8294dc2743e0be3445fb",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.h подключается только мёртвым DIALOGS/Rumour_Data.c; слухи игры берутся из PROGRAM/Rumour_Data.c"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.h",
+   "index": 5,
+   "ru_sha256": "9d940f560abcb675f45efb0dd4d32a518fc776296d9ba0f7a7cea4278d8ffdb5",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.h подключается только мёртвым DIALOGS/Rumour_Data.c; слухи игры берутся из PROGRAM/Rumour_Data.c"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Rumour_Data.h",
+   "index": 6,
+   "ru_sha256": "c5e09f5fa20da14758091f4f511281a0af26a83737835c34b5410958c76ef92b",
+   "class": "ambiguous",
+   "why": "мёртвый файл: DIALOGS/Rumour_Data.h подключается только мёртвым DIALOGS/Rumour_Data.c; слухи игры берутся из PROGRAM/Rumour_Data.c"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 18,
+   "ru_sha256": "01880bbc2953a15b648a3c77271f17d0d7753d74f502221e2e8230e973a30f57",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 21,
+   "ru_sha256": "d544ff0141a4b27c3318276d2e380fe746e7e0788d9f3209a85c9ef5d30a013c",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 32,
+   "ru_sha256": "c541fb54c381d5331fcf42a83032537e67715b26b7f925f3eb46414270f9798c",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 36,
+   "ru_sha256": "f3d80aca3e2f525673f5d9d0e6908c5a463105bba325c0397c769c91fc2e2713",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 39,
+   "ru_sha256": "88a68f0750b20fb510f1390f3f41d23740090a6e1e3077c8b7e7aa7c6a548655",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 42,
+   "ru_sha256": "87bd0d25dee3aea32984df57c35ffcf8c5add0984ad84aaf11dd98b483b1e00d",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 45,
+   "ru_sha256": "00bc72bac87c15dc9bc5f60042d011f3f6755b31480700be57c89ce1061d1e49",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 57,
+   "ru_sha256": "53e5a3178a441a771917e594ee28a887c3354d263de045d1128475c0f1bb55f9",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 60,
+   "ru_sha256": "5eb3805d3319d5e301c56a25f90d7ca9746e6463733dfa4d1b47d4d95709fcce",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 63,
+   "ru_sha256": "7e7a69ba2081c57027acad21c2a76270bd999df30b874259c2dbe077f4f25cdb",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 66,
+   "ru_sha256": "ed09e1c57583f781f1dddf44959097c51d791b30fb5f6441104495f4315e6439",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 69,
+   "ru_sha256": "dadad4e17c7f71d8a6c154217898738ead7b4a4fc28d206154d37716b3e1a014",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 72,
+   "ru_sha256": "0276b23000c9541f15f6c02b7bcf6f48702be951e75a687695ffbb00a32c3479",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 76,
+   "ru_sha256": "01422c485b74cd43d879f499a28ea07c27e3ea2a6b73616c3522c2b968056623",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 81,
+   "ru_sha256": "0eac2df2fd91a845e11c82dbaa71ad6c2a7555f085e9c4a64c782d207be437e5",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 92,
+   "ru_sha256": "b551392128aff1c49becaad35ae525965e873c951611d18d7cf1a382aa77b9a3",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 105,
+   "ru_sha256": "1b39e487009716a2fbff511cf51cd47cc170068d0e3370b9b5dbf1831256f2f5",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 108,
+   "ru_sha256": "ffa767d5f8ef1057feb735587d963ea4112a7b008b0d4342072d99e5228a2d26",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 111,
+   "ru_sha256": "82fe337dd87416692e86432017fddbe356a983eef63b9aca3f3a13a4c2ebf4d6",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 114,
+   "ru_sha256": "8236ada35dbb69b748c41725b9ca8ab6b4d4a7cc136fe1fd4332a1623b8c2386",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 117,
+   "ru_sha256": "5b29f68ef7fcdb07ad5287febbe008d94a24b4eb4f6289e976d147bf5df5c1bf",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 120,
+   "ru_sha256": "1f8ac51f9c89d55c824126786ef27729ab70be8627429cd69507305400832e6f",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Valentin Massoni_dialog.c",
+   "index": 126,
+   "ru_sha256": "d820d13e8f011e5779492e60343584f804d65ca6339c4d9e771ad7a9f14cdae0",
+   "class": "identifier",
+   "why": "путь озвучки Dialog.snd = \"voice\\VIМА\\VIМАnnn\" (кириллические М, А в имени каталога/файла): ключ ресурса, перевод ломает озвучку"
+  },
+  {
+   "file": "PROGRAM/Dialog_func.c",
+   "index": 177,
+   "ru_sha256": "22696266dad6c25c2acc538b31835a78f5d9c8100e90c4b9d1a819174897d81e",
+   "class": "debug",
+   "why": "Trace: перемещение персонажей (только system.log, игроку не показывается)"
+  },
+  {
+   "file": "PROGRAM/Dialog_func.c",
+   "index": 211,
+   "ru_sha256": "2b80d917b48cade5dcefdc93a1035fd9508345723fd688d68da41f5df15bcd75",
+   "class": "debug",
+   "why": "Trace: контрабандисты (только system.log, игроку не показывается)"
+  },
+  {
+   "file": "PROGRAM/Dialog_func.c",
+   "index": 260,
+   "ru_sha256": "473ef6ba64059796fb31169ff901ff6f9c2fb0eacb1de9a4ee8fffb1059275b3",
+   "class": "debug",
+   "why": "trace: индекс острова (только system.log, игроку не показывается)"
+  },
+  {
+   "file": "PROGRAM/Dialog_func.c",
+   "index": 261,
+   "ru_sha256": "f03b1dc79fd7014cc387b32fe34331011d3b9f631cbec35d03a5ce4c8c378397",
+   "class": "debug",
+   "why": "trace: текущий остров (только system.log, игроку не показывается)"
+  },
+  {
+   "file": "PROGRAM/Dialog_func.c",
+   "index": 262,
+   "ru_sha256": "6871cdc7b1ffe89c7329d07c79006db1a77f203c37140af9bb7106dcd536e007",
+   "class": "debug",
+   "why": "trace: нация острова (только system.log, игроку не показывается)"
+  },
+  {
+   "file": "PROGRAM/Dialog_func.c",
+   "index": 263,
+   "ru_sha256": "8876576c29608155ba6792391883c10174127c0f3fabfc4453c89302e2a6999b",
+   "class": "debug",
+   "why": "Trace: нация капитана (только system.log, игроку не показывается)"
+  },
+  {
+   "file": "PROGRAM/LandEncounters/LEnc_login.c",
+   "index": 0,
+   "ru_sha256": "cd7ecdc7a2eada4bcfe05efa69a5d41d205cbd3d3b40f707751e6dec7be0a6d7",
+   "class": "debug",
+   "why": "trace генератора сухопутных энкаунтеров (только system.log)"
+  },
+  {
+   "file": "PROGRAM/LandEncounters/LEnc_login.c",
+   "index": 1,
+   "ru_sha256": "762153b10b87bad6fd6f7c29a744e4364889ec9d0b05ae656ceabf508923cd73",
+   "class": "debug",
+   "why": "trace генератора сухопутных энкаунтеров (только system.log)"
+  },
+  {
+   "file": "PROGRAM/LandEncounters/LEnc_login.c",
+   "index": 2,
+   "ru_sha256": "b119631ecc63f22388cb464b87c02dcfb56d3270fa568a3c2a903cda01cda8d6",
+   "class": "debug",
+   "why": "trace генератора сухопутных энкаунтеров (только system.log)"
+  },
+  {
+   "file": "PROGRAM/LandEncounters/LEnc_login.c",
+   "index": 4,
+   "ru_sha256": "053ee8ac3f421c7bebac286451da5ffefa4a72760c26d7699fc5e0559131cfbe",
+   "class": "debug",
+   "why": "trace генератора сухопутных энкаунтеров (только system.log)"
+  },
+  {
+   "file": "PROGRAM/LandEncounters/LEnc_login.c",
+   "index": 7,
+   "ru_sha256": "07c700c49809cb6416b979e04f3abd5470ef4d16411ec91ec4f97f1182f5577a",
+   "class": "debug",
+   "why": "trace генератора сухопутных энкаунтеров (только system.log)"
+  },
+  {
+   "file": "PROGRAM/LandEncounters/LEnc_login.c",
+   "index": 9,
+   "ru_sha256": "5b71c1a407ef0b937e83f7ccc85fdcef1bba755c82caf22c4a444514fdbcdf53",
+   "class": "debug",
+   "why": "trace генератора сухопутных энкаунтеров (только system.log)"
+  },
+  {
+   "file": "PROGRAM/LandEncounters/LEnc_login.c",
+   "index": 11,
+   "ru_sha256": "be47dade1d88a9c8bd66232a1fc5072f5a9c44a2a1d7099166c6fec436ec8843",
+   "class": "debug",
+   "why": "trace генератора сухопутных энкаунтеров (только system.log)"
+  },
+  {
+   "file": "PROGRAM/LandEncounters/LEnc_login.c",
+   "index": 19,
+   "ru_sha256": "73ebb682d845f613f2f3a35d494108e2b185721daef993ddb0d2f735aae19057",
+   "class": "debug",
+   "why": "trace генератора сухопутных энкаунтеров (только system.log)"
+  },
+  {
+   "file": "PROGRAM/LandEncounters/LEnc_login.c",
+   "index": 20,
+   "ru_sha256": "fcc134b7b392c9e72e235b318999d15b4226aa4ff2256f4ecc84789e52aac96e",
+   "class": "debug",
+   "why": "trace генератора сухопутных энкаунтеров (только system.log)"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Oxbay.c",
+   "index": 1183,
+   "ru_sha256": "4a8ae5afc30a5ce09edf4e91bd132c15572ba6a2fda87a484116462731f669e2",
+   "class": "ambiguous",
+   "why": "locations[n].label (не id.label): ни один скрипт не читает этот атрибут и не сравнивает его; показывается ли он движком - не установлено, поэтому не переводится"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 1,
+   "ru_sha256": "d57287e3fc2e0081cd339f81ba653f0caaf3d1da4e9be4988a76d0cd7a27403a",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 25,
+   "ru_sha256": "ebdc9a2f6618a0e33a0c62346da83c3018118df0f879895431ed102249ca2dab",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 29,
+   "ru_sha256": "c1d1bd7a167e3161feadc33d1b7976127bb92ccb152fcc19c7f91def299c2d39",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 31,
+   "ru_sha256": "6c6856066287c8be26c6409947a1aa55ebb0927258e8a91bfa5add76e9ebfe5f",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 33,
+   "ru_sha256": "f70e23a36252fa1ba78bc7659208a04b79002d12dc4b6030c1dca23a5d09a719",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 35,
+   "ru_sha256": "10df682e4fef5e325db673cdc786002be2c1da98394a936237f16c32646a78bf",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 37,
+   "ru_sha256": "5140f09dddd0a0fef0d7844c69686bc7605341bf69a0b69ad46f9901deeb44d9",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 38,
+   "ru_sha256": "cb460ee41d044a28a1bac460502522ca7667c253f95aac19bfd17347f07d76dc",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 49,
+   "ru_sha256": "6c9ec2c3a4fd12c8f7674a2626b81a1874ae98964856691442bbbdd5832b4d3b",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 55,
+   "ru_sha256": "0ae7a269df34f4f29ba4be43531af66d6bdd9e36897a9e30dd11c452ad98006f",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 80,
+   "ru_sha256": "cc05ee30e1e4f42e9b4b32bbb1fd05430b72ad79eb44534ef94599564b663e3e",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 81,
+   "ru_sha256": "5d49fba5095e899afe3204c5235a112f838661f8504622c67db46acad1ce3855",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/Locations/location_init.txt",
+   "index": 82,
+   "ru_sha256": "13397cb0fd7f7a4b4f6f2efd533404ebcb6fe9b5b8cf7d84a58481ce9c04fd9f",
+   "class": "debug",
+   "why": "справочный шаблон полей локации в .txt: не подключается #include и не загружается скриптами, игроку не показывается"
+  },
+  {
+   "file": "PROGRAM/QUESTS/both_reaction.c",
+   "index": 0,
+   "ru_sha256": "c79a587ba709b5376af6284f6cd9a7fd8f70e67589480cf378030564a33d5f6d",
+   "class": "debug",
+   "why": "trace \"проверяется квест\" (только system.log)"
+  },
+  {
+   "file": "PROGRAM/QUESTS/both_reaction.c",
+   "index": 902,
+   "ru_sha256": "4cacbd5d19cf604cdb8770585a6b70e29f6a02a33ad8494a17dec4352a532507",
+   "class": "debug",
+   "why": "trace \"появление береговой стражи\" (только system.log)"
+  },
+  {
+   "file": "PROGRAM/QUESTS/quests_scenes.c",
+   "index": 105,
+   "ru_sha256": "ddd6eef6846d2094bfc3e11d8c6cb915fbae74c6f8640b7b93bf020e15c667d9",
+   "class": "debug",
+   "why": "trace \"WARNING ... не реализована\" (только system.log)"
+  },
+  {
+   "file": "PROGRAM/QUESTS/quests_scenes.c",
+   "index": 109,
+   "ru_sha256": "397ca7518d449f7dfc1823ee63ca1498e1ea89fe76c5648e7f6a7ec422e925df",
+   "class": "debug",
+   "why": "trace \"WARNING ... не реализована\" (только system.log)"
+  },
+  {
+   "file": "PROGRAM/QUESTS/quests_scenes.c",
+   "index": 129,
+   "ru_sha256": "862b75db9b4030527aa6b112b2995b67ceb1d00257ef28ae7746ffbafd9876b3",
+   "class": "debug",
+   "why": "trace \"WARNING ... не реализована\" (только system.log)"
+  },
+  {
+   "file": "PROGRAM/QUESTS/quests_scenes.c",
+   "index": 142,
+   "ru_sha256": "91aa9abcc80d53cd7ac71775e82840a72361626408a0abe90a0f3398bafc16e5",
+   "class": "debug",
+   "why": "trace \"WARNING ... не реализована\" (только system.log)"
+  }
+ ]
+}

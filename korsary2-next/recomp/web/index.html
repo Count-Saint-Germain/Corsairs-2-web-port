@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<link rel="icon" href="data:,">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game</title>
+<style>
+  :root {
+    --bg: #070b08; --fg: #eef4ef; --muted: #9fb3a5; --faint: #6f8576;
+    --accent: #34b866; --accent-hi: #45cf79;
+    --card: rgba(255, 255, 255, .055); --card-hi: rgba(255, 255, 255, .09); --line: rgba(255, 255, 255, .12);
+    --field: rgba(0, 0, 0, .28); --radius: 14px;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg);
+    font: 15px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { min-height: 100%; display: grid; place-items: center; padding: 0; }
+  /* The game fills the browser viewport. The original 4:3 picture is stretched
+     to fit by default; the 4:3 button restores undistorted proportions. */
+  #stage { position: relative; width: 100%; height: 100vh; height: 100dvh; background: #000;
+    border-radius: 0; overflow: hidden; }
+  canvas { width: 100%; height: 100%; display: block; cursor: none; }
+  .hidden { display: none !important; }
+
+  /* the launcher: a floodlit pitch behind the menus */
+  #panel { position: absolute; inset: 0; overflow: auto; display: grid; place-items: center; padding: 28px;
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, .10), transparent 60%),
+      repeating-linear-gradient(90deg, rgba(255, 255, 255, .025) 0 9%, transparent 9% 18%),
+      radial-gradient(140% 120% at 50% 110%, #123d22 0%, #0b2414 45%, #060d08 100%); }
+  .view { width: min(100%, 560px); text-align: center; animation: rise .25s ease-out; }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } }
+  @media (prefers-reduced-motion: reduce) { .view { animation: none; } }
+
+  .brand { display: inline-flex; align-items: center; gap: 12px; margin: 0 0 6px; }
+  .brand h1 { margin: 0; font-size: clamp(30px, 5.2vw, 46px); font-weight: 800; letter-spacing: .04em; line-height: 1; }
+  .brand svg { width: clamp(30px, 5.2vw, 46px); height: clamp(30px, 5.2vw, 46px); color: var(--accent); flex: none; }
+  .tagline { margin: 0 0 26px; color: var(--muted); }
+  .small { font-size: 13px; color: var(--faint); }
+  p { margin: 8px 0; }
+
+  /* home: the two big choices */
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 520px) { .choices { grid-template-columns: 1fr; } }
+  .choices.single { grid-template-columns: minmax(0, 300px); justify-content: center; }
+  .choice { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px 18px; text-align: left;
+    border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); color: var(--fg); font: inherit;
+    cursor: pointer; transition: transform .12s ease, background .12s ease, border-color .12s ease; }
+  .choice:hover { transform: translateY(-2px); background: var(--card-hi); border-color: rgba(255, 255, 255, .22); }
+  .choice:focus-visible, button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent-hi); outline-offset: 2px; }
+  .choice svg { width: 30px; height: 30px; color: var(--accent); }
+  .choice b { font-size: 18px; }
+  .choice span { color: var(--muted); font-size: 14px; }
+
+  /* language switch (E1) */
+  .langbox { margin: 0 0 20px; display: grid; gap: 6px; justify-items: center; }
+  .langlabel { font-size: 13px; color: var(--muted); }
+  .langbtns { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .langbtn { border: 0; border-radius: 0; padding: 8px 18px; background: transparent; color: var(--fg); font-weight: 600; }
+  .langbtn + .langbtn { border-left: 1px solid var(--line); }
+  .langbtn[aria-pressed="true"] { background: var(--accent); color: #04110a; }
+  .langbtn:disabled { opacity: .45; cursor: default; }
+  .langmsg { margin: 0; min-height: 0; max-width: 52ch; overflow-wrap: anywhere; }
+  .langmsg:empty { display: none; }
+  #lang-note { margin: 0; max-width: 52ch; }
+
+  /* buttons and fields */
+  button { font: inherit; cursor: pointer; border-radius: 10px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 20px; border: 0;
+    background: var(--accent); color: #04110a; font-weight: 700; transition: background .12s ease; }
+  .btn:hover { background: var(--accent-hi); }
+  .btn:disabled { opacity: .45; cursor: default; background: var(--accent); }
+  .btn.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); font-weight: 600; }
+  .btn.ghost:hover { background: var(--card-hi); }
+  .back { position: absolute; top: 16px; left: 16px; padding: 6px 12px; border: 0; background: transparent; color: var(--muted); }
+  .back:hover { color: var(--fg); }
+  input, select { font: inherit; color: var(--fg); background: var(--field); border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px 12px; min-width: 0; }
+  input::placeholder { color: var(--faint); }
+  label.field { display: grid; gap: 6px; text-align: left; font-size: 13px; color: var(--muted); }
+
+  .card { padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); text-align: left; }
+  .card h2 { margin: 0 0 4px; font-size: 16px; }
+  .stack { display: grid; gap: 14px; }
+  .row { display: flex; gap: 10px; }
+  .row > input { flex: 1; }
+  .or { display: flex; align-items: center; gap: 12px; color: var(--faint); font-size: 13px; }
+  .or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  #np-code { text-transform: uppercase; letter-spacing: .15em; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  details { margin-top: 12px; color: var(--muted); font-size: 13px; }
+  details summary { cursor: pointer; width: fit-content; }
+  details label { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+  details select { flex: 1; padding: 7px 10px; }
+  .msg { min-height: 1.5em; color: #f2b8a8; font-size: 14px; }
+
+  /* lobby */
+  .code { font: 800 clamp(30px, 6vw, 42px)/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; margin: 6px 0 2px; }
+  .players { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .players li { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; background: var(--field); text-align: left; }
+  .players li.empty { color: var(--faint); border: 1px dashed var(--line); background: transparent; }
+  .avatar { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; flex: none; font-weight: 700;
+    background: #1d5a33; color: #d8f5e2; }
+  .players .who { flex: 1; min-width: 0; }
+  .players .who b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .players .who small { color: var(--faint); }
+  .tag { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 99px;
+    background: var(--card-hi); color: var(--muted); }
+  .spinner { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--line);
+    border-top-color: var(--accent); animation: spin .9s linear infinite; vertical-align: -1px; margin-right: 6px; }
+  @keyframes spin { to { transform: rotate(1turn); } }
+
+  /* loading */
+  progress { width: min(100%, 320px); height: 8px; margin-top: 14px; appearance: none; border: 0; border-radius: 99px;
+    overflow: hidden; background: var(--field); }
+  progress::-webkit-progress-bar { background: var(--field); }
+  progress::-webkit-progress-value { background: var(--accent); border-radius: 99px; }
+  progress::-moz-progress-bar { background: var(--accent); }
+  #status { font-variant-numeric: tabular-nums; color: var(--muted); max-width: 52ch; margin-inline: auto; white-space: pre-line; }
+
+  /* Fullscreen uses the screen dimensions; the aspect control can restore 4:3. */
+  #stage:fullscreen { width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
+  #stage:-webkit-full-screen { width: 100vw; height: 100vh; aspect-ratio: auto; border-radius: 0; }
+  #fs, #aspect, #esc-fallback { position: absolute; right: 12px; bottom: 12px; z-index: 2; width: 40px; height: 40px; display: grid; place-items: center;
+    padding: 0; border: 1px solid rgba(255, 255, 255, .18); border-radius: 10px; background: rgba(0, 0, 0, .55); color: #fff;
+    backdrop-filter: blur(4px); opacity: 0; transition: opacity .25s ease; }
+  #fs svg { width: 20px; height: 20px; }
+  #aspect { right: 60px; width: 48px; font: 600 12px ui-sans-serif, system-ui, sans-serif; }
+  #esc-fallback { right: 116px; width: 48px; font: 600 12px ui-sans-serif, system-ui, sans-serif; }
+  #stage.awake #fs, #stage.awake #aspect, #stage.awake #esc-fallback, #fs:focus-visible, #aspect:focus-visible, #esc-fallback:focus-visible { opacity: 1; }
+  #fs:hover, #aspect:hover, #esc-fallback:hover { background: rgba(0, 0, 0, .75); }
+  main.touch-playing #aspect, #stage:has(> #panel:not(.hidden)) #aspect { display: none; }
+  #fstip, #fs-notice { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 2; padding: 6px 14px; border-radius: 99px;
+    background: rgba(0, 0, 0, .65); color: #fff; font-size: 13px; pointer-events: none; transition: opacity .4s ease; }
+  #fs-notice { max-width: min(90%, 640px); text-align: center; }
+  kbd { font: 600 12px ui-monospace, SFMono-Regular, Menlo, monospace; padding: 1px 6px; border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, .25); background: rgba(255, 255, 255, .08); }
+  #netstatus { position: absolute; top: 10px; right: 10px; padding: 4px 10px; border-radius: 99px; background: rgba(0, 0, 0, .6);
+    color: #fff; font: 12px/1.5 ui-sans-serif, system-ui, sans-serif; pointer-events: none; backdrop-filter: blur(4px); }
+  #netstatus.bad { background: rgba(170, 20, 20, .88); }
+  #save-read-activity { position: absolute; top: 10px; left: 10px; z-index: 1; padding: 6px 10px;
+    border-radius: 8px; background: rgba(0, 0, 0, .78); color: #fff; font-size: 13px;
+    pointer-events: none; }
+  @media (prefers-reduced-motion: reduce) { #save-read-activity .spinner { animation: none; } }
+
+  /* видеомост: полноэкранный ролик поверх canvas (recomp/web/video-player.mjs) */
+  .video-overlay { position: absolute; inset: 0; z-index: 3; background: #000; }
+  .video-screen { width: 100%; height: 100%; display: block; object-fit: contain; }
+  .video-skip { position: absolute; right: 14px; bottom: 14px; padding: 6px 14px; border-radius: 99px;
+    background: rgba(0, 0, 0, .6); color: #fff; font-size: 13px; pointer-events: none;
+    opacity: .9; transition: opacity .4s ease; }
+  .video-overlay:hover .video-skip { opacity: 1; }
+
+  /* Optional touch panel: shown only for a running solo game on coarse pointers
+     (or explicit ?touch=1). It stays outside the game's canvas. */
+  main.touch-playing { display: flex; flex-direction: column; justify-content: flex-start; gap: 8px; padding: 8px; }
+  main.touch-playing #stage { flex: none; width: min(100%, calc((50svh - 8px) * 4 / 3)); height: auto; aspect-ratio: 4 / 3; }
+  #touch-controls { width: min(100%, 620px); color: var(--fg); }
+  #touch-controls[hidden], #touch-controls [hidden] { display: none !important; }
+  .touch-header, .touch-tabs, .touch-grid { display: flex; flex-wrap: wrap; gap: 5px; }
+  .touch-header { position: sticky; top: 0; z-index: 1; justify-content: space-between; align-items: center; margin-bottom: 5px; background: var(--bg); }
+  .touch-scroll-grip { flex: 1; min-width: 80px; min-height: 44px; display: grid; place-items: center; border: 1px dashed #72907a; border-radius: 10px; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+  .touch-header button, .touch-tabs button, .touch-grid button { min-height: 44px; padding: 5px 9px; color: var(--fg); background: #263d2d; border: 1px solid #72907a; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+  .touch-header button, .touch-scroll-grip { font-size: 13px; }
+  .touch-tabs button[aria-pressed=true], .touch-grid button.touch-pressed { background: #358755; color: white; }
+  .touch-tabs { margin-bottom: 5px; }
+  .touch-grid button { flex: 1 0 19%; }
+  .touch-pad { display: grid; place-items: center; min-height: 58px; margin-top: 5px; border: 1px dashed #72907a; border-radius: 10px; color: var(--muted); background: #142019; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+  /* The launcher needs the whole mobile viewport, not the game's short 4:3
+     canvas. Its scroll starts at the top; gameplay keeps its 4:3 stage. */
+  @media (max-width: 600px), (max-height: 500px) {
+    main:has(> #stage > #panel:not(.hidden)) { display: block; min-height: 100dvh; padding: 0; }
+    #stage:has(> #panel:not(.hidden)) { width: 100%; height: 100dvh; min-height: 100dvh; aspect-ratio: auto; border-radius: 0; }
+    #stage:has(> #panel:not(.hidden)) #panel { display: block; padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+    #stage:has(> #panel:not(.hidden)) .view { margin-inline: auto; }
+  }
+  @media (orientation: landscape) and (max-height: 600px) {
+    main.touch-playing { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 40%); align-items: start; }
+    main.touch-playing #stage { width: min(100%, calc((100svh - 16px) * 4 / 3)); }
+    #touch-controls { max-height: calc(100svh - 16px); overflow: auto; }
+    .touch-header button, .touch-tabs button, .touch-grid button { min-height: 40px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <div id="stage">
+    <canvas id="canvas" width="1024" height="768" tabindex="0"></canvas>
+    <div id="save-read-activity" class="hidden" role="status" aria-live="polite"><span class="spinner" aria-hidden="true"></span><span id="save-read-label">Чтение сохранения…</span></div>
+    <div id="netstatus" class="hidden"></div>
+    <button id="aspect" type="button" title="Restore original 4:3 proportions (the default view stretches the image to fill the window)" aria-label="Restore original 4:3 proportions" aria-pressed="false">4:3</button>
+    <button id="esc-fallback" type="button" class="hidden" title="Game Escape key (also F10; on Mac use Fn+F10)" aria-label="Game Escape key">Esc</button>
+    <button id="fs" title="Fullscreen (Alt+Enter)" aria-label="Toggle fullscreen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path id="fs-icon" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+    </button>
+    <div id="fs-notice" class="hidden" role="status" aria-live="polite"></div>
+    <div id="fstip" class="hidden"><span id="fstip-prefix">Press</span> <kbd>Alt</kbd> + <kbd>Enter</kbd> <span id="fstip-suffix">for fullscreen</span></div>
+    <div id="panel">
+
+      <!-- loading: browser checks, the first-visit download, errors -->
+      <section id="view-loading" class="view">
+        <div class="brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 11h4M8 9v4"/><circle cx="15.5" cy="10.5" r=".6" fill="currentColor"/><circle cx="17.5" cy="12.5" r=".6" fill="currentColor"/><path d="M7 6h10a5 5 0 0 1 4.9 6l-.8 4a2.6 2.6 0 0 1-4.5 1.2L14.8 15H9.2l-1.8 2.2A2.6 2.6 0 0 1 2.9 16l-.8-4A5 5 0 0 1 7 6z"/></svg><h1 class="game-name"></h1></div>
+        <p id="status" role="status"><span lang="ru">Проверяем ваш браузер…</span><br><span lang="en">Checking your browser…</span></p>
+        <progress id="progress" class="hidden" max="1" value="0"></progress>
+        <div>
+          <label id="pick" class="btn hidden" style="margin-top:16px">Choose game folder
+            <input id="folder" type="file" webkitdirectory multiple hidden>
+          </label>
+        </div>
+        <p id="help" class="hidden small">Pick the folder that holds <b>ENGINE.exe</b>, <b>PROGRAM</b> and <b>RESOURCE</b>. It is copied
+          into this browser's private storage once and never leaves your computer.</p>
+      </section>
+
+      <!-- home: solo or online -->
+      <section id="view-home" class="view hidden">
+        <div class="brand"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 11h4M8 9v4"/><circle cx="15.5" cy="10.5" r=".6" fill="currentColor"/><circle cx="17.5" cy="12.5" r=".6" fill="currentColor"/><path d="M7 6h10a5 5 0 0 1 4.9 6l-.8 4a2.6 2.6 0 0 1-4.5 1.2L14.8 15H9.2l-1.8 2.2A2.6 2.6 0 0 1 2.9 16l-.8-4A5 5 0 0 1 7 6z"/></svg><h1 class="game-name"></h1></div>
+        <p id="home-tagline" class="tagline">Pick how you want to play.</p>
+        <!-- language (E1): Russian is the default; English is an optional overlay installed on demand (overlay.mjs, docs/overlay-e1.md) -->
+        <div id="lang-box" class="langbox" role="group" aria-label="Язык игры / Game language">
+          <span id="lang-label" class="langlabel">Язык игры / Game language</span>
+          <span class="langbtns">
+            <button id="lang-ru" class="langbtn" type="button" aria-pressed="true">Русский</button>
+            <button id="lang-en" class="langbtn" type="button" aria-pressed="false">English</button>
+          </span>
+          <p id="lang-status" class="small langmsg" role="status" aria-live="polite"></p>
+          <progress id="lang-progress" class="hidden" max="1" value="0"></progress>
+          <button id="lang-back-ru" class="btn ghost hidden" type="button">Вернуться к русскому</button>
+          <p id="lang-note" class="small"></p>
+          <p id="slot-lang-note" class="small langmsg hidden" role="status" aria-live="polite"></p>
+        </div>
+        <div class="choices">
+          <button id="play" class="choice">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14.5 3.5l6 6-9.5 9.5-3 .5-3.5-3.5.5-3z"/><path d="M4.5 19.5L3 21"/><circle cx="18.5" cy="18.5" r="2"/></svg>
+            <b id="play-label">Play Solo</b>
+            <span id="play-description">Offline, on this device.</span>
+          </button>
+          <button id="go-online" class="choice">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2.5 19c.7-3 2.9-5 5.5-5s4.8 2 5.5 5"/><path d="M13.5 14.6c.8-.4 1.6-.6 2.5-.6 2.6 0 4.8 2 5.5 5"/></svg>
+            <b id="online-label">Play Multiplayer</b>
+            <span id="online-description">Online 1v1 with a friend, wherever they are.</span>
+          </button>
+        </div>
+        <div style="margin-top:18px">
+          <button id="backup-saves" class="btn ghost" type="button">Скачать сохранения</button>
+          <button id="restore-saves" class="btn ghost" type="button">Восстановить сохранения</button>
+          <input id="restore-file" type="file" accept=".zip,application/zip" hidden>
+          <p id="save-help" class="small">Перед архивированием или восстановлением закройте все другие вкладки с запущенной
+            игрой: иначе последние изменения сохранений могут потеряться. Существующие сохранения с другими
+            именами не трогаются, а совпадающие имена требуют вашего выбора.</p>
+          <p id="backup-status" class="msg" role="status" aria-live="polite"></p>
+          <a id="backup-download" class="btn ghost hidden" download="korsary2-saves.zip">Скачать готовый архив</a>
+          <div id="restore-decision" class="hidden" style="margin-top:10px">
+            <p id="restore-conflicts" class="small" style="overflow-wrap:anywhere"></p>
+            <div class="row" style="margin-top:8px">
+              <button id="restore-skip" class="btn ghost" type="button">Пропустить всё</button>
+              <button id="restore-replace" class="btn ghost" type="button">Заменить всё</button>
+              <button id="restore-cancel" class="btn ghost" type="button">Отмена</button>
+            </div>
+          </div>
+        </div>
+        <p class="small" style="margin-top:22px"><span id="controls"></span><br>
+          <span id="fullscreen-prefix">Fullscreen:</span> <kbd>Alt</kbd> + <kbd>Enter</kbd> (<kbd>⌥</kbd> + <kbd>Enter</kbd> <span id="fullscreen-suffix">on Mac) or the button in the corner.</span></p>
+      </section>
+
+      <!-- multiplayer: host or join -->
+      <section id="view-online" class="view hidden">
+        <button class="back" data-go="home">← Back</button>
+        <div class="stack">
+          <div>
+            <h2 style="margin:0;font-size:24px">Play Multiplayer</h2>
+            <p class="small" style="margin:4px 0 0">Online 1v1. Each player needs a controller or the keyboard.</p>
+          </div>
+          <label class="field">Your name
+            <input id="np-name" placeholder="Player" maxlength="24" autocomplete="nickname">
+          </label>
+          <div class="card">
+            <h2>Host a game</h2>
+            <p class="small" style="margin:0 0 12px">Get a room code to send to your friend.</p>
+            <button id="np-host" class="btn" style="width:100%">Create room</button>
+            <details>
+              <summary>Server location</summary>
+              <label>Room server
+                <select id="np-region">
+                  <option value="auto" selected>Nearest to me</option><option value="weur">Western Europe</option>
+                  <option value="eeur">Eastern Europe</option><option value="enam">Eastern North America</option>
+                  <option value="wnam">Western North America</option><option value="sam">South America</option>
+                  <option value="apac">Asia-Pacific</option><option value="apac-ne">Northeast Asia</option>
+                  <option value="apac-se">Southeast Asia</option><option value="oc">Oceania</option>
+                </select>
+              </label>
+              <p class="small" style="margin:8px 0 0">For friends in another country, a server between you is fairest.</p>
+            </details>
+          </div>
+          <div class="or">or</div>
+          <div class="card">
+            <h2>Join a game</h2>
+            <p class="small" style="margin:0 0 12px">Enter the code your friend sent you.</p>
+            <div class="row">
+              <input id="np-code" placeholder="ROOM CODE" maxlength="12" autocapitalize="characters" autocomplete="off" spellcheck="false">
+              <button id="np-join" class="btn ghost">Join</button>
+            </div>
+          </div>
+          <p id="np-msg" class="msg"></p>
+        </div>
+      </section>
+
+      <!-- lobby: room code, players, start -->
+      <section id="view-lobby" class="view hidden">
+        <button id="np-leave" class="back">← Leave room</button>
+        <div class="stack">
+          <div>
+            <p class="small" style="margin:0">Room code</p>
+            <div class="code" id="np-room"></div>
+            <p class="small" style="margin:0"><span id="np-colo"></span></p>
+            <button id="np-copy" class="btn ghost" style="margin-top:12px">Copy invite link</button>
+            <span id="invite" class="hidden"></span>
+          </div>
+          <ul class="players" id="np-players"></ul>
+          <div id="np-hostctl" class="hidden">
+            <button id="np-start" class="btn" style="width:100%">Start match</button>
+            <details>
+              <summary>Input delay</summary>
+              <label>Delay
+                <select id="np-delay">
+                  <option value="auto" selected>Auto</option><option value="4">4 frames (67 ms)</option>
+                  <option value="6">6 frames (100 ms)</option><option value="9">9 frames (150 ms)</option>
+                  <option value="12">12 frames (200 ms)</option><option value="18">18 frames (300 ms)</option>
+                </select>
+              </label>
+              <p class="small" style="margin:8px 0 0">Auto picks the lowest delay your connection allows. Higher is smoother on a bad link.</p>
+            </details>
+          </div>
+          <p id="np-wait" class="hidden small"><span class="spinner"></span>Waiting for the host to start.</p>
+          <p id="np-lobbymsg" class="msg"></p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <section id="touch-controls" hidden aria-label="Сенсорное управление" data-aria-ru="Сенсорное управление" data-aria-en="Touch controls">
+    <div class="touch-header">
+      <strong class="touch-scroll-grip" aria-label="Проведите здесь для прокрутки" data-aria-ru="Проведите здесь для прокрутки" data-aria-en="Swipe here to scroll" data-ru="Прокрутка ↕" data-en="Scroll ↕">Прокрутка ↕</strong>
+      <button type="button" data-touch-toggle aria-expanded="true" data-ru="Скрыть управление" data-en="Hide touch controls">Скрыть управление</button>
+    </div>
+    <div data-touch-panel>
+      <div class="touch-tabs" role="group" aria-label="Раскладка управления" data-aria-ru="Раскладка управления" data-aria-en="Control layout">
+        <button type="button" data-touch-tab="land" aria-pressed="true" data-ru="Берег" data-en="Land">Берег</button>
+        <button type="button" data-touch-tab="sea" aria-pressed="false" data-ru="Море и карта" data-en="Sea and map">Море и карта</button>
+        <button type="button" data-touch-tab="menu" aria-pressed="false" data-ru="Меню" data-en="Menu">Меню</button>
+        <button type="button" data-touch-tab="extra" aria-pressed="false" data-ru="Ещё" data-en="More">Ещё</button>
+      </div>
+      <div class="touch-grid" data-touch-group="land">
+        <button type="button" data-touch-mouse="1" data-ru="ПКМ · вперёд" data-en="Right mouse · forward">ПКМ · вперёд</button>
+        <button type="button" data-touch-mouse="2" data-ru="СКМ · назад" data-en="Middle mouse · back">СКМ · назад</button>
+        <button type="button" data-touch-mouse="0" data-ru="ЛКМ · действие" data-en="Left mouse · action">ЛКМ · действие</button>
+        <button type="button" data-touch-key="44" data-ru="Пробел" data-en="Space">Пробел</button>
+        <button type="button" data-touch-key="225" data-ru="Shift · бег" data-en="Shift · run">Shift · бег</button>
+        <button type="button" data-touch-key="8" data-ru="E · бой" data-en="E · combat">E · бой</button>
+        <button type="button" data-touch-key="224" data-ru="Ctrl · блок" data-en="Ctrl · block">Ctrl · блок</button>
+        <button type="button" data-touch-key="20" data-ru="Q · пистолет" data-en="Q · pistol">Q · пистолет</button>
+        <button type="button" data-touch-key="29" data-ru="Z · уклон" data-en="Z · dodge">Z · уклон</button>
+        <button type="button" data-touch-key="6" data-ru="C · зелье" data-en="C · potion">C · зелье</button>
+      </div>
+      <div class="touch-grid" data-touch-group="sea" hidden>
+        <button type="button" data-touch-key="26" data-ru="W · паруса ↑" data-en="W · sails ↑">W · паруса ↑</button>
+        <button type="button" data-touch-key="22" data-ru="S · паруса ↓" data-en="S · sails ↓">S · паруса ↓</button>
+        <button type="button" data-touch-key="4" data-ru="A · влево" data-en="A · left">A · влево</button>
+        <button type="button" data-touch-key="7" data-ru="D · вправо" data-en="D · right">D · вправо</button>
+        <button type="button" data-touch-mouse="0" data-ru="ЛКМ · огонь" data-en="Left mouse · fire">ЛКМ · огонь</button>
+        <button type="button" data-touch-key="44" data-ru="Пробел" data-en="Space">Пробел</button>
+        <button type="button" data-touch-key="5" data-ru="B · пропуск" data-en="B · skip">B · пропуск</button>
+        <button type="button" data-touch-key="21" data-ru="R · время" data-en="R · time">R · время</button>
+        <button type="button" data-touch-key="30">1</button><button type="button" data-touch-key="31">2</button>
+        <button type="button" data-touch-key="32">3</button><button type="button" data-touch-key="33">4</button>
+      </div>
+      <div class="touch-grid" data-touch-group="menu" hidden>
+        <button type="button" data-touch-key="82" aria-label="Вверх" data-aria-ru="Вверх" data-aria-en="Up">↑</button><button type="button" data-touch-key="81" aria-label="Вниз" data-aria-ru="Вниз" data-aria-en="Down">↓</button>
+        <button type="button" data-touch-key="80" aria-label="Влево" data-aria-ru="Влево" data-aria-en="Left">←</button><button type="button" data-touch-key="79" aria-label="Вправо" data-aria-ru="Вправо" data-aria-en="Right">→</button>
+        <button type="button" data-touch-key="40">Enter</button><button type="button" data-touch-key="41">Esc</button>
+        <button type="button" data-touch-key="58" data-ru="F1 · сохранение" data-en="F1 · save">F1 · сохранение</button>
+        <button type="button" data-touch-key="59">F2</button><button type="button" data-touch-key="43">Tab</button>
+        <button type="button" data-touch-key="44" data-ru="Пробел" data-en="Space">Пробел</button>
+        <button type="button" data-touch-mouse="0" data-ru="ЛКМ · выбор" data-en="Left mouse · select">ЛКМ · выбор</button>
+        <button type="button" data-touch-mouse="1" data-ru="ПКМ" data-en="Right mouse">ПКМ</button>
+      </div>
+      <div class="touch-grid" data-touch-group="extra" hidden>
+        <button type="button" data-touch-key="60" data-ru="F3 · команда" data-en="F3 · command">F3 · команда</button>
+        <button type="button" data-touch-key="87" data-ru="+ · быстрее" data-en="+ · faster">+ · быстрее</button>
+        <button type="button" data-touch-key="86" data-ru="− · медленнее" data-en="− · slower">− · медленнее</button>
+        <button type="button" data-touch-key="8" data-ru="E · карта +" data-en="E · map +">E · карта +</button>
+        <button type="button" data-touch-key="9" data-ru="F · карта −" data-en="F · map −">F · карта −</button>
+        <button type="button" data-touch-key="75">Page Up</button><button type="button" data-touch-key="78">Page Down</button>
+        <button type="button" data-touch-key="42">Backspace</button>
+      </div>
+      <div class="touch-pad" data-touch-pad aria-label="Трекпад мыши" data-aria-ru="Трекпад мыши" data-aria-en="Mouse trackpad" data-ru="Проведите для камеры / курсора; касание — ЛКМ" data-en="Drag for camera / cursor; tap for left click">Проведите для камеры / курсора; касание — ЛКМ</div>
+    </div>
+  </section>
+</main>
+<script src="port-config.js"></script>
+<script src="netplay.js"></script>
+<script src="port.js"></script>
+<script type="module">
+// Restoring a downloaded saves ZIP. All file decisions live in save-import.mjs
+// (planning is unit-tested in Node); this only drives the launcher UI and never
+// writes anything itself. The root name matches OPFS_DIR in port.js.
+const $ = (id) => document.getElementById(id);
+const rootName = window.PORT.id + '-game';
+const openGame = async (create) =>
+  (await navigator.storage.getDirectory()).getDirectoryHandle(rootName, { create });
+const t = (ru, en) => window.launcherText(ru, en);
+const message = window.setBackupMessage;
+const decision = () => $('restore-decision');
+let pendingArchive = null;   // decoded check passed; waiting for the player's choice
+
+const busyButtons = () => [$('restore-saves'), $('backup-saves'), $('play'), $('go-online')];
+async function guarded(run) {
+  const buttons = busyButtons(); const disabled = buttons.map((b) => b.disabled);
+  buttons.forEach((b) => { b.disabled = true; });
+  try { await run(); }
+  catch (error) { console.warn('Save restore failed:', error); message(() => error?.restoreTooLarge ? t('Этот файл слишком велик для архива сохранений.', 'This file is too large for a save archive.') : t(error.message || 'Не удалось восстановить сохранения.', error?.name === 'SaveLockBusy' ? 'Another game tab holds the save lock. Close it and try again.' : 'Could not restore saves. Check the archive and see the browser console for details.')); }
+  finally { buttons.forEach((b, i) => { b.disabled = disabled[i]; }); }
+}
+const quote = (names) => names.map((n) => `«${n}»`).join(', ');
+let visibleDecision = null;
+function showDecision(result) {
+  visibleDecision = result;
+  $('restore-conflicts').textContent =
+    t(`Уже есть сохранения с такими же именами, но другим содержимым (${result.conflicts.length}): `, `Existing saves have matching names but different contents (${result.conflicts.length}): `) +
+    quote(result.conflicts.map((c) => c.name)) +
+    t('. «Заменить всё» перезапишет их текущие версии, «Пропустить всё» оставит их нетронутыми.', '. “Replace all” overwrites their current versions; “Skip all” leaves them unchanged.');
+  decision().classList.remove('hidden');
+}
+window.refreshRestoreDecision = () => { if (visibleDecision) showDecision(visibleDecision); };
+function hideDecision() { visibleDecision = null; decision().classList.add('hidden'); }
+function report(result) {
+  if (result.warnings?.length) console.warn('Save restore warnings:', result.warnings);
+  message(() => {
+    const parts = [];
+    if (result.restored.length) parts.push(t(`восстановлено новых файлов: ${result.restored.length}`, `new files restored: ${result.restored.length}`));
+    if (result.metaWritten) parts.push(t(`времена сохранений записаны: ${result.metaWritten}`, `save times recorded: ${result.metaWritten}`));
+    if (result.replaced.length) parts.push(t(`заменено: ${result.replaced.length} (${quote(result.replaced)})`, `replaced: ${result.replaced.length} (${quote(result.replaced)})`));
+    if (result.skippedConflicts.length) parts.push(t(`конфликтных пропущено: ${result.skippedConflicts.length}`, `conflicts skipped: ${result.skippedConflicts.length}`));
+    if (result.identical.length) parts.push(t(`совпадающих пропущено: ${result.identical.length}`, `identical files skipped: ${result.identical.length}`));
+    if (result.ignored.length) parts.push(t(`посторонних файлов вне SAVE проигнорировано: ${result.ignored.length}`, `unrelated files outside SAVE ignored: ${result.ignored.length}`));
+    let text = parts.length ? t('Готово. ', 'Done. ') + parts.join(', ') + '.' : t('В архиве нет файлов сохранений — ничего не изменено.', 'The archive contains no save files; nothing changed.');
+    if (result.warnings?.length) text += t(' ' + result.warnings.join(' '), ' Some operations could not be completed; see the browser console for details.');
+    return text;
+  });
+}
+async function finish(choice) {
+  const bytes = pendingArchive;
+  if (!bytes) return;
+  await guarded(async () => {
+    message(() => choice === 'replace' ? t('Замена конфликтующих сохранений…', 'Replacing conflicting saves…') : t('Восстановление без конфликтных файлов…', 'Restoring without conflicting files…'));
+    const { importBackupZip } = await import('./save-import.mjs');
+    const result = await importBackupZip(openGame, navigator.locks, rootName, bytes, choice);
+    hideDecision(); pendingArchive = null;
+    if (result.needsDecision) {   // the folder changed while we were deciding: ask again, nothing was written
+      pendingArchive = bytes;
+      message(() => t('Пока вы выбирали, сохранения изменились. Ничего не записано, проверьте список ещё раз.', 'Saves changed while you were choosing. Nothing was written; review the list again.'));
+      showDecision(result);
+    } else report(result);
+  });
+}
+$('restore-saves').onclick = () => { message(''); $('restore-file').click(); };
+$('restore-file').onchange = async (e) => {
+  const file = e.target.files && e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  await guarded(async () => {
+    hideDecision(); pendingArchive = null;
+    const { MAX_ARCHIVE } = await import('./save-import.mjs');
+    if (file.size > MAX_ARCHIVE) throw Object.assign(new Error('archive exceeds MAX_ARCHIVE'), { restoreTooLarge: true });
+    message(() => t('Проверка архива…', 'Checking archive…'));
+    const bytes = new Uint8Array(await file.arrayBuffer());
+    const { importBackupZip } = await import('./save-import.mjs');
+    const result = await importBackupZip(openGame, navigator.locks, rootName, bytes);
+    if (result.needsDecision) {
+      pendingArchive = bytes;
+      message(() => t('Найдены существующие сохранения с такими же именами, но другим содержимым. Ничего не записано.', 'Existing saves have matching names but different contents. Nothing was written.'));
+      showDecision(result);
+    } else report(result);
+  });
+};
+$('restore-skip').onclick = () => finish('skip');           // explicit choice: leave conflicts untouched
+$('restore-replace').onclick = () => finish('replace');     // explicit choice: this click is the confirmation
+$('restore-cancel').onclick = () => {
+  hideDecision(); pendingArchive = null;
+  message(() => t('Восстановление отменено; ни один файл не изменён.', 'Restore cancelled; no files were changed.'));
+};
+</script>
+</body>
+</html>

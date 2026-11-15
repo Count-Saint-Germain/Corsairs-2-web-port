@@ -1,0 +1,29 @@
+# path: PROGRAM/INTERFACE/interface.c
+# sha256-before: c168a2aee1db2a4e679341b3ed02fad3805b5bbd389f5176c3aaa7b5bd433019
+# sha256-after: e5a0e8601a6ee2e5b0bc8bf879758eeb7a4fd59d709b0b18283e5e952cdffc40
+# eol-before: crlf
+# eol-after: crlf
+# final-newline: yes
+--- a/PROGRAM/INTERFACE/interface.c
++++ b/PROGRAM/INTERFACE/interface.c
+@@ -121,0 +122 @@
++    Trace("SELECT_TRACE LaunchSelectMenu");
+@@ -464,0 +466 @@
++    Trace("SELECT_TRACE LaunchItems");
+@@ -466,0 +469 @@
++    Trace("SELECT_TRACE LaunchItems prepared ok");
+@@ -855,0 +859 @@
++    Trace("SELECT_TRACE launch " + nodName + " n " + n + " launched " + InterfaceStates.Launched);
+@@ -856,0 +861 @@
++    Trace("SELECT_TRACE launch refused by pending " + InterfaceStates.LaunchAfterFrame);
+@@ -860,0 +866 @@
++    Trace("SELECT_TRACE launch repost " + nodName + " n " + n);
+@@ -863,0 +870,4 @@
++	// the fenced launch is executing now: release the fence, otherwise it blocks every
++	// later delayed launch (browser startup videos take the LaunchAnyway path, which sets it)
++	DeleteAttribute(&InterfaceStates,"LaunchAfterFrame");
++    Trace("SELECT_TRACE fence cleared for " + nodName);
+@@ -888,0 +899 @@
++    Trace("SELECT_TRACE prepare " + interfaceCode + " launched " + InterfaceStates.Launched + " video " + g_ibVideoExecuting + " dialog " + DialogRun);
+@@ -902,0 +914 @@
++    Trace("SELECT_TRACE prepare LoadSegment FAILED code " + interfaceCode);

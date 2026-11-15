@@ -1,0 +1,50 @@
+> Historical technical document: intermediate diagnostic runs have been removed. Their screenshots and example commands are unavailable; see [BUILD_FROM_CLONE.md](BUILD_FROM_CLONE.md) for current instructions.
+
+> **Correction 2026-11-12:** `LanguageGetLanguage()` is called in `PROGRAM/seadogs.c:359, 596` (the claim below that it is never called is incorrect).
+
+# E0: short language audit (English POSTPONED by the user)
+
+Date: 2026-11-12. Read-only: no code, data, or manifest was changed; neither the game nor the browser was started. The user's decision was to defer English (do not start E1–E3); this report was requested as a basis for a future decision.
+
+## 1. Language-dependent game content
+
+| Area | Mechanism (from code and data) | State in this distribution |
+|---|---|---|
+| Interface strings, items, help | The `STRSERVICE` string service in `XINTERFACE.dll` (`obj_strservice.cpp`) reads `resource\ini\TEXTS\language.ini`, `[COMMON] defaultLanguage`, the directory from `[DIRECTORY]`, and `resource\ini\texts\<language>\<file>` (`LanguageOpenFile/ConvertString` in `PROGRAM/INTERFACE/utilite.c`) | `defaultLanguage = russian`; `TEXTS/RUSSIAN` and `TEXTS/ENGLISH` contain 19 files each (`common.ini`, `ItemsDescribe`, `GoodsDescribe`, `AbilityDescribe`, `ControlsNames`, `HELPSECTIONS/*`…), ≈ 104 KB |
+| `LanguageGetLanguage()` | Defined in `utilite.c:206`, **never called** in `PROGRAM`; only `STRSERVICE` determines language | No script branches by language |
+| Language-conditional screens | `INTERFACES/mainmenu.ini`: `item = 400,LANG,<English\|Spanish\|German\|French\|Russian>,PICTURE,…` — logo (`SEADOGSLOGO_RUS`, `LOGOGLOWS_RUS`) | Russian logo is selected automatically |
+| Language selection screen | `INTERFACES/LanguageSelect.ini` (English/Spanish/German/French/Russian) | Never called by scripts; a placeholder from the English edition |
+| Fonts | `engine.ini`: `startFontIniFile = resource\ini\fonts.ini`; nearby are `fonts_rus.ini`, `fonts_eng.ini`, `fonts_boal.ini`, `INI/rus/fonts.ini`, `INI/EURO/fonts.ini`; `Textures/FONTS/*` textures exist both with and without the `rus` suffix | `fonts.ini` references `… rus.tga` for interface, dialogs, and menus. Even `fonts_eng.ini` uses `rus` textures for interface/dialogs (only `menu font.tga` differs): the Russian font textures likely also contain Latin characters — **unverified** (requires inspecting `.tx` or a live run) |
+| Textures containing `rus` | `Textures/INTERFACES/potc_logo_rus`, `Loading/load_rus`, `new_game_rus`, `FONTS/* rus` | English alternatives exist for the logos (`potc_logo`, `seadogs2_logo_eng`) |
+| Loading screens | Scripts reference `loading\Tavern_01.tga` and similar paths (under `Textures/Loading`) | Only 18 files are at the root; **137 Russian screens (71.8 MB) are in `Loading/Russian/` and have not been copied to the root** (`sound_video_on.bat` copies them). No `Russian` directory substitution exists in `DX8RENDER`/`ENGINE`/host — a likely cause of black loading screens; the same applies to `WorldMap/reload/Russian` (4 files, 2.1 MB). Requires a live check (failed `CreateFileA(resource.textures.loading…)`). `docs/asset-plan.md` (“nothing needs copying”) does not account for this |
+| Voice acting | `Sounds/VOICE/RUSSIAN` (231 lines, ogg+wav, 35.6 MB); the `VOICE` root contains copies (wav, 30.3 MB; created by `scripts/restore_russian_voice.mjs`). Aliases expect `VOICE\Eng_*/Dut_*/Fre_*` — Russian lines use the same names | `Greetings_russian.lng`/`talk_russian.lng` (`[Russian Gr_…]` keys) **are not loaded**: `SoundService` scans only `*.ini`. There are 231 Russian lines; many aliases point to missing files (silence) |
+| Videos | `VIDEOS/*.wmv` (11) and `VIDEOS/Russian/Invasion.wmv`; the port plays MP4 (`videos/…`, `videos/Russian/Invasion.mp4`) | Only Invasion has a Russian variant; the rest are used as-is |
+| Dialogs | `PROGRAM/DIALOGS/*.h` (230 files): `string DLG_TEXT[N] = {…}` — **11,483 lines, 655,509 characters, CP1251**; responses use indices (`link.l1 = DLG_TEXT[n]`). 222 `*_dialog.c` files contain another 64 Russian strings | Translation means replacing 230 `.h` files with the same indices; leave dialog code unchanged |
+| Quests | `RESOURCE/QUESTSTEXT/quests_texts.txt` (83 KB, 456 lines, `#QUEST`/`#TEXT`, CP1251) | Russian |
+| Other scripts | Russian strings in `PROGRAM`: `Loc_ai` ≈ 1,650 lines, `Characters` ≈ 1,340, `QUESTS` ≈ 300, `Locations` ≈ 220, `messages.h` ≈ 100… (counts “lines with Cyrillic”, including comments) | Translation/review separate from dialogs |
+
+The English text in `TEXTS/ENGLISH` is **an older revision of the English edition**, not 1.03: `common.ini` lacks 12 Russian-version keys (`Brightness`, `Contrast`, `Gamma Correction`, `Horizontal Mouse Sensitivity`… — added in patch 1.01), `ItemsDescribe.txt` lacks 7 keys (`itmdescr_artefact`, `itmname_artefact`, `itmdescr_blade2r`, `itmdescr_satanist_amulet`…) and contains 5 extra keys (`itmname_animists_amulet`…); the key `you've_got` differs from `youve_got`; file line counts differ (`SeaSection` 38/39, `ShipEatGood` 31/34). `STRSERVICE` prints `WARNING: language ini files has different size` on a mismatch. The remaining files (`AbilityDescribe`, `GoodsDescribe`, `ControlsNames`, `commands_name`, `interface_strings`, `SeaSection`, `ShipEatGood`, `HelpSectionTitles`) have matching keys.
+
+## 2. How the engine and port select a language
+
+- The only source is `language.ini` → `defaultLanguage`. There are no language keys in `engine.ini`, `options`, or the registry (`port.json`: `"registry": []`). `language.ini` is included in `files.required` and the manifest with SHA.
+- `kernel32.c` gives the guest `GetUserDefaultLCID` = 0x0809 (en-GB), `GetLocaleInfo`: `LOCALE_ILANGUAGE` = "0809", ANSI code page "1252", `LOCALE_SABBREVLANGNAME` = "ENG". This serves the CRT (locale tables `english-*` in `XINTERFACE`/`DX8RENDER`/`SEA_OPERATOR`) and does not affect the `STRSERVICE` choice (no locale access was found in its strings; `GetLocaleInfo` calls come from CRT tables; live tracing was not performed). Russian CP1251 bytes bypass the locale: fonts are textures, and `user32.c` contains its own CP1251 `CharUpper`. Searching found no `TimeGreeting` strings in `host/` or `PROGRAM` (a fix is mentioned in `historical log (removed)`, but its source was not traced).
+- Currently the only switch is replacing `language.ini` (and a manifest update reverts it).
+
+## 3. Repack
+
+- `Info/Info.Sea Dogs 2 - … v 1.03.txt`: “Interface language: Russian”, “Voice language: Russian”, 1C/Akella edition, patches 1.01–1.03. The installer is Inno Setup 5.3.10 (`setup.exe`; only standard `/Lang=`, `TSetupLanguageEntryA` strings; the language list is in the compressed header and **was not read**). There is no game language choice in the distribution; `soft.bin` is a FreeArc archive (not examined).
+- `TEXTS/ENGLISH`, `LanguageSelect.ini`, `LANG` entries, `*_eng`/`fonts_eng.ini` are remnants of Bethesda's English edition. English dialogs, quest text, and voice acting are absent from the distribution.
+- 1C's Russian localization is applied by copying `*/Russian/*` over the root (`sound_video_on.bat`, `what_change.txt`); only voice acting was applied in this copy (using the port's script).
+
+## 4. Effort estimate (E1 and E3) and risks
+
+**E1 — interface language switch (RU/EN) on the start page: ≈ 2–3 agent-days plus one live acceptance run.** Preferred approach without rebuilding wasm: make `language.ini` a mutable profile file (like `options`: not overwritten by updates, installed on first use, written before launch using the `defaultLanguage` selected in `localStorage`); add it to `MUTABLE_PATHS` in preflight; test selection, persistence, manifest stability, non-overwrite on resync, and `?lang=`. Alternative: substitute paths in the host file layer (`kernel32.c`), at higher cost (rebuild, another agent owns the file). Required: add the 12+7 missing keys to `TEXTS/ENGLISH` (≈ half a day; text must be written/translated), check Latin glyphs in `rus` fonts, `LANG` logos, help, and item screens.
+
+**E2 — English assets (fonts, loading screens, videos): 1–3 days, depending on whether bitmap loading screens contain text** (not visually checked); videos and voice acting remain Russian. First resolve the “black loading screens”/`Loading/Russian` issue (§1): this affects Russian mode regardless of language.
+
+**E3 — dialogs and quests: user's decision.** 11,483 `DLG_TEXT` lines (≈ 0.66 MB, ~110,000 words) + 83 KB of quests + ≈ 4,000 “Cyrillic” lines in other scripts (including comments). Extraction/substitution tooling preserving indices and CP1251→ASCII: 2–3 days; machine translation is fast and inexpensive in tokens, but proofreading takes weeks; full human translation is a separate project. The user is responsible for the translation source's licensing status.
+
+Risks: (1) mixed mode (English interface, Russian dialogs/voice acting) without E3; (2) English texts are from an older pre-1.03 version with differing keys; (3) translatable strings are mixed with code (comparisons against Russian text may occur in `Loc_ai`/`Characters` — check before substitution); (4) line width and wrapping in dialogs: English may be longer or shorter, font `main dialogs rus`; (5) quests and journal use `quests_texts.txt` keys: do not break the `#TEXT n` format; (6) `language.ini` is SHA-pinned in the manifest, so it cannot be edited in place: a profile file or overlay is needed (E1); (7) a separate dist/manifest for English files (or language overlay) will duplicate part of the package unless shared files are separated; (8) Russian voice acting with English subtitles is an expected mismatch; (9) `Loading/Russian` is already unapplied.
+
+Live checks before a decision (for another agent): (a) whether location loading images and the map transition screen appear; (b) whether Latin text in interface/dialogs is legible with Russian fonts after setting `defaultLanguage = English` on a copy (only on a separate game copy, never the user's copy); (c) log lines `WARNING: language ini files has different size` / `Language … not exist` in English.

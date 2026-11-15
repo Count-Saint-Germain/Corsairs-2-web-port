@@ -1,0 +1,11 @@
+# path: PROGRAM/Characters/init/StoryCharacters.c
+# sha256-before: 98a7304c0d06c5b308f520513c541ca5a05839879ea3e807a3a8f753a6185adb
+# sha256-after: 6cd393d985279e111b91414acc0b20b485d0c2f6fd68419afa6da90d86b68f0c
+# eol-before: crlf
+# eol-after: lf
+# final-newline: no
+--- a/PROGRAM/Characters/init/StoryCharacters.c
++++ b/PROGRAM/Characters/init/StoryCharacters.c
+@@ -2702 +2702 @@
+-	ch.model = "ANIMISTSt2";
++	ch.model = "Animists2";

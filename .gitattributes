@@ -1,0 +1,5 @@
+# Generated Emscripten output is kept byte-for-byte as verified in the distribution.
+distribution/build/game.js -text whitespace=-blank-at-eol,-blank-at-eof
+# Original game data uses legacy encodings and line endings. Preserve every
+# file byte-for-byte, including scripts and INI files, across Git checkouts.
+korsary2-work/game/** -text whitespace=cr-at-eol

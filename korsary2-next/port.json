@@ -1,0 +1,110 @@
+{
+  "name": "Corsairs 2",
+  "id": "korsary2",
+  "exe": "ENGINE.exe",
+  "guest_exe": "ENGINE.exe",
+  "guest_root": "C:\\Games\\Korsary2",
+  "volume_label": "KORSARY2",
+  "files": {
+    "include": [
+      "PROGRAM",
+      "MODULES",
+      "RESOURCE",
+      "SAVE",
+      "engine.ini",
+      "options"
+    ],
+    "required": [
+      "engine.ini",
+      "options",
+      "PROGRAM/seadogs.c",
+      "PROGRAM/CONTROLS/controls.c",
+      "PROGRAM/CONTROLS/init_pc.c",
+      "MODULES/XINTERFACE.dll",
+      "MODULES/DX8RENDER.dll",
+      "MODULES/SOUND.dll",
+      "MODULES/PCS_CONTROLS.dll",
+      "RESOURCE/INI/TEXTS/language.ini"
+    ],
+    "exclude_extensions": [
+      ".sfk",
+      ".xbx"
+    ],
+    "exclude_paths": [
+      "RESOURCE/VIDEOS"
+    ],
+    "exclude_if_sibling": [
+      {
+        "path": "RESOURCE/Sounds",
+        "extension": ".ogg",
+        "sibling_extension": ".wav",
+        "min_sibling_bytes": 45
+      }
+    ],
+    "relocate_if_absent": [
+      {
+        "from": "RESOURCE/Textures/Loading/Russian",
+        "to": "RESOURCE/Textures/Loading"
+      },
+      {
+        "from": "RESOURCE/Textures/WorldMap/reload/Russian",
+        "to": "RESOURCE/Textures/WorldMap/reload"
+      }
+    ]
+  },
+  "registry": [],
+  "pad": {
+    "name": "Logitech Dual Action USB",
+    "vid": "046D",
+    "pid": "C216"
+  },
+  "online": false,
+  "controls": "Пример назначений в поставляемом профиле: ПКМ — движение вперёд, ЛКМ — действие и огонь из пушек, Пробел — быстрая команда; A/D — поворот корабля, W/S — паруса, Tab — камера, Shift — бег, E — бой, Ctrl — блок и труба, Q — пистолет, Z — уклонение, 1–4 — снаряды, Enter/Esc/F1/F2 — интерфейс, R — время, B — пропуск стычки. Назначения можно посмотреть и изменить в настройках управления.",
+  "modules": [
+    "MODULES/Animation.dll",
+    "MODULES/BallSplash.dll",
+    "MODULES/Blot.dll",
+    "MODULES/COLLIDE.dll",
+    "MODULES/CameraDialog.dll",
+    "MODULES/DIALOG.dll",
+    "MODULES/DUMMY.dll",
+    "MODULES/DUMMY2.dll",
+    "MODULES/DX8RENDER.dll",
+    "MODULES/GEOMETRY.dll",
+    "MODULES/ISLAND.dll",
+    "MODULES/Lighter.dll",
+    "MODULES/Location.dll",
+    "MODULES/MAST.dll",
+    "MODULES/MODEL.dll",
+    "MODULES/PARTICLES.dll",
+    "MODULES/PCS_CONTROLS.dll",
+    "MODULES/PC_CONTROLS.dll",
+    "MODULES/PEOPLES_ON_SHIP.dll",
+    "MODULES/SCRIPT_LIBRIARY.dll",
+    "MODULES/SEA_CAMERAS.dll",
+    "MODULES/SEA_OPERATOR.dll",
+    "MODULES/SOUND.dll",
+    "MODULES/SeaCreatures.dll",
+    "MODULES/SoundService.dll",
+    "MODULES/Teleport.dll",
+    "MODULES/Tornado.dll",
+    "MODULES/WEATHER.dll",
+    "MODULES/WaterRings.dll",
+    "MODULES/WorldMap.dll",
+    "MODULES/XINTERFACE.dll",
+    "MODULES/animals.dll",
+    "MODULES/artifact.dll",
+    "MODULES/battle_interface.dll",
+    "MODULES/blade.dll",
+    "MODULES/locator.dll",
+    "MODULES/rigging.dll",
+    "MODULES/sea.dll",
+    "MODULES/sea_ai.dll",
+    "MODULES/seafoam.dll",
+    "MODULES/shadow.dll",
+    "MODULES/ship.dll",
+    "MODULES/sink_effect.dll",
+    "MODULES/telescope.dll",
+    "MODULES/touch.dll"
+  ]
+}
