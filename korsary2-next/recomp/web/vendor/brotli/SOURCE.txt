@@ -1,0 +1,39 @@
+Происхождение и лицензия (D1b, PORT_SPECIFICATION.md)
+
+Что это
+  Официальный декодер brotli (Google), версия 1.2.1, собранный в один WebAssembly-модуль k2br.wasm, и тонкая обёртка k2br.c.
+
+Источник
+  https://github.com/google/brotli, тег v1.2.1
+  архив https://github.com/google/brotli/archive/refs/tags/v1.2.1.tar.gz
+  SHA-256 архива: 98d35d11a78dc453aebb7d10c3748f3f73ff78c8267c0dc697b8631f67bf7e8f
+  (то же значение зафиксировано в формуле Homebrew `brotli` 1.2.1: независимая сверка происхождения архива)
+
+Лицензия
+  MIT. Файл LICENSE — дословная копия LICENSE из архива (Copyright (c) 2009, 2010, 2013-2016 by the Brotli Authors).
+  Обязателен к сохранению при распространении исходников и двоичных сборок.
+
+Что скопировано без изменений (подмножество архива, только декодер)
+  c/dec/*            все файлы каталога
+  c/common/          constants.[ch], context.[ch], dictionary.[ch], dictionary_inc.h, platform.[ch], shared_dictionary.c,
+                     shared_dictionary_internal.h, static_init.h, transform.[ch], version.h
+  c/include/brotli/  decode.h, port.h, shared_dictionary.h, types.h
+  Кодировщик (c/enc) не нужен и не включён. Файлы можно сверить с архивом побайтно.
+
+Что написано здесь
+  k2br.c      обёртка (контекст потока, ввод/вывод порциями) и распределитель памяти (первый подходящий блок, предел кучи
+              96 МиБ); свои memcpy/memmove/memset/memcmp (без libc). Лицензия проекта.
+  build.sh    сборка: clang и wasm-ld из emsdk репозитория (emcc не нужен), `-O2 -mbulk-memory`, затем wasm-opt -O3.
+              Сборка воспроизводима (две сборки подряд дают одинаковые байты).
+  k2br.wasm   результат сборки (≈170 КБ). k2br.wasm.sha256 — его SHA-256; то же значение зашито в web/brotli-decoder.mjs
+              (K2BR_WASM_SHA256), страница не запускает файл с другим хэшем; тест проверяет совпадение.
+
+Свойства модуля
+  нет импортов (ни одной функции из JS), нет eval, нет сети; экспортируются k2br_* и memory;
+  требования к браузеру: WebAssembly, bulk-memory (Chrome 75+, Firefox 79+, Safari 15+).
+
+Как обновить декодер
+  1. скачать новый архив, сверить SHA-256 с независимым источником, заменить подмножество файлов;
+  2. bash web/vendor/brotli/build.sh (обновит k2br.wasm и k2br.wasm.sha256);
+  3. вписать новый SHA-256 в K2BR_WASM_SHA256 (web/brotli-decoder.mjs); прогнать tests/test_brotli_transfer.mjs,
+     tests/test_brotli_browser.mjs, tests/test_brotli_dist.py.

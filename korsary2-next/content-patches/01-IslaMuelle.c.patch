@@ -1,0 +1,11 @@
+# path: PROGRAM/Characters/init/IslaMuelle.c
+# sha256-before: 105256096d9034412fa9229524e28c7db39b923764f6e8ed79109f401dbe18f5
+# sha256-after: d80bb960fe89012201dc724cc9bc12e6ec0444a46da685e631f96e44ee10a5ca
+# eol-before: crlf
+# eol-after: lf
+# final-newline: no
+--- a/PROGRAM/Characters/init/IslaMuelle.c
++++ b/PROGRAM/Characters/init/IslaMuelle.c
+@@ -1425 +1425 @@
+-	ch.model = "corsair2_1";
++	ch.model = "corsair2";

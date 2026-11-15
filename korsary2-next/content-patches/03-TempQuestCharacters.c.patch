@@ -1,0 +1,14 @@
+# path: PROGRAM/Characters/init/TempQuestCharacters.c
+# sha256-before: a1b9b4350a4aa783ce94ae59d8353e68cdd058a562708bc71d0d4cbaa9b8a943
+# sha256-after: 5b22786c66c96b2f345cd034a9c968c4574344fe268f7a0c0ef8e7a35c531bdb
+# eol-before: crlf
+# eol-after: lf
+# final-newline: no
+--- a/PROGRAM/Characters/init/TempQuestCharacters.c
++++ b/PROGRAM/Characters/init/TempQuestCharacters.c
+@@ -11 +11 @@
+-	ch.model = "corsar2";
++	ch.model = "corsair2";
+@@ -3472 +3472 @@
+-	ch.model = "corsar2";
++	ch.model = "corsair2";

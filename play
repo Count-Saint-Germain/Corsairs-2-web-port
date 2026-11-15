@@ -1,0 +1,5 @@
+#!/bin/sh
+# Start the bundled browser build from any working directory.
+set -eu
+PROJECT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+exec node "$PROJECT_DIR/scripts/serve_distribution.mjs" --port 8007 "$@"

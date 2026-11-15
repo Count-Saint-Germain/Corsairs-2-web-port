@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {SequenceMatcher} from '../english-audit/sequence_matcher.mjs';
+test('reports matching blocks and replace/delete/insert operations',()=>{const m=new SequenceMatcher('abcd','acBd');assert.deepEqual(m.opcodes(),[['equal',0,1,0,1],['delete',1,2,1,1],['equal',2,3,1,2],['insert',3,3,2,3],['equal',3,4,3,4]]);assert.equal(m.ratio(),0.75);});
+test('handles empty sequences, duplicate elements, and autojunk',()=>{assert.equal(new SequenceMatcher('','').ratio(),1);assert.deepEqual(new SequenceMatcher([],['x']).opcodes(),[['insert',0,0,0,1]]);assert.equal(new SequenceMatcher('a'.repeat(300),'a'.repeat(300)).ratio(),1);});

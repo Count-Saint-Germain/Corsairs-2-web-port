@@ -1,0 +1,1270 @@
+{
+ "schema": 1,
+ "note": "Данные preflight (web/missing-resource-preflight.mjs): списки .gm, отсутствие которых роняет игру (GEOMETRY.dll бросает .PAD), и ссылки, которых нет в установке оригинала. Генерируется audit_refs.mjs --emit-data; сверяется тестом test_missing_resource_preflight.mjs.",
+ "gm": {
+  "magic": "50.1",
+  "header_bytes": 72,
+  "items": [
+   "RESOURCE/MODELS/Items/Antidote.gm",
+   "RESOURCE/MODELS/Items/Balsam.gm",
+   "RESOURCE/MODELS/Items/Diamond.gm",
+   "RESOURCE/MODELS/Items/Emerald.gm",
+   "RESOURCE/MODELS/Items/PearlBig.gm",
+   "RESOURCE/MODELS/Items/PearlSmall.gm",
+   "RESOURCE/MODELS/Items/PotionBig.gm",
+   "RESOURCE/MODELS/Items/Purse.gm",
+   "RESOURCE/MODELS/Items/PurseL.gm",
+   "RESOURCE/MODELS/Items/PurseM.gm",
+   "RESOURCE/MODELS/Items/Ruby.gm",
+   "RESOURCE/MODELS/Items/Sapphire.gm",
+   "RESOURCE/MODELS/Items/b1.gm",
+   "RESOURCE/MODELS/Items/blade1.gm",
+   "RESOURCE/MODELS/Items/blade10.gm",
+   "RESOURCE/MODELS/Items/blade11.gm",
+   "RESOURCE/MODELS/Items/blade12.gm",
+   "RESOURCE/MODELS/Items/blade13.gm",
+   "RESOURCE/MODELS/Items/blade14.gm",
+   "RESOURCE/MODELS/Items/blade15.gm",
+   "RESOURCE/MODELS/Items/blade16.gm",
+   "RESOURCE/MODELS/Items/blade17.gm",
+   "RESOURCE/MODELS/Items/blade18.gm",
+   "RESOURCE/MODELS/Items/blade19.gm",
+   "RESOURCE/MODELS/Items/blade2.gm",
+   "RESOURCE/MODELS/Items/blade20.gm",
+   "RESOURCE/MODELS/Items/blade21.gm",
+   "RESOURCE/MODELS/Items/blade22.gm",
+   "RESOURCE/MODELS/Items/blade23.gm",
+   "RESOURCE/MODELS/Items/blade3.gm",
+   "RESOURCE/MODELS/Items/blade4.gm",
+   "RESOURCE/MODELS/Items/blade5.gm",
+   "RESOURCE/MODELS/Items/blade6.gm",
+   "RESOURCE/MODELS/Items/blade7.gm",
+   "RESOURCE/MODELS/Items/blade8.gm",
+   "RESOURCE/MODELS/Items/blade9.gm",
+   "RESOURCE/MODELS/Items/pistol1.gm",
+   "RESOURCE/MODELS/Items/pistol2.gm",
+   "RESOURCE/MODELS/Items/pistol3.gm",
+   "RESOURCE/MODELS/Items/pistol4.gm",
+   "RESOURCE/MODELS/Items/pistol5.gm",
+   "RESOURCE/MODELS/Items/pistol6.gm",
+   "RESOURCE/MODELS/Items/potion.gm",
+   "RESOURCE/MODELS/Items/spyglass4.gm",
+   "RESOURCE/MODELS/Items/stat1.gm"
+  ],
+  "ammo": [
+   "RESOURCE/MODELS/Ammo/blade1.gm",
+   "RESOURCE/MODELS/Ammo/blade10.gm",
+   "RESOURCE/MODELS/Ammo/blade11.gm",
+   "RESOURCE/MODELS/Ammo/blade12.gm",
+   "RESOURCE/MODELS/Ammo/blade13.gm",
+   "RESOURCE/MODELS/Ammo/blade14.gm",
+   "RESOURCE/MODELS/Ammo/blade15.gm",
+   "RESOURCE/MODELS/Ammo/blade16.gm",
+   "RESOURCE/MODELS/Ammo/blade17.gm",
+   "RESOURCE/MODELS/Ammo/blade18.gm",
+   "RESOURCE/MODELS/Ammo/blade19.gm",
+   "RESOURCE/MODELS/Ammo/blade2.gm",
+   "RESOURCE/MODELS/Ammo/blade20.gm",
+   "RESOURCE/MODELS/Ammo/blade21.gm",
+   "RESOURCE/MODELS/Ammo/blade22.gm",
+   "RESOURCE/MODELS/Ammo/blade23.gm",
+   "RESOURCE/MODELS/Ammo/blade3.gm",
+   "RESOURCE/MODELS/Ammo/blade4.gm",
+   "RESOURCE/MODELS/Ammo/blade5.gm",
+   "RESOURCE/MODELS/Ammo/blade6.gm",
+   "RESOURCE/MODELS/Ammo/blade7.gm",
+   "RESOURCE/MODELS/Ammo/blade8.gm",
+   "RESOURCE/MODELS/Ammo/blade9.gm",
+   "RESOURCE/MODELS/Ammo/pistol1.gm",
+   "RESOURCE/MODELS/Ammo/pistol2.gm",
+   "RESOURCE/MODELS/Ammo/pistol3.gm",
+   "RESOURCE/MODELS/Ammo/pistol4.gm",
+   "RESOURCE/MODELS/Ammo/pistol5.gm",
+   "RESOURCE/MODELS/Ammo/pistol6.gm"
+  ],
+  "startup": [
+   "RESOURCE/MODELS/Islands/Conceicao/Conceicao_locators.gm",
+   "RESOURCE/MODELS/Islands/Douwesen/Douwesen_locators.gm",
+   "RESOURCE/MODELS/Islands/FalaiseDeFleur/FalaisedeFleur_locators.gm",
+   "RESOURCE/MODELS/Islands/IslaMuelle/IslaMuelle_locators.gm",
+   "RESOURCE/MODELS/Islands/KhaelRoa/KhaelRoa_locators.gm",
+   "RESOURCE/MODELS/Islands/Oxbay/Oxbay_locators.gm",
+   "RESOURCE/MODELS/Islands/QuebradasCostillas/QuebradasCostillas_locators.gm",
+   "RESOURCE/MODELS/Islands/Redmond/Redmond_locators.gm",
+   "RESOURCE/MODELS/Characters/Blaze.gm",
+   "RESOURCE/MODELS/Characters/bocman3.gm",
+   "RESOURCE/MODELS/Locations/decks/tut_deck/tut_deck.gm",
+   "RESOURCE/MODELS/Locations/decks/tut_deck/tut_deck_fd.gm",
+   "RESOURCE/MODELS/Locations/decks/tut_deck/tut_deck_l.gm",
+   "RESOURCE/MODELS/Locations/decks/tut_deck/tut_deck_w.gm",
+   "RESOURCE/MODELS/fish01.gm",
+   "RESOURCE/MODELS/seagull.gm",
+   "RESOURCE/MODELS/Heads/h_bocman3.gm"
+  ]
+ },
+ "known_missing_refs": [
+  {
+   "kind": "ani",
+   "expected": "RESOURCE/animation/Heads/capitan.ani",
+   "reach": "dead",
+   "note": "анимация головы отсутствующей головы; сама её нехватка не роняет (опыт H01/H02)"
+  },
+  {
+   "kind": "ani",
+   "expected": "RESOURCE/animation/Heads/h_monkey.ani",
+   "reach": "dead",
+   "note": "анимация головы отсутствующей головы; сама её нехватка не роняет (опыт H01/H02)"
+  },
+  {
+   "kind": "ani",
+   "expected": "RESOURCE/animation/Heads/h_mummy.ani",
+   "reach": "dead",
+   "note": "анимация головы отсутствующей головы; сама её нехватка не роняет (опыт H01/H02)"
+  },
+  {
+   "kind": "ani",
+   "expected": "RESOURCE/animation/Heads/h_none.ani",
+   "reach": "dead",
+   "note": "анимация головы отсутствующей головы; сама её нехватка не роняет (опыт H01/H02)"
+  },
+  {
+   "kind": "ani",
+   "expected": "RESOURCE/animation/Heads/h_skel1.ani",
+   "reach": "dead",
+   "note": "анимация головы отсутствующей головы; сама её нехватка не роняет (опыт H01/H02)"
+  },
+  {
+   "kind": "ani",
+   "expected": "RESOURCE/animation/Heads/h_skel2.ani",
+   "reach": "dead",
+   "note": "анимация головы отсутствующей головы; сама её нехватка не роняет (опыт H01/H02)"
+  },
+  {
+   "kind": "ani",
+   "expected": "RESOURCE/animation/Heads/h_skel3.ani",
+   "reach": "dead",
+   "note": "анимация головы отсутствующей головы; сама её нехватка не роняет (опыт H01/H02)"
+  },
+  {
+   "kind": "ani",
+   "expected": "RESOURCE/animation/Heads/h_skel4.ani",
+   "reach": "dead",
+   "note": "анимация головы отсутствующей головы; сама её нехватка не роняет (опыт H01/H02)"
+  },
+  {
+   "kind": "gm",
+   "expected": "RESOURCE/MODELS/Characters/none.gm",
+   "reach": "dead",
+   "note": "ch.model=\"none\" у пустых слотов Characters (characters_init.c:34); у используемых NPC перезаписывается"
+  },
+  {
+   "kind": "gm",
+   "expected": "RESOURCE/MODELS/Heads/capitan.gm",
+   "reach": "dead",
+   "note": "дефолтный headModel слотов (characters_init.c:55); для используемых NPC перезаписывается \"h_\"+model (characters_init.c:297, LAi_utils.c:340)"
+  },
+  {
+   "kind": "gm",
+   "expected": "RESOURCE/MODELS/Heads/h_Monkey.gm",
+   "reach": "dead",
+   "note": "монстры LandEncounters (LEnc_monsters.c); голова грузится только в диалоге (DIALOG.dll, опыт M04), с монстрами диалогов нет"
+  },
+  {
+   "kind": "gm",
+   "expected": "RESOURCE/MODELS/Heads/h_mummy.gm",
+   "reach": "dead",
+   "note": "монстры LandEncounters (LEnc_monsters.c); голова грузится только в диалоге (DIALOG.dll, опыт M04), с монстрами диалогов нет"
+  },
+  {
+   "kind": "gm",
+   "expected": "RESOURCE/MODELS/Heads/h_none.gm",
+   "reach": "dead",
+   "note": "дефолтный headModel слотов (characters_init.c:55); для используемых NPC перезаписывается \"h_\"+model (characters_init.c:297, LAi_utils.c:340)"
+  },
+  {
+   "kind": "gm",
+   "expected": "RESOURCE/MODELS/Heads/h_skel1.gm",
+   "reach": "dead",
+   "note": "скелеты: Skel1-4 только как модель игрока в финале (quests_reaction.c:6536) и у монстров; голова игрока в диалоге не грузится (трасса M00: только h_bocman3)"
+  },
+  {
+   "kind": "gm",
+   "expected": "RESOURCE/MODELS/Heads/h_skel2.gm",
+   "reach": "dead",
+   "note": "скелеты: Skel1-4 только как модель игрока в финале (quests_reaction.c:6536) и у монстров; голова игрока в диалоге не грузится (трасса M00: только h_bocman3)"
+  },
+  {
+   "kind": "gm",
+   "expected": "RESOURCE/MODELS/Heads/h_skel3.gm",
+   "reach": "dead",
+   "note": "скелеты: Skel1-4 только как модель игрока в финале (quests_reaction.c:6536) и у монстров; голова игрока в диалоге не грузится (трасса M00: только h_bocman3)"
+  },
+  {
+   "kind": "gm",
+   "expected": "RESOURCE/MODELS/Heads/h_skel4.gm",
+   "reach": "dead",
+   "note": "скелеты: Skel1-4 только как модель игрока в финале (quests_reaction.c:6536) и у монстров; голова игрока в диалоге не грузится (трасса M00: только h_bocman3)"
+  },
+  {
+   "kind": "gm",
+   "expected": "RESOURCE/MODELS/Ships/Fort/Fort.gm",
+   "reach": "dead",
+   "note": "SHIP_FORT: корабельная модель не создаётся, форт строит AIFort.c из моделей острова (AIShip.c:167, AIFort.c:344); прямо не проверено"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/NATURE/foutain.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/NATURE/widmill.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/OBJECTS/SHIPCHARGE/hit_toground.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_f_a_006.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_006.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_007.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_009.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_010.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_013.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_014.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_015.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_016.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_017.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_027.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_028.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_031.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_043.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_046.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_047.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_049.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_051.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_052.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_053.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_054.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_055.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_056.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_057.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_062.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_066.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_070.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Dut_m_a_071.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_f_c_006.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_f_c_007.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_f_c_010.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_f_c_011.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_f_c_017.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_f_c_018.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_f_c_020.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_008.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_016.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_034.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_038.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_042.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_044.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_055.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_057.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_059.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_061.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_062.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_064.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_066.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_069.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_a_079.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_b_053.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_b_058.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_b_060.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_b_063.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_b_072.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_b_076.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_b_078.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_b_083.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_004.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_007.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_008.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_009.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_010.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_011.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_013.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_014.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_016.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_017.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_019.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_022.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_023.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Eng_m_c_032.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_a_009.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_a_012.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_a_013.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_a_014.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_a_015.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_a_017.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_a_018.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_a_030.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_a_031.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_039.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_040.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_044.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_045.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_047.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_050.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_051.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_052.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_053.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_056.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_058.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_060.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_b_070.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_c_020.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_c_021.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_c_034.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_c_040.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_c_050.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_c_056.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Fre_m_c_059.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Ita_m_a_003.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Ita_m_a_004.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Ita_m_a_005.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_a_006.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_a_008.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_a_010.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_a_012.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_a_013.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_a_014.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_a_015.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_a_026.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_a_028.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_b_045.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_b_049.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_b_050.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_b_051.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Por_m_b_053.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_005.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_006.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_007.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_009.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_011.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_012.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_013.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_014.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_015.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_025.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_030.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_032.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_033.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_034.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_041.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_042.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_043.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_044.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_046.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_047.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_048.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_049.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_053.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_a_067.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_b_012.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_b_013.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "sound",
+   "expected": "RESOURCE/Sounds/VOICE/Spa_m_b_014.wav",
+   "reach": "cosmetic",
+   "note": "нет звукового файла алиаса (.wav): тихо пропускается (опыты S03-S05); музыка (.ogg) — отдельный класс, защищена preflight"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/compass.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/DAY.TGA.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/Fort1.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/highlight.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "portrait",
+   "expected": "RESOURCE/Textures/INTERFACES/PORTRAITS/256/face_47.tga.tx",
+   "reach": "cosmetic",
+   "note": "FaceId 47-51 у моделей Offic_*; отсутствующая текстура = \"Can't load texture\" без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "portrait",
+   "expected": "RESOURCE/Textures/INTERFACES/PORTRAITS/256/face_48.tga.tx",
+   "reach": "cosmetic",
+   "note": "FaceId 47-51 у моделей Offic_*; отсутствующая текстура = \"Can't load texture\" без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "portrait",
+   "expected": "RESOURCE/Textures/INTERFACES/PORTRAITS/256/face_49.tga.tx",
+   "reach": "cosmetic",
+   "note": "FaceId 47-51 у моделей Offic_*; отсутствующая текстура = \"Can't load texture\" без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "portrait",
+   "expected": "RESOURCE/Textures/INTERFACES/PORTRAITS/256/face_50.tga.tx",
+   "reach": "cosmetic",
+   "note": "FaceId 47-51 у моделей Offic_*; отсутствующая текстура = \"Can't load texture\" без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "portrait",
+   "expected": "RESOURCE/Textures/INTERFACES/PORTRAITS/256/face_51.tga.tx",
+   "reach": "cosmetic",
+   "note": "FaceId 47-51 у моделей Offic_*; отсутствующая текстура = \"Can't load texture\" без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "portrait",
+   "expected": "RESOURCE/Textures/INTERFACES/PORTRAITS/64/face_47.tga.tx",
+   "reach": "cosmetic",
+   "note": "FaceId 47-51 у моделей Offic_*; отсутствующая текстура = \"Can't load texture\" без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "portrait",
+   "expected": "RESOURCE/Textures/INTERFACES/PORTRAITS/64/face_48.tga.tx",
+   "reach": "cosmetic",
+   "note": "FaceId 47-51 у моделей Offic_*; отсутствующая текстура = \"Can't load texture\" без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "portrait",
+   "expected": "RESOURCE/Textures/INTERFACES/PORTRAITS/64/face_49.tga.tx",
+   "reach": "cosmetic",
+   "note": "FaceId 47-51 у моделей Offic_*; отсутствующая текстура = \"Can't load texture\" без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "portrait",
+   "expected": "RESOURCE/Textures/INTERFACES/PORTRAITS/64/face_50.tga.tx",
+   "reach": "cosmetic",
+   "note": "FaceId 47-51 у моделей Offic_*; отсутствующая текстура = \"Can't load texture\" без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "portrait",
+   "expected": "RESOURCE/Textures/INTERFACES/PORTRAITS/64/face_51.tga.tx",
+   "reach": "cosmetic",
+   "note": "FaceId 47-51 у моделей Offic_*; отсутствующая текстура = \"Can't load texture\" без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/jungle_land_09.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/light.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/numbers.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/OfGolland.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/sails_shiplet.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/Satanist1.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/Satanist2.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/sh03_envday.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/SPHETE.TGA.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/WaterBlend.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/white.TGA.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  },
+  {
+   "kind": "texture",
+   "expected": "RESOURCE/Textures/yacht.tga.tx",
+   "reach": "cosmetic",
+   "note": "нет текстуры: \"Can't load texture\", без падения (опыты T01-T06)"
+  }
+ ],
+ "checked": {
+  "an": 131,
+  "ani": 144,
+  "gm": 1023,
+  "ptc": 136,
+  "grs": 64,
+  "sound": 456,
+  "music": 32,
+  "texture": 137,
+  "portrait": 106
+ }
+}

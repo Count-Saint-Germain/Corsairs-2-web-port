@@ -1,0 +1,18 @@
+# path: PROGRAM/INTERFACE/select_menu.c
+# sha256-before: 60a1eed00cda6e972fa4adb6af6671f950830829e39bc72aa47f619570b76387
+# sha256-after: 6dc3b988de3cc581b8716e484ef4c744258d3103690915c75fba3edf57b42292
+# eol-before: crlf
+# eol-after: crlf
+# final-newline: yes
+--- a/PROGRAM/INTERFACE/select_menu.c
++++ b/PROGRAM/INTERFACE/select_menu.c
+@@ -4,0 +5 @@
++    Trace("SELECT_TRACE init");
+@@ -16,0 +18 @@
++    Trace("SELECT_TRACE cancel");
+@@ -21,0 +24 @@
++    Trace("SELECT_TRACE exit " + exitCode);
+@@ -38,0 +42 @@
++    Trace("SELECT_TRACE command " + comName + " node " + nodName);
+@@ -50,0 +55 @@
++    Trace("SELECT_TRACE delayed exit fired");

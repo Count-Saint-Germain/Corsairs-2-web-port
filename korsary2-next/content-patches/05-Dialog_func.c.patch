@@ -1,0 +1,16 @@
+# path: PROGRAM/Dialog_func.c
+# sha256-before: 70b7c2c9bec528a3968709b8cc248870484c05acc6cdbc7c9c6b88f7930f75b7
+# sha256-after: c8bb325d8a661b2e6ebec098df43a8f90a2c45180968dbd9fd89776447723f21
+# eol-before: crlf
+# eol-after: crlf
+# final-newline: yes
+--- a/PROGRAM/Dialog_func.c
++++ b/PROGRAM/Dialog_func.c
+@@ -1106,3 +1106,4 @@
+-	return "Good day";
+-}
+-
++	if (LanguageGetLanguage() == "English") return "Good day";
++	return "Добрый день";
++}
++

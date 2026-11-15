@@ -1,0 +1,2043 @@
+{
+ "format": 1,
+ "description": "Ручной слой английского текстового слоя (E2): собственный перевод агента с русского для строк, которых нет в американской версии 1.0 (патчи 1.01-1.03, текст туториала порта, 12+2 ключа TEXTS, записи квестов kill_* и др.). Американского текста здесь нет. kind: literal (строковый литерал скрипта: файл + ординал литерала; для DIALOGS/*.h ординал = индекс DLG_TEXT), quest (запись QUESTSTEXT 'квест#номер', 0 = заголовок), text_key (ключ файла TEXTS). ru_sha256 — SHA-256 русского оригинала (защита от дрейфа базовой раздачи). en — английский текст в том виде, как он ляжет в файл (внутри кавычек литерала; последовательность \\n — как в файле; многострочные значения TEXTS — с CRLF). pairs: авторская поправка выравнивания .h (ординал RU -> ординал US; null — пары нет), текста не содержит. override=true: строка перекрывает автоматическую американскую пару (сознательно). Записи без американской пары (остатки, русские и в американской версии: случайная встреча Enc_Rapers*, диалоги quest_sailor_tmp/quest_sapper, подписи локаций) применяются так же, override не нужен: файл строится из русской базы с подстановкой. Ноты со словом REVIEW — места для вычитки человеком.",
+ "entries": [
+  {
+   "file": "PROGRAM/DIALOGS/Christofor Manuel De Alencar_dialog.h",
+   "kind": "literal",
+   "index": 16,
+   "ru_sha256": "ea96765a13699d25e7f62509dae552c3104f041a721c2239f08a799b1285dd49",
+   "en": "Yes, captain, I do have a task for you."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Christofor Manuel De Alencar_dialog.h",
+   "kind": "literal",
+   "index": 17,
+   "ru_sha256": "f9b23007cea6051af830ca318ffe3ea58ec227eb7979538bf5c3406ba0b8dd02",
+   "en": "And what might that be?"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Christofor Manuel De Alencar_dialog.h",
+   "kind": "literal",
+   "index": 18,
+   "ru_sha256": "a3157de2a75addd121e25debdac17a153669612e607cff665d2fd4a85681445d",
+   "en": "I have learned that you carried out my commission. My congratulations - here is your reward."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Christofor Manuel De Alencar_dialog.h",
+   "kind": "literal",
+   "index": 19,
+   "ru_sha256": "f68c7de1441ce3a57388d7e538c10cb35f158289869821bb00898ead481e88fe",
+   "en": "Thank you. I was glad to be of service."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Christofor Manuel De Alencar_dialog.h",
+   "kind": "literal",
+   "index": 20,
+   "ru_sha256": "ee127b6213216887dc245aba707e67694db667f18acdc0ae32775f683a85e74e",
+   "en": "I need you to sink the ship '",
+   "note": "REVIEW: один перевод на 4 губернатора разных наций (тон нейтрально-официальный); фрагмент склеивается кодом: фраза + имя корабля + фраза + колония + фраза + сумма + '.'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Christofor Manuel De Alencar_dialog.h",
+   "kind": "literal",
+   "index": 22,
+   "ru_sha256": "6d0d19b2269fe8caf5d9acdc3a7f3cae8a3411e9c91132d285a652d2b4f46280",
+   "en": "', believed to be in the waters of the colony of ",
+   "note": "REVIEW: один перевод на 4 губернатора разных наций (тон нейтрально-официальный); фрагмент склеивается кодом: фраза + имя корабля + фраза + колония + фраза + сумма + '.'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Christofor Manuel De Alencar_dialog.h",
+   "kind": "literal",
+   "index": 23,
+   "ru_sha256": "a86eef1be07d4896b624cc0ab37a6f4b891f05a883151736c3dc135869892d2b",
+   "en": "\\nIf you complete this task, I will pay you the sum of ",
+   "note": "REVIEW: один перевод на 4 губернатора разных наций (тон нейтрально-официальный); фрагмент склеивается кодом: фраза + имя корабля + фраза + колония + фраза + сумма + '.'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Christofor Manuel De Alencar_dialog.h",
+   "kind": "literal",
+   "index": 25,
+   "ru_sha256": "6ef88fe7e48a84fb8b6bfa17b75ed44faad4631549beed07a2575bcdef53c8bf",
+   "en": "I will take the job."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Christofor Manuel De Alencar_dialog.h",
+   "kind": "literal",
+   "index": 26,
+   "ru_sha256": "ca46570d43215b411c76dcc2cf30296d070d69a0d1928afedae76c896d4d7d1a",
+   "en": "I don't think that interests me."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Jacinto Arcibaldo Barreto_dialog.h",
+   "kind": "literal",
+   "index": 16,
+   "ru_sha256": "ea96765a13699d25e7f62509dae552c3104f041a721c2239f08a799b1285dd49",
+   "en": "Yes, captain, I do have a task for you."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Jacinto Arcibaldo Barreto_dialog.h",
+   "kind": "literal",
+   "index": 17,
+   "ru_sha256": "f9b23007cea6051af830ca318ffe3ea58ec227eb7979538bf5c3406ba0b8dd02",
+   "en": "And what might that be?"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Jacinto Arcibaldo Barreto_dialog.h",
+   "kind": "literal",
+   "index": 18,
+   "ru_sha256": "a3157de2a75addd121e25debdac17a153669612e607cff665d2fd4a85681445d",
+   "en": "I have learned that you carried out my commission. My congratulations - here is your reward."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Jacinto Arcibaldo Barreto_dialog.h",
+   "kind": "literal",
+   "index": 19,
+   "ru_sha256": "f68c7de1441ce3a57388d7e538c10cb35f158289869821bb00898ead481e88fe",
+   "en": "Thank you. I was glad to be of service."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Jacinto Arcibaldo Barreto_dialog.h",
+   "kind": "literal",
+   "index": 21,
+   "ru_sha256": "ee127b6213216887dc245aba707e67694db667f18acdc0ae32775f683a85e74e",
+   "en": "I need you to sink the ship '",
+   "note": "REVIEW: один перевод на 4 губернатора разных наций (тон нейтрально-официальный); фрагмент склеивается кодом: фраза + имя корабля + фраза + колония + фраза + сумма + '.'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Jacinto Arcibaldo Barreto_dialog.h",
+   "kind": "literal",
+   "index": 23,
+   "ru_sha256": "6d0d19b2269fe8caf5d9acdc3a7f3cae8a3411e9c91132d285a652d2b4f46280",
+   "en": "', believed to be in the waters of the colony of ",
+   "note": "REVIEW: один перевод на 4 губернатора разных наций (тон нейтрально-официальный); фрагмент склеивается кодом: фраза + имя корабля + фраза + колония + фраза + сумма + '.'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Jacinto Arcibaldo Barreto_dialog.h",
+   "kind": "literal",
+   "index": 24,
+   "ru_sha256": "a86eef1be07d4896b624cc0ab37a6f4b891f05a883151736c3dc135869892d2b",
+   "en": "\\nIf you complete this task, I will pay you the sum of ",
+   "note": "REVIEW: один перевод на 4 губернатора разных наций (тон нейтрально-официальный); фрагмент склеивается кодом: фраза + имя корабля + фраза + колония + фраза + сумма + '.'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Jacinto Arcibaldo Barreto_dialog.h",
+   "kind": "literal",
+   "index": 26,
+   "ru_sha256": "6ef88fe7e48a84fb8b6bfa17b75ed44faad4631549beed07a2575bcdef53c8bf",
+   "en": "I will take the job."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Jacinto Arcibaldo Barreto_dialog.h",
+   "kind": "literal",
+   "index": 27,
+   "ru_sha256": "ca46570d43215b411c76dcc2cf30296d070d69a0d1928afedae76c896d4d7d1a",
+   "en": "I don't think that interests me."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Joseph Claude Le Moigne_dialog.h",
+   "kind": "literal",
+   "index": 27,
+   "ru_sha256": "ea96765a13699d25e7f62509dae552c3104f041a721c2239f08a799b1285dd49",
+   "en": "Yes, captain, I do have a task for you."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Joseph Claude Le Moigne_dialog.h",
+   "kind": "literal",
+   "index": 28,
+   "ru_sha256": "f9b23007cea6051af830ca318ffe3ea58ec227eb7979538bf5c3406ba0b8dd02",
+   "en": "And what might that be?"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Joseph Claude Le Moigne_dialog.h",
+   "kind": "literal",
+   "index": 29,
+   "ru_sha256": "a3157de2a75addd121e25debdac17a153669612e607cff665d2fd4a85681445d",
+   "en": "I have learned that you carried out my commission. My congratulations - here is your reward."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Joseph Claude Le Moigne_dialog.h",
+   "kind": "literal",
+   "index": 30,
+   "ru_sha256": "f68c7de1441ce3a57388d7e538c10cb35f158289869821bb00898ead481e88fe",
+   "en": "Thank you. I was glad to be of service."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Joseph Claude Le Moigne_dialog.h",
+   "kind": "literal",
+   "index": 41,
+   "ru_sha256": "ee127b6213216887dc245aba707e67694db667f18acdc0ae32775f683a85e74e",
+   "en": "I need you to sink the ship '",
+   "note": "REVIEW: один перевод на 4 губернатора разных наций (тон нейтрально-официальный); фрагмент склеивается кодом: фраза + имя корабля + фраза + колония + фраза + сумма + '.'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Joseph Claude Le Moigne_dialog.h",
+   "kind": "literal",
+   "index": 43,
+   "ru_sha256": "6d0d19b2269fe8caf5d9acdc3a7f3cae8a3411e9c91132d285a652d2b4f46280",
+   "en": "', believed to be in the waters of the colony of ",
+   "note": "REVIEW: один перевод на 4 губернатора разных наций (тон нейтрально-официальный); фрагмент склеивается кодом: фраза + имя корабля + фраза + колония + фраза + сумма + '.'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Joseph Claude Le Moigne_dialog.h",
+   "kind": "literal",
+   "index": 44,
+   "ru_sha256": "a86eef1be07d4896b624cc0ab37a6f4b891f05a883151736c3dc135869892d2b",
+   "en": "\\nIf you complete this task, I will pay you the sum of ",
+   "note": "REVIEW: один перевод на 4 губернатора разных наций (тон нейтрально-официальный); фрагмент склеивается кодом: фраза + имя корабля + фраза + колония + фраза + сумма + '.'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Joseph Claude Le Moigne_dialog.h",
+   "kind": "literal",
+   "index": 46,
+   "ru_sha256": "6ef88fe7e48a84fb8b6bfa17b75ed44faad4631549beed07a2575bcdef53c8bf",
+   "en": "I will take the job."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Joseph Claude Le Moigne_dialog.h",
+   "kind": "literal",
+   "index": 47,
+   "ru_sha256": "ca46570d43215b411c76dcc2cf30296d070d69a0d1928afedae76c896d4d7d1a",
+   "en": "I don't think that interests me."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Reynard Grueneveldt_dialog.h",
+   "kind": "literal",
+   "index": 19,
+   "ru_sha256": "ea96765a13699d25e7f62509dae552c3104f041a721c2239f08a799b1285dd49",
+   "en": "Yes, captain, I do have a task for you."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Reynard Grueneveldt_dialog.h",
+   "kind": "literal",
+   "index": 20,
+   "ru_sha256": "f9b23007cea6051af830ca318ffe3ea58ec227eb7979538bf5c3406ba0b8dd02",
+   "en": "And what might that be?"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Reynard Grueneveldt_dialog.h",
+   "kind": "literal",
+   "index": 21,
+   "ru_sha256": "a3157de2a75addd121e25debdac17a153669612e607cff665d2fd4a85681445d",
+   "en": "I have learned that you carried out my commission. My congratulations - here is your reward."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Reynard Grueneveldt_dialog.h",
+   "kind": "literal",
+   "index": 22,
+   "ru_sha256": "f68c7de1441ce3a57388d7e538c10cb35f158289869821bb00898ead481e88fe",
+   "en": "Thank you. I was glad to be of service."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Reynard Grueneveldt_dialog.h",
+   "kind": "literal",
+   "index": 24,
+   "ru_sha256": "ee127b6213216887dc245aba707e67694db667f18acdc0ae32775f683a85e74e",
+   "en": "I need you to sink the ship '",
+   "note": "REVIEW: один перевод на 4 губернатора разных наций (тон нейтрально-официальный); фрагмент склеивается кодом: фраза + имя корабля + фраза + колония + фраза + сумма + '.'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Reynard Grueneveldt_dialog.h",
+   "kind": "literal",
+   "index": 26,
+   "ru_sha256": "6d0d19b2269fe8caf5d9acdc3a7f3cae8a3411e9c91132d285a652d2b4f46280",
+   "en": "', believed to be in the waters of the colony of ",
+   "note": "REVIEW: один перевод на 4 губернатора разных наций (тон нейтрально-официальный); фрагмент склеивается кодом: фраза + имя корабля + фраза + колония + фраза + сумма + '.'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Reynard Grueneveldt_dialog.h",
+   "kind": "literal",
+   "index": 27,
+   "ru_sha256": "a86eef1be07d4896b624cc0ab37a6f4b891f05a883151736c3dc135869892d2b",
+   "en": "\\nIf you complete this task, I will pay you the sum of ",
+   "note": "REVIEW: один перевод на 4 губернатора разных наций (тон нейтрально-официальный); фрагмент склеивается кодом: фраза + имя корабля + фраза + колония + фраза + сумма + '.'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Reynard Grueneveldt_dialog.h",
+   "kind": "literal",
+   "index": 29,
+   "ru_sha256": "6ef88fe7e48a84fb8b6bfa17b75ed44faad4631549beed07a2575bcdef53c8bf",
+   "en": "I will take the job."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Reynard Grueneveldt_dialog.h",
+   "kind": "literal",
+   "index": 30,
+   "ru_sha256": "ca46570d43215b411c76dcc2cf30296d070d69a0d1928afedae76c896d4d7d1a",
+   "en": "I don't think that interests me."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Douwesen Citizen_Dialog.h",
+   "kind": "literal",
+   "index": 162,
+   "ru_sha256": "d5d8a19b6fb0787d2496ef386b9209ce682a853a9761c9207e4814370104158e",
+   "en": "Oh! He is a vile man; I would advise you to have no dealings with him\\nHe keeps half the people of our town in debt! And the goods sold in his shop are always of poor quality."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Douwesen Citizen_Dialog.h",
+   "kind": "literal",
+   "index": 163,
+   "ru_sha256": "34c185d9e25208fc65a468948af35fb6c33fd2bc224f0428b1b9fdf47a057edd",
+   "en": "I see. I have a question."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Douwesen Citizen_Dialog.h",
+   "kind": "literal",
+   "index": 164,
+   "ru_sha256": "a780bd712570990002571cf566af2aa7a8acc48426c168af3685cd126a9de700",
+   "en": "Thank you, goodbye."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Douwesen Soldier_Dialog.h",
+   "kind": "pairs",
+   "ru_literals": 28,
+   "us_literals": 27,
+   "map": {
+    "22": null,
+    "23": 22,
+    "24": 23,
+    "25": 24,
+    "26": 25,
+    "27": 26
+   },
+   "note": "поправка выравнивания: у американского файла реплики сдвинуты на одну; пары проверены по смыслу (сцена пьяного солдата)"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Douwesen Soldier_Dialog.h",
+   "kind": "literal",
+   "index": 22,
+   "ru_sha256": "a1b0d458770a46b048653c9f5316872a109731d302db7d0e9cec1f2da368d98a",
+   "en": "What do you want?",
+   "note": "реплика добавлена в русской 1.01+; в американском файле её нет"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/isla muelle soldier_dialog.h",
+   "kind": "pairs",
+   "ru_literals": 28,
+   "us_literals": 27,
+   "map": {
+    "22": null,
+    "23": 22,
+    "24": 23,
+    "25": 24,
+    "26": 25,
+    "27": 26
+   },
+   "note": "поправка выравнивания: у американского файла реплики сдвинуты на одну; пары проверены по смыслу (сцена пьяного солдата)"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/isla muelle soldier_dialog.h",
+   "kind": "literal",
+   "index": 22,
+   "ru_sha256": "a1b0d458770a46b048653c9f5316872a109731d302db7d0e9cec1f2da368d98a",
+   "en": "What do you want?",
+   "note": "реплика добавлена в русской 1.01+; в американском файле её нет"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Raiders_dialog.h",
+   "kind": "literal",
+   "index": 44,
+   "ru_sha256": "6746cf2c47cb4663cb6b157404b2dcd428d8fffe54d8f30f3ecaf6b645f7f62e",
+   "en": "Get off me! Get lost! I want to live!"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Raiders_dialog.h",
+   "kind": "literal",
+   "index": 45,
+   "ru_sha256": "64fbae8467567d6f651ada9936748a8acdaa425ee9f2838be23e26a59ad8dc13",
+   "en": "Help! He's a maniac! Don't kill me!"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Raiders_dialog.h",
+   "kind": "literal",
+   "index": 46,
+   "ru_sha256": "8049fa892f0b239c31c6b43a2d24e6f9a1fca60d3b4ef4609e5511d555991f9b",
+   "en": "Mercy! I'm just a humble bandit! I'm too young to die!"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Raiders_dialog.h",
+   "kind": "literal",
+   "index": 47,
+   "ru_sha256": "b62ce3ffceb9a6dfccdf532d30e3600a6b6006bef5ba930fd5a6826154c4442b",
+   "en": "You should have stayed at home - you'd have lived longer!"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Eng_Bertillon's Guard_dialog.h",
+   "kind": "literal",
+   "index": 0,
+   "ru_sha256": "8ab46e055689dfbf265d6605de508fde7524702bfe0d50ec5cc1e376e3121a1d",
+   "en": "If you feel like talking, go and chat with the boss. But mind you, if he doesn't like your tone, we'll send you to the other world in no time."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Eng_Bertillon's Guard_dialog.h",
+   "kind": "literal",
+   "index": 1,
+   "ru_sha256": "292aaf7a58fe73701434949e646e0b3bea4dd00dd90da2b0ce52a87c2b0e0ba5",
+   "en": "Well, you're a tough fellow, I see"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Quest_ANIMISTS_dialog.h",
+   "kind": "literal",
+   "index": 50,
+   "ru_sha256": "b9daa9343e61bc8301459d97125f27e894a8e68672e82b0ddd0f7b51bdc5cb05",
+   "en": "That's it! Your leader is dead and you are mine! Now show me the animists' lair!"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Quest_ANIMISTS_dialog.h",
+   "kind": "literal",
+   "index": 51,
+   "ru_sha256": "30e1e8731dc45592f920c33529db12d9017893b1df52712be09619a1e0a01985",
+   "en": "Ha! Head for the little island north of Isla Muelle. My companions there will destroy you!"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Quest_ANIMISTS_dialog.h",
+   "kind": "literal",
+   "index": 52,
+   "ru_sha256": "c88398ace57525f25d324ac20eede13fe059ff0220bba7a1b5dc2aa47b3c0e0e",
+   "en": "Okay, we'll see about that... Come along with me.",
+   "note": "исходный русский текст содержит латинское 'Okay'"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Simon Hanpool_dialog.h",
+   "kind": "literal",
+   "index": 121,
+   "ru_sha256": "cf3dcfea31e417757be6432e7a9060e842ff305b1653e7419ffb3a569bc6fac7",
+   "en": "Remember when you told me to talk to the warden about the prisoner? Well, I went and killed the bastard. What do I do next?",
+   "note": "REVIEW: 'начальник' переведён 'warden' как в американской реплике Саймона Хэнпула (в журнале квеста - 'commandant')"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Simon Hanpool_dialog.h",
+   "kind": "literal",
+   "index": 122,
+   "ru_sha256": "de0bd65463a940264b6ecd09f0a88fd9eef9971676710c66ddbd97daeee455c7",
+   "en": "Well, now that the warden is dead, go and talk to the prisoner. Nobody will stop you now."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Simon Hanpool_dialog.h",
+   "kind": "literal",
+   "index": 123,
+   "ru_sha256": "79c49c9fbb2cc0cc7904d3f847ea5a609f4ad812598c5fbb75235143c56df095",
+   "en": "I'll do that, thank you!"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Simon Hanpool_dialog.h",
+   "kind": "literal",
+   "index": 124,
+   "ru_sha256": "69b13fa670594d96f10169d4c3fad324d1277aeb72cf06928a11a4a7695173d4",
+   "en": " That lad was arrested a few days ago - he was inciting people to rebellion. Since the warden is dead, I suppose you can go to the prison and talk to the convict."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Usurer_dialog.h",
+   "kind": "literal",
+   "index": 84,
+   "ru_sha256": "afe8b9f8a9ea32e4db55859eed456b04aead8414eb6b68f63e4488916531c90f",
+   "en": " percent per month. Considering what I know about you, I can't offer you better terms right now.",
+   "note": "американская пара пропущена проверкой спецификаторов ('%%'); число подставляет код, слово 'percent' добавлено"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Usurer_dialog.h",
+   "kind": "literal",
+   "index": 118,
+   "ru_sha256": "1988443745ed4111918387aba091dfca6be8bab9def2138cf71d2ede40ddd9b8",
+   "en": " percent. Of course, that's the rate per month."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Usurer_dialog.h",
+   "kind": "literal",
+   "index": 123,
+   "ru_sha256": "1988443745ed4111918387aba091dfca6be8bab9def2138cf71d2ede40ddd9b8",
+   "en": " percent. Of course, that's the rate per month."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Usurer_dialog.h",
+   "kind": "literal",
+   "index": 128,
+   "ru_sha256": "1988443745ed4111918387aba091dfca6be8bab9def2138cf71d2ede40ddd9b8",
+   "en": " percent. Of course, that's the rate per month."
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Malcolm Hatcher_dialog.h",
+   "kind": "literal",
+   "index": 8,
+   "ru_sha256": "c5755bbd6e24f88b1f5761cfefdc642f6476a901fdebe25ac4fdc89399209788",
+   "en": "Your sword is on the chest. And everything else is in the wardrobe. Come closer to it and you will see an icon with a picture of a hand on the screen\\n Then press the quick command key (usually Space; it can be changed in the controls settings). In the menu that opens you can take the items you need. Using the interface that opens you can take an item out of the wardrobe or put something back in\\nNow, captain, gather your equipment; I will wait for you here.",
+   "override": true,
+   "note": "туториал порта: команды по назначению, не жёсткие клавиши (патч 04)"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Malcolm Hatcher_dialog.h",
+   "kind": "literal",
+   "index": 34,
+   "ru_sha256": "60d759313c03fad45b53f92dd2f5d1afdbd6936224a988f0ef2d4367e92d5402",
+   "en": "Now, sir, press the assigned fight mode key to draw your sword. While you get used to the controls I will not attack you. Use the assigned commands to fire the pistol and to strike with the sword; you can look them up in the controls settings.",
+   "override": true,
+   "note": "туториал порта (патч 04)"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Malcolm Hatcher_dialog.h",
+   "kind": "literal",
+   "index": 36,
+   "ru_sha256": "b1d00846ef8f5c0253ab18c3a04c21af97374df0589b35d4f9f9a73c9c1b837c",
+   "en": "Wait a moment. To quickly gain some distance between you and your opponent, jump back from him with the assigned dodge command. Remember that you cannot talk while your weapon is drawn; put it away with the fight mode command. You can look up the assignments in the controls settings.",
+   "override": true,
+   "note": "туториал порта (патч 04)"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Malcolm Hatcher_dialog.h",
+   "kind": "literal",
+   "index": 48,
+   "ru_sha256": "eae036595f63e3764569063342b96c9ebc0de255d2e525a69da7922276f39854",
+   "en": "Now, sir, I will fight back. Do not forget to block my blows with the assigned block command  - if you only attack and never block, you will very soon say goodbye to your life.",
+   "override": true,
+   "note": "туториал порта (патч 04); двойной пробел перед тире сохранён как в оригинале"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Malcolm Hatcher_dialog.h",
+   "kind": "literal",
+   "index": 50,
+   "ru_sha256": "ab066f8b278c5e1dd9a8fae81316ce060dace71c3afa1a157fa5aa9e126df75e",
+   "en": "Not bad, captain, not bad at all! Remember that if you have been wounded in battle, you can restore your health with a bottle of elixir. To do that, open the command menu, choose the icon with a picture of a bottle from the list and confirm your choice. You can look up the menu command key in the controls settings.",
+   "override": true,
+   "note": "туториал порта (патч 04)"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Malcolm Hatcher_dialog.h",
+   "kind": "literal",
+   "index": 54,
+   "ru_sha256": "e6ffeccf2ebae7433358c5fcaa67c6f3c7c032426334dc3257dc09c7b4b3fb8e",
+   "en": "Hmm... You need more practice... Remember that if you have been wounded in battle, you can restore your health with a bottle of elixir. To do that, open the command menu, choose the icon with a picture of a bottle from the list and confirm your choice. You can look up the menu command key in the controls settings.",
+   "override": true,
+   "note": "туториал порта (патч 04)"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Malcolm Hatcher_dialog.h",
+   "kind": "literal",
+   "index": 157,
+   "ru_sha256": "2df96de71bc035942a02b4a51ebb71c4006f85a7cfb3fe0d7e771ac8465f9ad7",
+   "en": "The store is in the town. Follow me to the gates, and as soon as an icon with a picture of an open lock appears on the screen, use the quick command (usually Space; it can be changed in the controls settings) to move to the next location.",
+   "override": true,
+   "note": "туториал порта (патч 04)"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Malcolm Hatcher_dialog.h",
+   "kind": "literal",
+   "index": 235,
+   "ru_sha256": "e7f80aeaa108c5f7d2169c3b5a7dd0821d95609724545936962894a8e2504c1e",
+   "en": "Firing the cannons while watching the ship from the third person is easy - keep the enemy within range of your guns and use the fire command when your guns are loaded. You can look up its assignment in the controls settings. Your gunners will aim the guns at the enemy on their own\\nFiring from the deck is harder. You will have to aim your guns at the enemy ship yourself. Remember that cannonballs fly in an arc, so the farther away the enemy is, the higher you must raise the sight\\n Aim straight at the enemy only if he is very close.",
+   "override": true,
+   "note": "туториал порта (патч 04)"
+  },
+  {
+   "file": "PROGRAM/Characters/init/StoryCharacters.c",
+   "kind": "literal",
+   "index": 1992,
+   "ru_sha256": "264f6a06eee4f8e2884fef347afecfa177b160e6bba3ae7c738a9d606ff034ba",
+   "en": "Pirate",
+   "note": "имя наёмного убийцы (Quest Pirate)"
+  },
+  {
+   "file": "PROGRAM/seadogs.c",
+   "kind": "literal",
+   "index": 263,
+   "ru_sha256": "fe4d884a4770f4aad24952ada93849dbd5afc9d8afe014f5a38b5dc4ac5a88ff",
+   "en": "All OK!",
+   "note": "отладочная строка"
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 40,
+   "ru_sha256": "4c89f7c4da7bf7296076ea95711dcfe2b1957f50beea24a6b3ce8f379176ad5d",
+   "en": "merchants",
+   "note": "REVIEW: фраза склеивается кодом из кусков: [Captain, ... It looks like ] + группа + [, under ] + флаг + [vs. ] + группа + ...; проверить на карте мира живьём"
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 41,
+   "ru_sha256": "f5a7332a05383b8def0d9ed0982d79425b6fdb512da78ec8ead03b150287c021",
+   "en": "merchants with an escort"
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 42,
+   "ru_sha256": "8943decfb495483bac6275e4fcc1f6bdd3987a0f6c268b5c151f231c373b5feb",
+   "en": "a military convoy carrying valuable cargo"
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 43,
+   "ru_sha256": "5092331ca1dbc85a60e62d70069fdd6f7007d6a8a2b175b0fab38cd36055c5f4",
+   "en": "a military patrol"
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 44,
+   "ru_sha256": "cd47a231416d83fc7880c57aa6b5defdb7ab68e234c683e1cd6c317b520bdc5a",
+   "en": "a military armada"
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 45,
+   "ru_sha256": "1bd4b2b2f7ce15ced5720f7faa5a77a6ba0de2689dd3868c8588de52306b7d0e",
+   "en": "one or more warships"
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 46,
+   "ru_sha256": "afc2be770b1a483ef6cedd781d1e890e62b391c268fce39978d3af96476cea50",
+   "en": "corsairs"
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 47,
+   "ru_sha256": "64d6ea0ff21e4a6121c45be3742d7edb7167b80b3e36b8a6d8983e750787a1f2",
+   "en": "a punitive expedition"
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 48,
+   "ru_sha256": "9943625af447969673b2bbd5327ea262d77f8bbea76275d2d26a9c00a136c2ec",
+   "en": ", under ",
+   "note": "REVIEW: фраза склеивается кодом из кусков: [Captain, ... It looks like ] + группа + [, under ] + флаг + [vs. ] + группа + ...; проверить на карте мира живьём"
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 49,
+   "ru_sha256": "e45fb2753d6bbc06d024250072d93c22077e3fc1673779d817cb0e1c7487e88d",
+   "en": "English colors ",
+   "note": "REVIEW: фраза склеивается кодом из кусков: [Captain, ... It looks like ] + группа + [, under ] + флаг + [vs. ] + группа + ...; проверить на карте мира живьём"
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 50,
+   "ru_sha256": "92933de58309ce2504a9023a74949a65b3281d3eeb35d095cb0504fc9c5c982e",
+   "en": "French colors "
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 51,
+   "ru_sha256": "2633714851c37e879d93632ac7279baa7fe1c6cda551d429fb16ac474e1398e6",
+   "en": "Spanish colors "
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 52,
+   "ru_sha256": "709cd78362b6ee85145a442b59244ea0ed4ec381b5998c7560deef3560a5fc3a",
+   "en": "pirate colors "
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 53,
+   "ru_sha256": "83b0219efb86b0dd9e4b45ed7c303e8e7c791d4b0d2bb9bd73d5388d57472bae",
+   "en": "Dutch colors "
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 54,
+   "ru_sha256": "b39ef51f5e656eb2ef4fa3d61866cf9f98090a9b5da86f430dd31be3e0187e9d",
+   "en": "Portuguese colors "
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 55,
+   "ru_sha256": "da4ea18aac5518b322a25e84dd04b1f692a2e36a7e70ddb6c3be5f2d51c3d809",
+   "en": "Captain, there's a battle ahead. It looks like ",
+   "note": "REVIEW: фраза склеивается кодом из кусков: [Captain, ... It looks like ] + группа + [, under ] + флаг + [vs. ] + группа + ...; проверить на карте мира живьём"
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 56,
+   "ru_sha256": "e6817763f79ebb2b475f90ab287a6807261dfb7affd1077e980ec6470e79060c",
+   "en": "Captain, someone is sailing out there. It looks like "
+  },
+  {
+   "file": "PROGRAM/INTERFACE/boal_map.c",
+   "kind": "literal",
+   "index": 58,
+   "ru_sha256": "6b7262e551ad466ba4f747fe9b19acfccf01519e66321d16074bee2be245fe25",
+   "en": "Attack?"
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "Story_1stTaskReceived#14",
+   "ru_sha256": "9f7cb14da3e5023067456b0cfb450e3fdaf895a26bc1aa2171f4d7ce5e5ab738",
+   "en": "My trick of changing the flag worked, and they took me for a Frenchman. And if anyone grows suspicious about my accent, I have already prepared a touching story of my childhood spent in a foreign land that would move anyone to pity."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "Blaze_in_prison#7",
+   "ru_sha256": "e4769e0584e5fd696a16512556eb8b247d44ddda46ef90e5c4adc918fa390ab4",
+   "en": "Thank God, it all worked out. Governor Silehard himself came to the prison to set me free and to apologize for the actions of his men."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "animists#38",
+   "ru_sha256": "cee628bbfbf12fa0b89114901f5b165859e65c474c5f5e4f242c54c27a1e8f90",
+   "en": "The Greenford tavern keeper told me that, since the commandant is dead, I only have to walk into the prison and talk to the 'teacher'."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "resque_researcher#0",
+   "ru_sha256": "a9227104a69ab6f77afcb929b6af9cee8ecfd229f385a3f9d9dafdd1134679f7",
+   "en": "Rescue the researcher",
+   "note": "в американском файле заголовок этого квеста пустой"
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "convoy_por#1",
+   "ru_sha256": "e80504ed15c8a8f7212ca809249718baf41a71599a90ed8721c6dd7273700226",
+   "en": "I must escort a merchant's ship to Conceicao."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_fal#0",
+   "ru_sha256": "782c43ce05a095f4aa840209f5a24c3827f4c8e96aecf5651ded4e1c13e8f80c",
+   "en": "Sink the pirate"
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_fal#1",
+   "ru_sha256": "e4238d234b2798db8edd9e4f818e15cdc68a3805978d686d2d51ec4f49992cb8",
+   "en": "I have been commissioned to sink a pirate whose ship is in the waters of Falaise de Fleur."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_fal#2",
+   "ru_sha256": "8d01cefe95ce87eb11f9067944c5bea3d8efe3927c6cf438794f3bf6cbd39c64",
+   "en": "The commission is complete; now I can return to my employer."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_mue#0",
+   "ru_sha256": "782c43ce05a095f4aa840209f5a24c3827f4c8e96aecf5651ded4e1c13e8f80c",
+   "en": "Sink the pirate"
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_mue#1",
+   "ru_sha256": "114e37338bd26e786ccae3576b49a66de7c5bd10d90d4da8d4f9bfd607ad60e0",
+   "en": "I have been commissioned to sink a pirate whose ship is in the waters of Isla Muelle."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_mue#2",
+   "ru_sha256": "8d01cefe95ce87eb11f9067944c5bea3d8efe3927c6cf438794f3bf6cbd39c64",
+   "en": "The commission is complete; now I can return to my employer."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_dou#0",
+   "ru_sha256": "782c43ce05a095f4aa840209f5a24c3827f4c8e96aecf5651ded4e1c13e8f80c",
+   "en": "Sink the pirate"
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_dou#1",
+   "ru_sha256": "2566813e038bed85d4c269dfe8e67a51474d53f99b12f1b8850f04ed4ecc947d",
+   "en": "I have been commissioned to sink a pirate whose ship is in the waters of Douwesen."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_dou#2",
+   "ru_sha256": "8d01cefe95ce87eb11f9067944c5bea3d8efe3927c6cf438794f3bf6cbd39c64",
+   "en": "The commission is complete; now I can return to my employer."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_con#0",
+   "ru_sha256": "782c43ce05a095f4aa840209f5a24c3827f4c8e96aecf5651ded4e1c13e8f80c",
+   "en": "Sink the pirate"
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_con#1",
+   "ru_sha256": "6b5b102d9940cd0f0299fae465db81f6b14e1c413573d624e200936dcfd9563c",
+   "en": "I have been commissioned to sink a pirate whose ship is in the waters of Conceicao."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_con#2",
+   "ru_sha256": "8d01cefe95ce87eb11f9067944c5bea3d8efe3927c6cf438794f3bf6cbd39c64",
+   "en": "The commission is complete; now I can return to my employer."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_red#0",
+   "ru_sha256": "782c43ce05a095f4aa840209f5a24c3827f4c8e96aecf5651ded4e1c13e8f80c",
+   "en": "Sink the pirate"
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_red#1",
+   "ru_sha256": "e575d3c399840cdd9176b9ac5e08db541081cbb5a1fbcc88f2abc9f5fecf0d47",
+   "en": "I have been commissioned to sink a pirate whose ship is in the waters of Redmond."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_red#2",
+   "ru_sha256": "8d01cefe95ce87eb11f9067944c5bea3d8efe3927c6cf438794f3bf6cbd39c64",
+   "en": "The commission is complete; now I can return to my employer."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_ox#0",
+   "ru_sha256": "782c43ce05a095f4aa840209f5a24c3827f4c8e96aecf5651ded4e1c13e8f80c",
+   "en": "Sink the pirate"
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_ox#1",
+   "ru_sha256": "f0dde3e5f02e7ca92568e1e1d679cc33750302778456717b28fd036fc2fe8dd9",
+   "en": "I have been commissioned to sink a pirate whose ship is in the waters of Oxbay."
+  },
+  {
+   "file": "RESOURCE/QUESTSTEXT/quests_texts.txt",
+   "kind": "quest",
+   "key": "kill_ox#2",
+   "ru_sha256": "8d01cefe95ce87eb11f9067944c5bea3d8efe3927c6cf438794f3bf6cbd39c64",
+   "en": "The commission is complete; now I can return to my employer."
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "titleBoal_map",
+   "ru_sha256": "690bb763f955ee0b0a0986c27ae4c19b753e4de5b8ebfa300115734e4e2a9f0e",
+   "en": "SAILS ON THE HORIZON"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Video Settings",
+   "ru_sha256": "029f7275227431688be79c76a809275dc05501b99f9a56aa7dadd67b8a9ffdb0",
+   "en": "Video Settings"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Restore Default",
+   "ru_sha256": "e41333af4849df587b35484fcdc3e317a35a3e21298c45a2b585f1c09cade9b0",
+   "en": "Restore Defaults"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Save Settings",
+   "ru_sha256": "7a767030e18e4ee5cc919bca1e2f0eec30642cc7dfd4065cf442a627fb52791a",
+   "en": "Save Settings"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Gamma Correction",
+   "ru_sha256": "4c8c1a01af90f4a2127bbd7ae6c09b98f624d4e983a237a4ca8f47ea0d31970f",
+   "en": "Gamma Correction"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Brightness",
+   "ru_sha256": "b709073eb0820df034f7b5016e6bc20c1edb51f4c9d9a6c462e797070ec4f250",
+   "en": "Brightness"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Contrast",
+   "ru_sha256": "fae4b57fbe3ccaa5f7f00926b1e31776c9b3de0119045d4db037cae015ff0e07",
+   "en": "Contrast"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Invert Vertical Mouse Control",
+   "ru_sha256": "9668e5300e439b4fbae08b8de7228c21adc0110b684aad29a098760d80991c7c",
+   "en": "Invert Vertical Mouse Axis"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Vertical Mouse Sensitivity",
+   "ru_sha256": "2fd6999ec01b1d75f350809686a13ef45c5e80802e984a5de81697a945803054",
+   "en": "Vertical Mouse Sensitivity"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Horizontal Mouse Sensitivity",
+   "ru_sha256": "67792ad6075b6bccba01bada375ecc3857bbc1be016850b9cfc517d166f42fe0",
+   "en": "Horizontal Mouse Sensitivity"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Set Flag",
+   "ru_sha256": "dd34fc5543f2370d484fa5ba51b4c92c5bfe607305ecdc48ebd6f5f8170ae219",
+   "en": "Raise Flag"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "SELLALL",
+   "ru_sha256": "0373598de133a0a0d8882ea9a58f6e6c1a8dda2fe3d74c737e038176dae8133e",
+   "en": "Sell All"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/ItemsDescribe.txt",
+   "kind": "text_key",
+   "key": "itmname_artefact",
+   "ru_sha256": "5bbd951f83e5cbe8ecd42fea1bc616611b538552b09a5efdcd3883a9debc2627",
+   "en": "Artifact"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/ItemsDescribe.txt",
+   "kind": "text_key",
+   "key": "itmdescr_artefact",
+   "ru_sha256": "b4c4e95216120652c4f723df9c2ee2a9c783d64aff8780dd164d23e49a2ab90a",
+   "en": "\r\nA mysterious artifact that you found in an ancient temple. Your skin tingles noticeably when you hold it in your hands.\r\n",
+   "note": "значение многострочное (CRLF как в файле)"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/AbilityDescribe.txt",
+   "kind": "text_key",
+   "key": "perkSwordplayProfessional",
+   "ru_sha256": "ac8e1186c48344dc30f5dc2b88657494ae5399b115f4598c92e1b829e8898249",
+   "en": "\r\nThe player's attacks cannot be blocked. 25% chance of dealing a critical hit. Damage inflicted on the character is reduced by 40%.\r\n",
+   "override": true,
+   "note": "механика изменена патчами 1.01-1.03 (число/эффект в русской версии другие); перевод с русского, не американский текст"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/AbilityDescribe.txt",
+   "kind": "text_key",
+   "key": "perkImmediateReload",
+   "ru_sha256": "1c783c11b292c2f9e089068b1f554eadc937b92ecbfdee97b603ba0858feeae3",
+   "en": "\r\nWhen this ability is chosen, the next reload will be 50% faster. After use, the ability is locked for 5 minutes.\r\n",
+   "override": true,
+   "note": "механика изменена патчами 1.01-1.03 (число/эффект в русской версии другие); перевод с русского, не американский текст"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/AbilityDescribe.txt",
+   "kind": "text_key",
+   "key": "perkLightRepair",
+   "ru_sha256": "c0ba05635f6fe900c71adb27443dfaa08d47c58962ab34486ac7f4a5bc854fbd",
+   "en": "\r\nSlow repair of ship damage without using any resources. No more than 10% of HP can be repaired. When the hull HP is below 10%, the ship slowly but constantly takes light damage to the hull - the ship is sinking.\r\n",
+   "override": true,
+   "note": "механика изменена патчами 1.01-1.03 (число/эффект в русской версии другие); перевод с русского, не американский текст"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/AbilityDescribe.txt",
+   "kind": "text_key",
+   "key": "perkStormProfessional",
+   "ru_sha256": "a0a391d0fb84cd657c7f425227bb9312c2d865f046a464e8ce1410a03f5bc7f1",
+   "en": "\r\nReduces the damage inflicted by storms by 20%.\r\n",
+   "override": true,
+   "note": "механика изменена патчами 1.01-1.03 (число/эффект в русской версии другие); перевод с русского, не американский текст"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/AbilityDescribe.txt",
+   "kind": "text_key",
+   "key": "perkIronWill",
+   "ru_sha256": "859a2a4dba5c20c4ef65d4174ac7fb5f83c42caf99c840f444f2c53d854238c9",
+   "en": "\r\nMutiny never breaks out on your ship.\r\n",
+   "override": true,
+   "note": "механика изменена патчами 1.01-1.03 (число/эффект в русской версии другие); перевод с русского, не американский текст"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/AbilityDescribe.txt",
+   "kind": "text_key",
+   "key": "perkTrustworthy",
+   "ru_sha256": "a45a4202d4c14ba242a9ed4069ef32d5a253fdf214e1c3fc539e3961fe31d5b4",
+   "en": "\r\nAdditional goods appear in stores.\r\n",
+   "override": true,
+   "note": "механика изменена патчами 1.01-1.03 (число/эффект в русской версии другие); перевод с русского, не американский текст"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/ItemsDescribe.txt",
+   "kind": "text_key",
+   "key": "itmdescr_jewelry4",
+   "ru_sha256": "2a27795499b2d45c99a47d69511896a6429728065e0006d4d16a936f633725a3",
+   "en": "\r\nEmerald. A green stone; at the sight of it even the most hardened scoundrel is reminded of the green-eyed beauty he left behind at home. (+1 Leadership)\r\n",
+   "override": true,
+   "note": "в русской 1.03 в описании указан бонус/штраф к навыку; американское описание его не содержит, поэтому дано с русского"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/ItemsDescribe.txt",
+   "kind": "text_key",
+   "key": "itmdescr_jewelry8",
+   "ru_sha256": "9135f7d2d8b56f19e54d86137dc9d243d5e7b6cafa36c8aad8a4faecb17ff25c",
+   "en": "\r\nA bronze ring for good luck. Your talisman. (+1 Luck)\r\n",
+   "override": true,
+   "note": "в русской 1.03 в описании указан бонус/штраф к навыку; американское описание его не содержит, поэтому дано с русского"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/ItemsDescribe.txt",
+   "kind": "text_key",
+   "key": "itmdescr_jewelry9",
+   "ru_sha256": "75b1a20b8e1afa56d32f500eb42aff52e65b64f5fb22b22c7f6f9cfca6a54ba6",
+   "en": "\r\nRemember the Savior. In battle, perhaps it is this little cross that will give you strength. (+1 Luck)\r\n",
+   "override": true,
+   "note": "в русской 1.03 в описании указан бонус/штраф к навыку; американское описание его не содержит, поэтому дано с русского"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/ItemsDescribe.txt",
+   "kind": "text_key",
+   "key": "itmdescr_jewelry15",
+   "ru_sha256": "5e73e3db02723204b00c02ceff0d2f7940460e2138b1dd9ce96cf50dfa3a9c3c",
+   "en": "\r\nThe devil take me if you do not win the favor of any woman with a trinket like this. (+1 Luck)\r\n",
+   "override": true,
+   "note": "в русской 1.03 в описании указан бонус/штраф к навыку; американское описание его не содержит, поэтому дано с русского"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/ItemsDescribe.txt",
+   "kind": "text_key",
+   "key": "itmdescr_indian2",
+   "ru_sha256": "d3255facd04406cda5bdb2d0f4c21649478f1874554bd2da4912f7745249f077",
+   "en": "\r\nWho knows what this is. It seems to be a toy for little Indians. (-1 Leadership)\r\n",
+   "override": true,
+   "note": "в русской 1.03 в описании указан бонус/штраф к навыку; американское описание его не содержит, поэтому дано с русского"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/ItemsDescribe.txt",
+   "kind": "text_key",
+   "key": "itmdescr_indian3",
+   "ru_sha256": "9e74c5102c7840fe84344b052d8f3a490378401d0528f0902a1764646fc3cdea",
+   "en": "\r\nAn astonishingly beautiful piece; the secret of making such mosaics has long been lost. In Europe such a thing would cost a fortune, but here it sells for next to nothing. (+1 Commerce)\r\n",
+   "override": true,
+   "note": "в русской 1.03 в описании указан бонус/штраф к навыку; американское описание его не содержит, поэтому дано с русского"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/ItemsDescribe.txt",
+   "kind": "text_key",
+   "key": "itmdescr_indian6",
+   "ru_sha256": "fc7dd14042abf9c6676f835f347fc4ab10042aa4571fa11cc94229e5b14f165c",
+   "en": "\r\nA golden figurine of the war god of the local Indians. (+1 Melee Combat)\r\n",
+   "override": true,
+   "note": "в русской 1.03 в описании указан бонус/штраф к навыку; американское описание его не содержит, поэтому дано с русского"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/ItemsDescribe.txt",
+   "kind": "text_key",
+   "key": "itmdescr_indian7",
+   "ru_sha256": "7b438c5f9e8eb8207a143da8dd120a173f6737da2d6a5422b0c03235ea3ed0c6",
+   "en": "\r\nAn idol - an image of Mother Earth. A symbol of fertility and luck. (+1 Luck)\r\n",
+   "override": true,
+   "note": "в русской 1.03 в описании указан бонус/штраф к навыку; американское описание его не содержит, поэтому дано с русского"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/ItemsDescribe.txt",
+   "kind": "text_key",
+   "key": "itmdescr_CursedCoin",
+   "ru_sha256": "b190e30845b0689bbddcccea630f4b15aeb30a20df33d2ce10cecd477a3af599",
+   "en": "\r\nA large gold coin bearing the image of a skull. You do not like looking at it. (-1 Luck)\r\n",
+   "override": true,
+   "note": "в русской 1.03 в описании указан бонус/штраф к навыку; американское описание его не содержит, поэтому дано с русского"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Wait for save",
+   "ru_sha256": "5cbcb7cd43fd46c5bd6efe31d5119b0a1e23600a3989e9332699ee04d2192243",
+   "en": "Saving the game.",
+   "override": true,
+   "note": "в американском тексте консольная строка (Xbox); для PC дан перевод русского"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Memory card",
+   "ru_sha256": "d977cdd4727e396d3fea197eff988044fc550b2a87a913eaba33608f6d535174",
+   "en": "Memory Card",
+   "override": true,
+   "note": "в американском тексте консольная строка (Xbox); для PC дан перевод русского"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "Change key",
+   "ru_sha256": "28eff7b41a012e8d9827e5e45e77db4c45176d3b3a48a870bea783048827ffe6",
+   "en": "Change Current Settings",
+   "override": true,
+   "note": "в американском тексте консольная строка (Xbox); для PC дан перевод русского"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+   "kind": "text_key",
+   "key": "You give item",
+   "ru_sha256": "331ec0fa7080362a04314a1282ebdc0a03556dceedca6dcdd77283a0360b262a",
+   "en": "You gave away an item",
+   "override": true,
+   "note": "английский текст американской версии длиннее русского в 1,6+ раза (слишком длинная подпись интерфейса): сокращено"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/HelpSectionTitles.txt",
+   "kind": "text_key",
+   "key": "land_commands",
+   "ru_sha256": "f9e1ecfad181dd85e72fc32e0c23446de8c86fc0bee99112fed2e9ead72b4644",
+   "en": "\r\n  Party status and commands for actions on land.\r\n\r\n",
+   "override": true,
+   "note": "английский текст американской версии длиннее русского в 1,6+ раза (слишком длинная подпись интерфейса): сокращено"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/arnaud matton_dialog.h",
+   "kind": "literal",
+   "index": 138,
+   "ru_sha256": "32b9fd40db557bb984d326735988113f6b858cbd894c78727f6cd4fd734f5471",
+   "en": "As I said, you must take my daughter to the island of Isla Muelle, to her godmother. Her name is ",
+   "note": "REVIEW: склейка кодом: этот фрагмент + имя (DLG_TEXT[139], [140]) + фрагмент [141] «. \\nShe's French...»"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 0,
+   "ru_sha256": "01e3f0ec111e2b2675624ea2d5f80da037d6bbec986bf6d6b5afa25526bbdd8f",
+   "en": "Help! Help! These men are chasing me! Save me!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 1,
+   "ru_sha256": "4da0ad1f4a4fc1fecee2c5fd97333378ad8f0c3b2d39e52ebc1da24b99c9bb78",
+   "en": "Ah! Help, stranger! Save me from these scoundrels!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 2,
+   "ru_sha256": "05bfeadc9807183a8c225b174f25e61621a4fd97a318da5cd7402950cd0cd9d4",
+   "en": "Have mercy, protect me from these wretches! I beg you!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 3,
+   "ru_sha256": "bd735a09f27058e2a3afd9bc9524c88603845971e48651bf7a3fb9f270bb3ce6",
+   "en": "What is going on?",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 4,
+   "ru_sha256": "63c4d1b0d892920222b74f57a7658701fb66536b4c689eb5e757dfafce8ae403",
+   "en": "What's the matter?",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 5,
+   "ru_sha256": "1e6c746f0162efa2211cb3c5538a769013b77e0d9034ad56becf47432da86ec5",
+   "en": "What happened?",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 6,
+   "ru_sha256": "2c87af93f5ce76035552a13d508399820fd7ef99a5c6144a7dae61966de56348",
+   "en": "They... they mean to dishonor me! I beg you, don't let them! Save me!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 7,
+   "ru_sha256": "0718e3b9382f3e4e9fa7962cb45c6fdfe6c44ec085592838f22eb7d54ef11587",
+   "en": "These brutes... they want to do something terrible... Please, protect me from them!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 8,
+   "ru_sha256": "639bf5eb44a9214212055b95f4f6eff49423e42d8cf4c82543b17d24a26b5a7e",
+   "en": "In the name of the Lord, protect me from these lecherous monsters! They want to ruin my honor!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 9,
+   "ru_sha256": "458762c463168a618a8d5576ea0f613c5a1c1b1744e43e5854eaba97fc339797",
+   "en": "All right, let's sort this out.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 10,
+   "ru_sha256": "0684a17515e9a07a060f734f52f2d93427b6f7a89e7c0549322eb68c0ce985d6",
+   "en": "Oh! Thank you for your help!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 11,
+   "ru_sha256": "673040c2511fbf40769a8fe1eed3838c1ce2f8dd115e61361eec8ef59186172c",
+   "en": "You saved me! I am so grateful to you!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 12,
+   "ru_sha256": "c40ad41ac5a3f3e3304b6ab0d63bf57f3f635c5628427921e5bce81d01d6af94",
+   "en": "You are a true knight! Thank you!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 13,
+   "ru_sha256": "bba51b9e3dfb281031998b499d18ce2f3c9d9b9255358638eafeeeb44e82e317",
+   "en": "That is how such scoundrels deserve to be treated!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 14,
+   "ru_sha256": "d839573c2e073d2773caea7f0ea328c95a8b63302a9dabfadf344ba6a43c403c",
+   "en": "I have a little money. Please take it as a token of my gratitude!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 15,
+   "ru_sha256": "db1f4cf67636e62634878bc3ed00bc1333180934d3d59c1b3f372600338a2c9d",
+   "en": "Thank you. Be more careful next time.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 16,
+   "ru_sha256": "33300051a9cd1cd8028b233830af97a726f53aa98fe86dc04bd6f9b94ee4d83d",
+   "en": "I will tell everyone that you saved me! Let them all know what a brave and kind man you are!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 17,
+   "ru_sha256": "d484cb14eb4e9cb3f9a4bbe8407331ca5760329b8ac00ca241a80e8186a9e834",
+   "en": "Thank you. You had better go home now.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 18,
+   "ru_sha256": "d839573c2e073d2773caea7f0ea328c95a8b63302a9dabfadf344ba6a43c403c",
+   "en": "I have a little money. Please take it as a token of my gratitude!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 19,
+   "ru_sha256": "db1f4cf67636e62634878bc3ed00bc1333180934d3d59c1b3f372600338a2c9d",
+   "en": "Thank you. Be more careful next time.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 20,
+   "ru_sha256": "6532b0fcea0bbdcbdf7fb04b699d308efbcd4491303274b56bc6527357aaa546",
+   "en": "Hey, don't get so worked up, friend! I was only joking! Go on your way!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 21,
+   "ru_sha256": "6920ee6b635649a7b7e448231f6063fcbe2f45b0211beadc47b3959863e196ef",
+   "en": "All right, we have changed our minds. You may continue on your way. We won't rob you.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 22,
+   "ru_sha256": "5271f8a7f9a54edece23fa7b68f7387ac1c6d42b9ae9ff3263e7fb93d711c68b",
+   "en": "You are a bold man! That is why we'll let you go. But don't cross our path again.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 23,
+   "ru_sha256": "69b18bb62d35afa9a888b8ac85ed11099d617e9a64e372596489b15c33a77de8",
+   "en": "Well then, until we meet again!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 24,
+   "ru_sha256": "cbfef80fc37cbbf98834ac4ada67c11cf9c9ba2ea9a9da4da15a48b2702dd203",
+   "en": "You should give up this foul business! Farewell.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 25,
+   "ru_sha256": "8bac7911829d1175f305159329e446cd49b8cd23c22b8728251d16c22e8d0f20",
+   "en": "I'm glad you made a wise decision. Stay well!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 26,
+   "ru_sha256": "832a70e6085f1f304fec481c9a25356e15df954ffa72acd69ff119329e0cd67e",
+   "en": "It's too late to back down - you have an appointment with your maker.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 27,
+   "ru_sha256": "06c74a9bd0ef740164d2a29e9a46e9c3d37a5c14b0a2bb3b6b18d4587abdb1b9",
+   "en": "Turning coward, lads? But I can't let you leave alive now!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 28,
+   "ru_sha256": "86a0e980903bf37bcafa415b18db8745b13df739560adf3011026042ac7c35fb",
+   "en": "I'm not going anywhere until I have finished this business.",
+   "note": "REVIEW: русский оригинал небрежен («Никуда я пойду»), смысл — «никуда я не уйду»"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 29,
+   "ru_sha256": "44c26f57e3352ddd075f9694d4ceca8d738a9a1d36cd0b08beee89726a2d33b9",
+   "en": "You could have left in peace! Now you will die!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 30,
+   "ru_sha256": "07689e27037e45471133f1ed5285cd24ce7abf8f007948ba29cfefcd06a044ee",
+   "en": "You should not have started this, you scoundrel! Die!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 31,
+   "ru_sha256": "9c236ded0dfa17f2e517c3074a4d2072adc4cf4df8b9cf6a5c35f38756ea0036",
+   "en": "Is that so! We'll tear you to pieces! We'll cut out your liver and roast it over a slow fire!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 32,
+   "ru_sha256": "8a0d26539ae8429e411a7cc269235290508fba2f99f2e6d8938992cad461da0a",
+   "en": "Try it!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 33,
+   "ru_sha256": "d406c93d32832ccad56045e1d63731a9e523f1b38fe064a11567af01fefe7858",
+   "en": "Fine! Hand it over quickly and then be on your way!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 34,
+   "ru_sha256": "6bbcf80fd7835912828a8868a0b3c4cc40e3c8e8231745edb334e5be2478dc55",
+   "en": "Not much, but better than nothing. A pleasure to deal with a reasonable man! You may go.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 35,
+   "ru_sha256": "e48efb572637934d6373197300291d72754d5668c148e7307adce758356c42ad",
+   "en": "In return for your gold I'll give you a piece of advice: don't go wandering through the jungle if you're such a weakling! Sit in the port, in the tavern, and drink your rum - you'll live longer.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 36,
+   "ru_sha256": "5e35cf0f41231d10997c67cba1c7ced1fa0da3e66d0409d1f619b154deaf62be",
+   "en": "A curse on your heads!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 37,
+   "ru_sha256": "51913b210853063c29f50197c9349804cabb2a8017935206013eb8742f25ab42",
+   "en": "Seems to me you want to cheat us! Never mind, we'll tickle you a little now. And it's easier to pick the gold off a corpse.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 38,
+   "ru_sha256": "4ecd31e01a7c97b8a6419653ab4064d8439ca99a5b93205b44c9b93efad4dede",
+   "en": "Damn it!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 39,
+   "ru_sha256": "14a0ee682470eda6f18323d3795e429016d30eb92b347b534e34dc3f51240b75",
+   "en": "You again? You ought to be running with your heels flashing by now! We might come to regret letting you go.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 40,
+   "ru_sha256": "19111600ee644a0e571fee2dee0ceffc15ce0c6303f173c4b296f0fbc6607c6c",
+   "en": "Did you find some more gold in your pockets and come to share it with us? How sweet! Ha-ha!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 41,
+   "ru_sha256": "d23c4d3045585ac3dd03edfb72e4d7f3b9288d2520ea6a699393c317f018aa7d",
+   "en": "Friend, you are wearing me out! Get out of my sight, or I'll cut your throat!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 42,
+   "ru_sha256": "60ad6451ed029f5243194bcbd16ba9a264e53c907c17511202f28e1e7ce38935",
+   "en": "Yes, I'm leaving now.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 43,
+   "ru_sha256": "d76f2c63773c9135fd91e0762b5f77d51a5133cf966693461c2a3b471301244a",
+   "en": "I thought it over and came back to give you what you deserve!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 44,
+   "ru_sha256": "814125870e1e6330f5f0ef149da12a35fd0321b897555d56fa3f2ba632744999",
+   "en": "What do you want? We agreed that you would leave!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 45,
+   "ru_sha256": "428f438a7b524508aba2a2e0be490d3a7a6c3dea8f5b2ac8899fe0ecb3b87534",
+   "en": "Leave us be, lad. We have our business and you have yours. We had better not continue this acquaintance!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 46,
+   "ru_sha256": "33fb0a75d3581141bdbac0f8b64eefcf4aa687889a9bafb7313937575d92e84a",
+   "en": "Be off, friend! Hell, do you really want to hand over your money after all?",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 47,
+   "ru_sha256": "60ad6451ed029f5243194bcbd16ba9a264e53c907c17511202f28e1e7ce38935",
+   "en": "Yes, I'm leaving now.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 48,
+   "ru_sha256": "7e19b68e639ee617f6c2521161dc882521aec067cd5db5a4471190d498999231",
+   "en": "I have decided to punish you for your crimes!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 49,
+   "ru_sha256": "6746cf2c47cb4663cb6b157404b2dcd428d8fffe54d8f30f3ecaf6b645f7f62e",
+   "en": "Get off me! Go away! I want to live!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 50,
+   "ru_sha256": "64fbae8467567d6f651ada9936748a8acdaa425ee9f2838be23e26a59ad8dc13",
+   "en": "Help! He's a madman! Don't kill me!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 51,
+   "ru_sha256": "8049fa892f0b239c31c6b43a2d24e6f9a1fca60d3b4ef4609e5511d555991f9b",
+   "en": "Mercy! I'm only a humble robber! I'm too young to die!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_RapersGirl_dialog.h",
+   "kind": "literal",
+   "index": 52,
+   "ru_sha256": "32a1212909ac14cc45b9de6996adb12c717a7d4c0033ed691238904c2d70a365",
+   "en": "If you'd stayed at home, you'd have lived longer!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 0,
+   "ru_sha256": "6c4539af6af5f19e4ad79ccc25758544b912b4424030a1c1cbf9fdf88a133de6",
+   "en": "Get out of here! Don't spoil our fun!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 1,
+   "ru_sha256": "adb8bd93a50611841df40b5242a0e45d5e657eada132f039545362b2decef252",
+   "en": "Clear off, friend! Mind your own business! So what if we have a little fun!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 2,
+   "ru_sha256": "7aa192bf5cb73d6c5ccd29befb68f43faec19461fd000b970cc401b3d4d6213f",
+   "en": "Go your way, stranger! She will thank us for it later herself. And you will keep your skin whole!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 3,
+   "ru_sha256": "0777793eb8dae9e3b9b3ee08800940891252208ecb222bc95502d5e6e8c36c97",
+   "en": "No, I'm afraid I will have to step in.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 4,
+   "ru_sha256": "0b4384c4e2aa916ccf674fb06bb60bec27834f494ddb0de56728b2e9c9e89463",
+   "en": "I will not let this crime be committed!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 5,
+   "ru_sha256": "cff6b2a7e52507b945d0ac9005849c3b0a94b2eff3480b017d07c4ff42d0bfa6",
+   "en": "Stop this foul business!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 6,
+   "ru_sha256": "a2cdbe963cfd2088906cd996a01573a6f9525b00425d293d20edcdbcfccfed48",
+   "en": "I'll be going. Sorry for disturbing you.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 7,
+   "ru_sha256": "f8bba7a4d9a0d5c12d33d76a2cb36bbff0b891082538a696a19340892768022b",
+   "en": "Pardon me for troubling you. Good day to you.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 8,
+   "ru_sha256": "53c663e0d4ee26630f5449bd9ecf6b159d3d808bcd04fd206cf40f0373873a81",
+   "en": "I understand. Goodbye!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 9,
+   "ru_sha256": "2df006431c46c89d27d0890ec957245bdc71d99c275d46913d85fc529e37962a",
+   "en": "Well then, you have only yourself to blame! Let's tickle his ribs with steel, lads!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 10,
+   "ru_sha256": "9e4778172f25b3db6511e07d24c8f80f836097899fdfed1246dab9240c2a89ee",
+   "en": "Say your prayers before you die!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 11,
+   "ru_sha256": "e60e0d0d76432ce4f67c18a6c96f1d9ca6615e9d64683e633d2d38481f99a2b9",
+   "en": "What, you want to join in? Go to the devil - there's barely enough for us!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 12,
+   "ru_sha256": "470a18d1dfdfaf783d0c1799bba077b44900690793e8b6f6e9f1189cd7061ffc",
+   "en": "In that case, I won't get in your way.",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/Enc_Rapers_dialog.h",
+   "kind": "literal",
+   "index": 13,
+   "ru_sha256": "8320afacf108f009d0b67461791c74d1889d5d304162404f1c47484a69f55e82",
+   "en": "I will not let violence happen before my eyes!",
+   "note": "остаток «русский и в американской версии»: перевод агента с русского текста 1.03"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 0,
+   "ru_sha256": "aa2c988175520cb2d20651bec540444a548751da8052e40ef687bfdc8333c4e5",
+   "en": ", are you back already? May we return to Redmond?",
+   "note": "REVIEW: код склеивает имя игрока + этот фрагмент без разделителя; в английском начало «, are you back…» (в русском оригинале запятой нет); диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 1,
+   "ru_sha256": "cfcd41823cda7a443c040edb505b85c45fa045c298ab38a1a5643e0969c0bee2",
+   "en": "Yes. But first take a couple of sturdy lads and bring the French officer here. He is lying tied up in the jungle.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 2,
+   "ru_sha256": "dec46d7c12d2db5c6ae042865395444c6fa21915d03c95a910adf9c6ce4fb862",
+   "en": "Captain, as you ordered, I followed that ship. It has just set sail.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 3,
+   "ru_sha256": "601832e4a151445aa5ad5a56c920eac8e8049351ab003645a5a203ea84a2022e",
+   "en": "Excellent, we'll intercept it on the open sea.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 4,
+   "ru_sha256": "fd9deb2e987a73902525d896adfaf03e6e61895a8b75f4b8d247f212232ac33c",
+   "en": "Captain! I have a message for you, ",
+   "note": "REVIEW: склейка: этот фрагмент + обращение (address_form.eng) + «!»; диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 6,
+   "ru_sha256": "6aca246255b6eb5a795a9be6ca20bf27b9aed81eba01c6892d657df416bc1ac0",
+   "en": "Out with it!",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 7,
+   "ru_sha256": "5c8ee884b31de1a414b6d7a213c0e0986709902a67c7bcfa520b9cb6e49a141f",
+   "en": "Our boatswain, ",
+   "note": "REVIEW: склейка: этот фрагмент + имя (DLG_TEXT[8]) + фрагмент [9]; диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 9,
+   "ru_sha256": "9cff205608fe15baa1426f70ce77b1e8e73f5d738f4bb6950555028e269995d3",
+   "en": ", asked me to tell you that he has gone to the tavern. And if you decide to set sail, he asked to be told.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 10,
+   "ru_sha256": "88a5480252328b68fe6261bc9a4440fd71142665edc21e37f763ee38558f1dab",
+   "en": "The old drunkard!",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 11,
+   "ru_sha256": "50adeb1cf4dedf5b96ef734c55f94b97d967311e0b6a34a77bfb72d9357d7c65",
+   "en": "Shall I go and fetch him, Captain?",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 12,
+   "ru_sha256": "161e192feb1194b099a7bb588406a25e8ba7f00165f89559562457d74b9dc05c",
+   "en": "Never mind, I'll go myself.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 13,
+   "ru_sha256": "0377c189b152b01106c94286ada45165a7bbda1c41bf84ebfe3b3bea71b42656",
+   "en": "Captain, this poor fellow is getting worse and worse. He is barely breathing.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 14,
+   "ru_sha256": "f975116d311d045455a341d34fba3c2fc094cc14e2e627fb410c34077812598f",
+   "en": "Poor man... But why did you call me here?",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 15,
+   "ru_sha256": "b8c6efef403004a2af6b7ed1a26075c47b14cc84379c95117d8575aacafdda94",
+   "en": "Before he sees the priest, he wants to tell you something.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sailor_tmp.h",
+   "kind": "literal",
+   "index": 16,
+   "ru_sha256": "ca12097cfca81e3f473cc4ede6a5dcdf21ff0dc6d11de1a7d56016099d15882c",
+   "en": "Very well. I will talk to him.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sapper.h",
+   "kind": "literal",
+   "index": 0,
+   "ru_sha256": "3454dbd887deb52dcb7904388cf0f2270bcdb64f1a8899bc3f8d8e0f4c599423",
+   "en": "There is nobody left. We can lay the charge and light the fuse.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sapper.h",
+   "kind": "literal",
+   "index": 1,
+   "ru_sha256": "4704e982352ff386ddd31d030bc130c170bcec38ed6ca826941e2b1806ea7201",
+   "en": "Is there enough powder aboard for the blast to send the ship to the bottom?",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sapper.h",
+   "kind": "literal",
+   "index": 2,
+   "ru_sha256": "b0b2e10ba32fde025489c006ddc39094f34b1956b86e45e3e745a6d06663535d",
+   "en": "There is enough powder to blow it sky high.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sapper.h",
+   "kind": "literal",
+   "index": 3,
+   "ru_sha256": "bcdcdd989c3e3b2661cfa5410d69d2e1e61dbbe8d8167271212b161c322f75c7",
+   "en": "Then get to work, don't dawdle.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sapper.h",
+   "kind": "literal",
+   "index": 4,
+   "ru_sha256": "42e7706294ea73b734af11e20dd0e08bbae43d6de38924c7db622a34866cb8af",
+   "en": "Right away, Captain, a couple more minutes... Don't disturb me.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sapper.h",
+   "kind": "literal",
+   "index": 5,
+   "ru_sha256": "b9591cae24210f49a614fa0f9b55aa9c18aa9c179451ceacd9fbf305c2aa2435",
+   "en": "Hurry up. Soon the French will realize that something is going on here!",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sapper.h",
+   "kind": "literal",
+   "index": 6,
+   "ru_sha256": "83f4685f8875745c390858ecaedcd4083656a95b19a4274becbbc8469745507b",
+   "en": "That's it, now we must get out of here fast. It will blow so hard that the devil himself will feel the heat!",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sapper.h",
+   "kind": "literal",
+   "index": 7,
+   "ru_sha256": "1a458e1c464cad6b7b2807211e12d7358736184ecba5b8038ffdf80fa97072c9",
+   "en": "Let's go!",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sapper.h",
+   "kind": "literal",
+   "index": 8,
+   "ru_sha256": "751c61118c2963400f69b49c636ad778e0d0a9dc0dd9efa3020eab0dd408a975",
+   "en": "Excellent, you have destroyed the guards. Now I can set the bomb.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sapper.h",
+   "kind": "literal",
+   "index": 9,
+   "ru_sha256": "e856e35d9dbc3cae739604f0cf43cbec1070c43609651f978426248a59202e22",
+   "en": "Good, set it quickly and let's get out of here.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sapper.h",
+   "kind": "literal",
+   "index": 10,
+   "ru_sha256": "c24311240903015d231fa2b5712c84fdbac171553d0593a09ae9af42684e3568",
+   "en": "I have set the bomb. There is little time left.",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/DIALOGS/quest_sapper.h",
+   "kind": "literal",
+   "index": 11,
+   "ru_sha256": "c4c45608f403d1ea30d5de57c0ae040d1fcaf90debcdda65685c9a6061c79d4f",
+   "en": "Run!",
+   "note": "диалог недостижим в текущих скриптах (персонаж нигде не размещается), переведён на случай использования"
+  },
+  {
+   "file": "PROGRAM/Locations/init/IslaMuelle.c",
+   "kind": "literal",
+   "index": 110,
+   "ru_sha256": "3c0186aacca4e552257ffd8278db71997e6cb04f1a3c8c9b1a6ac8ee28aa7341",
+   "en": "Store.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Oxbay.c",
+   "kind": "literal",
+   "index": 453,
+   "ru_sha256": "c3403a6624d93c2492b897be0606fc0dbfd752cbef624616967bdf47e92a3f91",
+   "en": "Jungle.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Oxbay.c",
+   "kind": "literal",
+   "index": 458,
+   "ru_sha256": "c3403a6624d93c2492b897be0606fc0dbfd752cbef624616967bdf47e92a3f91",
+   "en": "Jungle.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Oxbay.c",
+   "kind": "literal",
+   "index": 463,
+   "ru_sha256": "73e613d1257e78a953803b7cc097cbb2884e13ff0848fca80a5c9bcfe3dc4666",
+   "en": "Sea.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Oxbay.c",
+   "kind": "literal",
+   "index": 627,
+   "ru_sha256": "c3403a6624d93c2492b897be0606fc0dbfd752cbef624616967bdf47e92a3f91",
+   "en": "Jungle.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Oxbay.c",
+   "kind": "literal",
+   "index": 632,
+   "ru_sha256": "c3403a6624d93c2492b897be0606fc0dbfd752cbef624616967bdf47e92a3f91",
+   "en": "Jungle.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Oxbay.c",
+   "kind": "literal",
+   "index": 637,
+   "ru_sha256": "73e613d1257e78a953803b7cc097cbb2884e13ff0848fca80a5c9bcfe3dc4666",
+   "en": "Sea.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/QuebradasCostillas.c",
+   "kind": "literal",
+   "index": 166,
+   "ru_sha256": "e771b582b8a6385a6b8c22a301df31c47a91901bb2abbf764e335eb74203798b",
+   "en": "Quebradas Costillas.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Redmond.c",
+   "kind": "literal",
+   "index": 29,
+   "ru_sha256": "732b8da1b488d0ceca38b3388c5f2692b0e8c72d70a62b3e8e56eb59fa236881",
+   "en": "Redmond.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Redmond.c",
+   "kind": "literal",
+   "index": 34,
+   "ru_sha256": "732b8da1b488d0ceca38b3388c5f2692b0e8c72d70a62b3e8e56eb59fa236881",
+   "en": "Redmond.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Redmond.c",
+   "kind": "literal",
+   "index": 39,
+   "ru_sha256": "732b8da1b488d0ceca38b3388c5f2692b0e8c72d70a62b3e8e56eb59fa236881",
+   "en": "Redmond.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Redmond.c",
+   "kind": "literal",
+   "index": 44,
+   "ru_sha256": "732b8da1b488d0ceca38b3388c5f2692b0e8c72d70a62b3e8e56eb59fa236881",
+   "en": "Redmond.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Redmond.c",
+   "kind": "literal",
+   "index": 49,
+   "ru_sha256": "862d16c80020559095a2aad9483d3724ee13efac0783567ab67d9a707f6411da",
+   "en": "Port.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Redmond.c",
+   "kind": "literal",
+   "index": 69,
+   "ru_sha256": "73684f33698a42330b71cd1bc489e07f06c8113dd788905a2ce5e3c1fdcd033c",
+   "en": "Shipyard.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "PROGRAM/Locations/init/Redmond.c",
+   "kind": "literal",
+   "index": 74,
+   "ru_sha256": "d07e637ea92469ec880c153d966ef5e9dbb924ac42eb753cdaddb9b281dc0739",
+   "en": "Loanshark's Office.",
+   "note": "подпись локатора перехода (reload.lN.label, показывается рядом с дверью/выходом); слова как у соседних английских подписей того же файла"
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/interface_strings.txt",
+   "kind": "text_key",
+   "key": "Load game confirm",
+   "ru_sha256": "8cfe095e8a7b6d1c44048528b923d9bde8cc12465bc805cef4b9b97e43e93e78",
+   "en": "Are you sure you want to load this game?",
+   "override": true,
+   "note": "Исправление грамматики подтверждения загрузки."
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/interface_strings.txt",
+   "kind": "text_key",
+   "key": "Delete savefile confirm",
+   "ru_sha256": "0cc4aab9b2aa4acec1e7930cee6a7080aa9c665b5d1ca02a1feb1066ff0554d8",
+   "en": "Are you sure you want to delete this saved game?",
+   "override": true,
+   "note": "Исправление английского текста интерфейса."
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/interface_strings.txt",
+   "kind": "text_key",
+   "key": "Overwrite savefile confirm",
+   "ru_sha256": "c7a834875fab620bc2476ceafe04cbec6c16b5ad77d045d279b5170694a71583",
+   "en": "Are you sure you want to overwrite this saved game?",
+   "override": true,
+   "note": "Исправление английского текста интерфейса."
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/interface_strings.txt",
+   "kind": "text_key",
+   "key": "New game confirm",
+   "ru_sha256": "815724db61df94d1f90d336f8669f82238d78a8b12f6ac1f28240670adeaa68d",
+   "en": "Are you sure you want to start a new game?",
+   "override": true,
+   "note": "Исправление английского текста интерфейса."
+  },
+  {
+   "file": "RESOURCE/INI/TEXTS/ENGLISH/interface_strings.txt",
+   "kind": "text_key",
+   "key": "Low storage and unable save create",
+   "ru_sha256": "cd42f4766f85425f8862d79f53af9d466d911f8c7f8e544c29ff2392aa44aa0e",
+   "en": "There is not enough storage space to create a save in this slot.",
+   "override": true,
+   "note": "Исправление английского текста интерфейса."
+  }
+ ]
+}

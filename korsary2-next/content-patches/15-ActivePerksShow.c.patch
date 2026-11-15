@@ -1,0 +1,16 @@
+# path: PROGRAM/BATTLE_INTERFACE/ActivePerksShow.c
+# sha256-before: 5e72a81e5db5dfa693476dede5530fd5349440b66ba4db90e38c9e2eb2d14926
+# sha256-after: 232549eb2b3f4fc794215d0e8b7f99c3f84804d9e1dd540ea62cc26788636cb6
+# eol-before: crlf
+# eol-after: crlf
+# final-newline: yes
+--- a/PROGRAM/BATTLE_INTERFACE/ActivePerksShow.c
++++ b/PROGRAM/BATTLE_INTERFACE/ActivePerksShow.c
+@@ -96,0 +97,7 @@
++	// Sea AI can run before the deferred sea interface replaces the land textures.
++	// Retry on its next update instead of adding an icon with an invalid texture.
++	if (perkID == "sink")
++	{
++		if (!CheckAttribute(&objActivePerkShower, "Textures.t1.file")) return;
++		if (objActivePerkShower.Textures.t1.file != "battle_interface\Sinking.tga") return;
++	}

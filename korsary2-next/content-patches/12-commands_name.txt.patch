@@ -1,0 +1,41 @@
+# path: RESOURCE/INI/TEXTS/RUSSIAN/commands_name.txt
+# sha256-before: 248dbdf25725ef7b014242235dc80f39b8b14e5fdea0996dc7a8c0f3a15bca2c
+# sha256-after: 2b67848c13dabcde532d2195d17225e0b3a2b444d148e1294e77a2f8088220ee
+# eol-before: crlf
+# eol-after: crlf
+# final-newline: yes
+--- a/RESOURCE/INI/TEXTS/RUSSIAN/commands_name.txt
++++ b/RESOURCE/INI/TEXTS/RUSSIAN/commands_name.txt
+@@ -4 +4 @@
+-sea_SailTo {SailTo}
++sea_SailTo {Плыть к}
+@@ -7 +7 @@
+-sea_Map {Map}
++sea_Map {Карта}
+@@ -13,2 +13,2 @@
+-sea_Charge {Reload}
+-sea_Speed {Sails}
++sea_Charge {Перезарядка}
++sea_Speed {Паруса}
+@@ -16 +16 @@
+-sea_Ability {UseAbility}
++sea_Ability {Способности}
+@@ -19 +19 @@
+-land_FastReload {FastTravel}
++land_FastReload {Быстрый переход}
+@@ -21 +21 @@
+-land_DialogStart {Talk}
++land_DialogStart {Говорить}
+@@ -25 +25 @@
+-land_OutDoor {Open}
++land_OutDoor {Открыть}
+@@ -29,3 +29,3 @@
+-go_store {store}
+-go_shipyard {shipyard}
+-go_tavern {tavern}
++go_store {Магазин}
++go_shipyard {Верфь}
++go_tavern {Таверна}
+@@ -33 +33 @@
+-go_port {port}
++go_port {Порт}

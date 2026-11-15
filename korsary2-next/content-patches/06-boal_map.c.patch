@@ -1,0 +1,13 @@
+# path: PROGRAM/INTERFACE/boal_map.c
+# sha256-before: 9ca5ddae5b97fa98f9814709127d96e08b3a6c3207141003285bde078dda0ad3
+# sha256-after: 815fb25a0bb433e6759e248caf7deb5828ab3194f3cec75232a10a16b7609046
+# eol-before: crlf
+# eol-after: crlf
+# final-newline: yes
+--- a/PROGRAM/INTERFACE/boal_map.c
++++ b/PROGRAM/INTERFACE/boal_map.c
+@@ -51,0 +52,4 @@
++		if(comName=="downstep")
++		{
++			if(GetSelectable("B_CANCEL")) SetCurrentNode("B_CANCEL");
++		}

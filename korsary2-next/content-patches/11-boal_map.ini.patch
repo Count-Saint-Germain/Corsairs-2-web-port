@@ -1,0 +1,11 @@
+# path: RESOURCE/INI/INTERFACES/boal_map.ini
+# sha256-before: becd9cc02b725437ed896ae938efbac54a8c26c08fe40164dbde2c5a87302b80
+# sha256-after: bcad9f2bf84478b3b08d7c0a93936f981bc1e995ecbe6d1225092bb82f798d8a
+# eol-before: crlf
+# eol-after: crlf
+# final-newline: yes
+--- a/RESOURCE/INI/INTERFACES/boal_map.ini
++++ b/RESOURCE/INI/INTERFACES/boal_map.ini
+@@ -36 +36 @@
+-command		= downstep,select:B_CANCEL
++command		= downstep

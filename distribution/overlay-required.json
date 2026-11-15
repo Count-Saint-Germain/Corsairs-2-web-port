@@ -1,0 +1,29 @@
+{
+  "format": 1,
+  "description": "Единственный список обязательных файлов английского слоя (PORT_SPECIFICATION.md, E5). Его читают: страница (web/overlay.mjs, import JSON), упаковщик (web/gamefiles.mjs), проверка dist (tests/verify_dist.mjs); make_dist копирует его в dist рядом со страницей. Править только здесь.",
+  "required": [
+    "RESOURCE/INI/TEXTS/language.ini",
+    "RESOURCE/INI/fonts.ini",
+    "RESOURCE/QUESTSTEXT/quests_texts.txt",
+    "RESOURCE/INI/TEXTS/ENGLISH/common.ini",
+    "RESOURCE/INI/TEXTS/ENGLISH/ItemsDescribe.txt",
+    "PROGRAM/Characters/Characters_names.c"
+  ],
+  "recommended": [
+    "RESOURCE/INI/ALIASES/Greetings_alias.ini",
+    "RESOURCE/INI/TEXTS/ENGLISH/AbilityDescribe.txt",
+    "RESOURCE/INI/TEXTS/ENGLISH/HelpSectionTitles.txt",
+    "RESOURCE/INI/TEXTS/ENGLISH/HELPSECTIONS/Dialog_window.txt",
+    "RESOURCE/Textures/Loading/Sea.tga.tx",
+    "RESOURCE/Textures/WorldMap/reload/sea.tga.tx"
+  ],
+  "base_recommended": [
+    "RESOURCE/INI/TEXTS/ENGLISH/commands_name.txt",
+    "RESOURCE/INI/TEXTS/ENGLISH/ControlsNames.txt",
+    "RESOURCE/INI/TEXTS/ENGLISH/GoodsDescribe.txt",
+    "RESOURCE/INI/TEXTS/ENGLISH/interface_strings.txt",
+    "RESOURCE/INI/TEXTS/ENGLISH/SeaSection.txt",
+    "RESOURCE/INI/TEXTS/ENGLISH/ShipEatGood.txt",
+    "RESOURCE/Textures/FONTS/Menu font.tga.tx"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+ "schema": 1,
+ "source": "Node-сборка recomp/build_web/node на APFS-клоне korsary2-next/game: новая игра, диалог Малкольма, 9000 кадров (dynamic/matrix_defs_2.json, опыт B00); журнал PORT_LOG=1 '[file] CreateFileA(...) = ok'. Колонка frame — кадр первого открытия.",
+ "note": "Модели, открытые до первого диалога; отсутствие любой в клонах давало RaiseException e06d7363 (опыты M01-M07, M13, M14).",
+ "gm": [
+  {
+   "path": "RESOURCE/MODELS/Islands/Conceicao/Conceicao_locators.gm",
+   "frame": 0
+  },
+  {
+   "path": "RESOURCE/MODELS/Islands/Douwesen/Douwesen_locators.gm",
+   "frame": 0
+  },
+  {
+   "path": "RESOURCE/MODELS/Islands/FalaiseDeFleur/FalaisedeFleur_locators.gm",
+   "frame": 0
+  },
+  {
+   "path": "RESOURCE/MODELS/Islands/IslaMuelle/IslaMuelle_locators.gm",
+   "frame": 0
+  },
+  {
+   "path": "RESOURCE/MODELS/Islands/KhaelRoa/KhaelRoa_locators.gm",
+   "frame": 0
+  },
+  {
+   "path": "RESOURCE/MODELS/Islands/Oxbay/Oxbay_locators.gm",
+   "frame": 0
+  },
+  {
+   "path": "RESOURCE/MODELS/Islands/QuebradasCostillas/QuebradasCostillas_locators.gm",
+   "frame": 0
+  },
+  {
+   "path": "RESOURCE/MODELS/Islands/Redmond/Redmond_locators.gm",
+   "frame": 0
+  },
+  {
+   "path": "RESOURCE/MODELS/Ammo/blade20.gm",
+   "frame": 327
+  },
+  {
+   "path": "RESOURCE/MODELS/Characters/Blaze.gm",
+   "frame": 327
+  },
+  {
+   "path": "RESOURCE/MODELS/Characters/bocman3.gm",
+   "frame": 327
+  },
+  {
+   "path": "RESOURCE/MODELS/Items/blade1.gm",
+   "frame": 327
+  },
+  {
+   "path": "RESOURCE/MODELS/Locations/decks/tut_deck/tut_deck.gm",
+   "frame": 327
+  },
+  {
+   "path": "RESOURCE/MODELS/Locations/decks/tut_deck/tut_deck_fd.gm",
+   "frame": 327
+  },
+  {
+   "path": "RESOURCE/MODELS/Locations/decks/tut_deck/tut_deck_l.gm",
+   "frame": 327
+  },
+  {
+   "path": "RESOURCE/MODELS/Locations/decks/tut_deck/tut_deck_w.gm",
+   "frame": 327
+  },
+  {
+   "path": "RESOURCE/MODELS/fish01.gm",
+   "frame": 327
+  },
+  {
+   "path": "RESOURCE/MODELS/seagull.gm",
+   "frame": 327
+  },
+  {
+   "path": "RESOURCE/MODELS/Heads/h_bocman3.gm",
+   "frame": 668
+  }
+ ]
+}

@@ -1,0 +1,652 @@
+{
+ "modules": [
+  {
+   "tag": "recomp",
+   "base": 4194304,
+   "preferred": 4194304,
+   "size": 1269760,
+   "entries": 2399,
+   "exports": []
+  },
+  {
+   "tag": "MODULES_Animation",
+   "base": 5505024,
+   "preferred": 268435456,
+   "size": 172032,
+   "entries": 821,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 5519632
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_BallSplash",
+   "base": 5701632,
+   "preferred": 268435456,
+   "size": 65536,
+   "entries": 418,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 5705728
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_Blot",
+   "base": 5767168,
+   "preferred": 268435456,
+   "size": 675840,
+   "entries": 477,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 5771264
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_COLLIDE",
+   "base": 6488064,
+   "preferred": 268435456,
+   "size": 53248,
+   "entries": 271,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 6492160
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_CameraDialog",
+   "base": 6553600,
+   "preferred": 268435456,
+   "size": 61440,
+   "entries": 284,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 6557696
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_DIALOG",
+   "base": 6619136,
+   "preferred": 268435456,
+   "size": 106496,
+   "entries": 445,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 6623584
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_DUMMY",
+   "base": 6750208,
+   "preferred": 268435456,
+   "size": 57344,
+   "entries": 335,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 6754304
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_DUMMY2",
+   "base": 6815744,
+   "preferred": 268435456,
+   "size": 61440,
+   "entries": 387,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 6819840
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_DX8RENDER",
+   "base": 6881280,
+   "preferred": 268435456,
+   "size": 290816,
+   "entries": 1243,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 6890000
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_GEOMETRY",
+   "base": 7208960,
+   "preferred": 268435456,
+   "size": 634880,
+   "entries": 437,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 7222256
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_ISLAND",
+   "base": 7864320,
+   "preferred": 268435456,
+   "size": 102400,
+   "entries": 599,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 7868416
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_Lighter",
+   "base": 7995392,
+   "preferred": 268435456,
+   "size": 139264,
+   "entries": 633,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 8008848
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_Location",
+   "base": 8192000,
+   "preferred": 268435456,
+   "size": 307200,
+   "entries": 1400,
+   "exports": [
+    {
+     "name": "?SFLB_PotectionLoad@PtcData@@AAAXXZ",
+     "ordinal": 1,
+     "address": 8364032
+    },
+    {
+     "name": "DMAInterface",
+     "ordinal": 2,
+     "address": 8328320
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_MAST",
+   "base": 8519680,
+   "preferred": 268435456,
+   "size": 86016,
+   "entries": 465,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 8523776
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_MODEL",
+   "base": 8650752,
+   "preferred": 268435456,
+   "size": 135168,
+   "entries": 344,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 8654848
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_PARTICLES",
+   "base": 8847360,
+   "preferred": 268435456,
+   "size": 81920,
+   "entries": 475,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 8851456
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_PCS_CONTROLS",
+   "base": 8978432,
+   "preferred": 268435456,
+   "size": 61440,
+   "entries": 417,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 8982528
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_PC_CONTROLS",
+   "base": 9043968,
+   "preferred": 268435456,
+   "size": 77824,
+   "entries": 489,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 9051584
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_PEOPLES_ON_SHIP",
+   "base": 9175040,
+   "preferred": 268435456,
+   "size": 98304,
+   "entries": 547,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 9179136
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_SCRIPT_LIBRIARY",
+   "base": 9306112,
+   "preferred": 268435456,
+   "size": 57344,
+   "entries": 337,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 9310208
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_SEA_CAMERAS",
+   "base": 9371648,
+   "preferred": 268435456,
+   "size": 81920,
+   "entries": 478,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 9375744
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_SEA_OPERATOR",
+   "base": 9502720,
+   "preferred": 268435456,
+   "size": 294912,
+   "entries": 959,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 9507006
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_SOUND",
+   "base": 9830400,
+   "preferred": 268435456,
+   "size": 61440,
+   "entries": 408,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 9834496
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_SeaCreatures",
+   "base": 9895936,
+   "preferred": 268435456,
+   "size": 77824,
+   "entries": 435,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 9900032
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_SoundService",
+   "base": 10027008,
+   "preferred": 268435456,
+   "size": 270336,
+   "entries": 978,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 10042368
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_Teleport",
+   "base": 10354688,
+   "preferred": 268435456,
+   "size": 73728,
+   "entries": 422,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 10358784
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_Tornado",
+   "base": 10485760,
+   "preferred": 268435456,
+   "size": 90112,
+   "entries": 492,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 10496880
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_WEATHER",
+   "base": 10616832,
+   "preferred": 268435456,
+   "size": 188416,
+   "entries": 909,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 10620928
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_WaterRings",
+   "base": 10813440,
+   "preferred": 268435456,
+   "size": 61440,
+   "entries": 408,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 10818272
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_WorldMap",
+   "base": 10878976,
+   "preferred": 268435456,
+   "size": 282624,
+   "entries": 880,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 10948528
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_XINTERFACE",
+   "base": 11206656,
+   "preferred": 268435456,
+   "size": 442368,
+   "entries": 2403,
+   "exports": [
+    {
+     "name": "?SFLB_DoControl@XINTERFACE@@IAAXXZ",
+     "ordinal": 1,
+     "address": 11212012
+    },
+    {
+     "name": "DMAInterface",
+     "ordinal": 2,
+     "address": 11211857
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_animals",
+   "base": 11665408,
+   "preferred": 268435456,
+   "size": 90112,
+   "entries": 548,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 11669504
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_artifact",
+   "base": 11796480,
+   "preferred": 268435456,
+   "size": 77824,
+   "entries": 424,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 11800576
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_battle_interface",
+   "base": 11927552,
+   "preferred": 268435456,
+   "size": 184320,
+   "entries": 883,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 11990272
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_blade",
+   "base": 12124160,
+   "preferred": 268435456,
+   "size": 69632,
+   "entries": 412,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 12128256
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_locator",
+   "base": 12255232,
+   "preferred": 268435456,
+   "size": 81920,
+   "entries": 470,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 12262864
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_rigging",
+   "base": 12386304,
+   "preferred": 268435456,
+   "size": 192512,
+   "entries": 755,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 12494864
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_sea",
+   "base": 12582912,
+   "preferred": 268435456,
+   "size": 200704,
+   "entries": 885,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 12596384
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_sea_ai",
+   "base": 12845056,
+   "preferred": 268435456,
+   "size": 176128,
+   "entries": 1083,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 12849152
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_seafoam",
+   "base": 13041664,
+   "preferred": 268435456,
+   "size": 94208,
+   "entries": 504,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 13045760
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_shadow",
+   "base": 13172736,
+   "preferred": 268435456,
+   "size": 73728,
+   "entries": 333,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 13176832
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_ship",
+   "base": 13303808,
+   "preferred": 268435456,
+   "size": 106496,
+   "entries": 396,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 13309312
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_sink_effect",
+   "base": 13434880,
+   "preferred": 268435456,
+   "size": 77824,
+   "entries": 488,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 13439072
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_telescope",
+   "base": 13565952,
+   "preferred": 268435456,
+   "size": 65536,
+   "entries": 398,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 13570048
+    }
+   ]
+  },
+  {
+   "tag": "MODULES_touch",
+   "base": 13631488,
+   "preferred": 268435456,
+   "size": 73728,
+   "entries": 432,
+   "exports": [
+    {
+     "name": "DMAInterface",
+     "ordinal": 1,
+     "address": 13635584
+    }
+   ]
+  }
+ ]
+}

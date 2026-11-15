@@ -1,0 +1,26 @@
+# path: PROGRAM/sound.c
+# sha256-before: bb5731e2eb7167f4df4adc5af6a5c26dd70f905dfab9614a766944fa4077ece7
+# sha256-after: 180d949fe1acb5713fc35af4a56b0e2990f5232d564425a5699a31c7161f5a7c
+# eol-before: crlf
+# eol-after: crlf
+# final-newline: yes
+--- a/PROGRAM/sound.c
++++ b/PROGRAM/sound.c
+@@ -202,0 +203,14 @@
++}
++
++// Existing game data has one-, two- and three-digit numbered locators.
++bool IsNumberedNightInsectsLocator(string locatorName)
++{
++	int n = strlen(locatorName);
++	if (n <= 12) return false;
++	if (strcut(locatorName, 0, 11) != "nightinsects") return false;
++	for (int j = 12; j < n; j++)
++	{
++		string digit = GetSymbol(&locatorName, j);
++		if (!isDigit(&digit, 0)) return false;
++	}
++	return true;
+@@ -223 +237 @@
+-		if ((locatorType == "nightinsects") || (locatorType == "tree"))
++		if (IsNumberedNightInsectsLocator(locatorName) || (locatorType == "nightinsects") || (locatorType == "tree"))
