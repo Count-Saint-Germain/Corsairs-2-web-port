@@ -22,6 +22,7 @@
   #stage { position: relative; width: 100%; height: 100vh; height: 100dvh; background: #000;
     border-radius: 0; overflow: hidden; }
   canvas { width: 100%; height: 100%; display: block; cursor: none; }
+  canvas.loading-screen { cursor: progress; }
   .hidden { display: none !important; }
 
   /* the launcher: a floodlit pitch behind the menus */
@@ -207,7 +208,7 @@
       </div>
     </div>
     <button id="aspect" type="button" title="Restore original 4:3 proportions (the default view stretches the image to fill the window)" aria-label="Restore original 4:3 proportions" aria-pressed="false">4:3</button>
-    <button id="esc-fallback" type="button" class="hidden" title="Game Escape key (also F10; on Mac use Fn+F10)" aria-label="Game Escape key">Esc</button>
+    <button id="esc-fallback" type="button" class="hidden" title="Game Escape key (also the grave/tilde key)" aria-label="Game Escape key">Esc</button>
     <button id="fs" title="Fullscreen (Alt+Enter)" aria-label="Toggle fullscreen">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path id="fs-icon" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>

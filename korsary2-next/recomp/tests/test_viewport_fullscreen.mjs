@@ -44,9 +44,11 @@ test('unavailable fullscreen leaves browser shortcuts untouched and 4:3 control 
 });
 test('denied keyboard lock does not intercept Escape and explains the fallback',async()=>{
   const f=fixture({keyboard:'deny'});await f.fs.onclick();await f.doc.emit('fullscreenchange');
-  const esc=await f.win.emit('keydown',{code:'Escape'});assert.equal(esc.defaultPrevented,false);assert.match(f.tip.textContent,/Esc/);
+  const esc=await f.win.emit('keydown',{code:'Escape'});assert.equal(esc.defaultPrevented,false);assert.match(f.tip.textContent,/~ \/ Ё/);
   assert.equal(f.escape.classList.contains('hidden'),false);assert.equal(f.win.escapeFallbackActive(),true);
   assert.deepEqual(f.lockCalls,[['Escape']]);
+  await f.doc.exitFullscreen();await f.doc.emit('fullscreenchange');
+  assert.equal(f.tip.classList.contains('hidden'),true,'the fallback notice follows fullscreen');
 });
 test('granted keyboard lock forwards Escape and releases on exit',async()=>{
   const f=fixture({keyboard:'allow'});await f.fs.onclick();await f.doc.emit('fullscreenchange');
@@ -79,6 +81,43 @@ test('held, repeated, slow or unfocused Escape does not accidentally exit',async
   await f.win.emit('blur');
   const afterBlur=await f.win.emit('keydown',{code:'Escape',timeStamp:950});
   assert.equal(afterBlur.stopped,false);assert.ok(f.doc.fullscreenElement);
+});
+test('holding the first Escape for more than 600 ms does not begin a double press', async () => {
+  const f = fixture({ keyboard: 'allow' });
+  await f.fs.onclick();
+  await f.doc.emit('fullscreenchange');
+  await f.win.emit('keydown', { code: 'Escape', timeStamp: 100 });
+  await f.win.emit('keyup', { code: 'Escape', timeStamp: 800 });
+  const second = await f.win.emit('keydown', { code: 'Escape', timeStamp: 850 });
+  assert.equal(second.stopped, false);
+  assert.ok(f.doc.fullscreenElement);
+});
+test('switching to a hidden tab cancels a pending double Escape', async () => {
+  const f = fixture({ keyboard: 'allow' });
+  await f.fs.onclick();
+  await f.doc.emit('fullscreenchange');
+  await f.win.emit('keydown', { code: 'Escape', timeStamp: 100 });
+  await f.win.emit('keyup', { code: 'Escape', timeStamp: 150 });
+  f.doc.hidden = true;
+  await f.doc.emit('visibilitychange');
+  f.doc.hidden = false;
+  await f.doc.emit('visibilitychange');
+  const second = await f.win.emit('keydown', { code: 'Escape', timeStamp: 250 });
+  assert.equal(second.stopped, false);
+  assert.ok(f.doc.fullscreenElement);
+});
+test('Alt+Enter consumes its matching release even after Alt is released', async () => {
+  const f = fixture();
+  const down = await f.win.emit('keydown', { code: 'Enter', altKey: true });
+  assert.equal(down.stopped, true);
+  assert.ok(f.doc.fullscreenElement);
+  const repeat = await f.win.emit('keydown', { code: 'Enter', repeat: true });
+  assert.equal(repeat.stopped, true);
+  assert.ok(f.doc.fullscreenElement, 'repeat must not toggle fullscreen');
+  const up = await f.win.emit('keyup', { code: 'Enter' });
+  assert.equal(up.stopped, true);
+  const next = await f.win.emit('keydown', { code: 'Enter' });
+  assert.equal(next.stopped, false, 'a plain Enter remains available to the game');
 });
 test('double Escape never interferes when Keyboard Lock is unavailable',async()=>{
   const f=fixture({keyboard:'deny'});await f.fs.onclick();await f.doc.emit('fullscreenchange');

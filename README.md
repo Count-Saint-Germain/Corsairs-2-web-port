@@ -76,9 +76,11 @@ New installations start with effects at 10% and dialogue at 90%. Existing player
 
 By default the game fills the browser viewport by stretching the original 4:3 image horizontally. Move the mouse to reveal the **4:3** button in the bottom-right corner to restore undistorted proportions (with side bars on a wide screen); use the same button to fill the viewport again. The choice is saved in the browser. The touch layout keeps its 4:3 game area.
 
-Use **Alt+Enter** (Option+Enter on a Mac) or the corner button for native fullscreen. In browsers that support Keyboard Lock and grant its permission, a single Esc reaches the game; press Esc twice quickly, hold Esc, or use Alt+Enter to leave fullscreen. If Keyboard Lock is unavailable or denied, the browser controls Esc and may leave fullscreen on the first press. In windowed mode the game fills the viewport without capturing the mouse, so Esc reaches the game. The game draws its own cursor; movement stops when the system pointer leaves the game area.
+Use **Alt+Enter** (Option+Enter on a Mac) or the corner button for native fullscreen. While Keyboard Lock holds Esc, one press reaches the game and two presses within 600 ms leave fullscreen. Holding Esc or using Alt+Enter also leaves fullscreen. If Keyboard Lock is unavailable or denied, the browser handles the fullscreen Esc shortcut. When the pointer is free, menu clicks follow its position and loading screens show the browser’s progress cursor. The camera uses relative movement. In a window it stops tracking outside the game area. Fullscreen can capture the pointer on click.
 
-If the browser reserves Esc in fullscreen, use **F10** for the game's Esc action; on Macs with media keys, use **Fn+F10**. An **Esc** button also appears near the bottom-right corner when this fallback is active. This does not change your browser's privacy settings. F10 retains its normal game binding when the fallback is inactive.
+In game fullscreen, the **grave/tilde key** also opens or closes the game menu. Press it without Shift, on the key usually to the left of 1. If the browser reserves Esc, an **Esc** button also appears near the bottom-right corner.
+
+In Vivaldi on macOS, use **Control+Command+F** to enter or leave Vivaldi’s own fullscreen window. In that mode, **Esc** opens and closes the game menu. The game’s fullscreen button and **Alt+Enter** use the webpage’s fullscreen mode.
 
 ## Saves
 

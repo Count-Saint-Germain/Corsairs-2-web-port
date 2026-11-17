@@ -434,7 +434,13 @@ W(dev_Present) {
 #endif
         last_t = now; last_f = d->frame;
     }
-    if (g_render->present) g_render->present(d);
+    int loading_screen = 0;
+#if defined(__EMSCRIPTEN__) && !defined(PORT_NODE_BUILD)
+    /* DX8RENDER's loading progress renderer (guest 0x00699990) presents
+       its own frames. The call site identifies the picture in this frame. */
+    loading_screen = R32(c->esp) == 0x00699cdbu;
+#endif
+    if (g_render->present) g_render->present(d, loading_screen);
     if (g_log_d3d && (d->frame <= 3 || d->frame % 300 == 0))
         fprintf(stderr, "[d3d] Present: frame %u, %u draws\n", d->frame, d->draws_this_frame);
     d->draws_this_frame = 0;
@@ -1191,8 +1197,9 @@ static ComInterface IDirect3DSwapChain8_i __attribute__((unused)) = { "IDirect3D
 /* ------------------------------------------------------------------ headless backend */
 
 /* Headless "vsync": pace Present to 60 Hz like a real display would. */
-static void hl_present(Device *d) {
+static void hl_present(Device *d, int loading_screen) {
     (void)d;
+    (void)loading_screen;
 #ifdef PORT_HEAP_STATS   /* диагностика (K3): PORT_HL_NOPACE=<кадр> снимает 60-Гц паузу начиная с этого кадра (1 — с начала),
                             чтобы прогнать много кадров быстрее реального времени; без переменной поведение прежнее */
     static long nopace_from = -2;

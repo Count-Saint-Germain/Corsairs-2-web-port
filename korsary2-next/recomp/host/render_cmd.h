@@ -85,7 +85,7 @@ typedef struct { CmdHdr h; uint32_t id, w, h_; } CmdUploadSurf;
    then sets *done (a host address) to 1. */
 typedef struct { CmdHdr h; uint32_t id, w, h_, fmt, pitch, guest_mem; uint64_t done_ptr; } CmdReadback;
 
-typedef struct { CmdHdr h; uint32_t frame, screenshot; } CmdPresent;
+typedef struct { CmdHdr h; uint32_t frame; uint8_t screenshot, loading_screen; } CmdPresent;
 
 /* executor entry points */
 void gpu_exec(const CmdHdr *c);              /* native: run one command now */

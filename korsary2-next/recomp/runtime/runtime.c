@@ -43,6 +43,10 @@ __thread uint32_t g_import_target;  /* which host slot the current import call c
 
 static uint32_t g_trace_call = 1;   /* PORT_TRACE_CALL=addr: log indirect calls to that function */
 
+#if defined(__EMSCRIPTEN__) && !defined(PORT_NODE_BUILD)
+void port_menu_mouse_control(CPU *c, uint32_t result);
+#endif
+
 #if !defined(PORT_NODE_BUILD)
 /* Video bridge (browser builds): host/video.c turns the engine's CAviPlayer open call (the one place every
  * video request passes with its file name, see host/video.c) into a page-visible request, and logs the
@@ -57,6 +61,9 @@ __attribute__((weak)) void port_video_open_site(const CPU *c) { (void)c; }
 static int g_ss_trace = -1;
 void call_indirect(CPU *c, uint32_t target) {
     SeaCapsProbe sea_probe={0};
+#if defined(__EMSCRIPTEN__) && !defined(PORT_NODE_BUILD)
+    uint32_t menu_control_result = 0;
+#endif
 #ifndef PORT_NODE_BUILD
     /* Video bridge: CAviPlayer's open call (0xae77fd) and ExecuteFunction's unknown-function trace calls
      * (three return addresses, diagnostic) are forwarded; the single guarded load keeps the hot path cheap. */
@@ -64,6 +71,11 @@ void call_indirect(CPU *c, uint32_t target) {
         uint32_t ra = R32(c->esp);
         if (ra==0x00ae77fdu) port_video_open_site(c);
         else if (ra==0x0040a3cfu || ra==0x0040b977u || ra==0x0040a456u) port_video_call_site(c);
+#if defined(__EMSCRIPTEN__)
+        /* XINTERFACE's second mouse-axis GetControlState call. Read its
+           result pointer before the callee pops the guest arguments. */
+        else if (ra == 0x00ae2381u) menu_control_result = R32(c->esp + 8u);
+#endif
     }
 #endif
     /* Only the verified sea caps call is eligible for the opt-in fallback. */
@@ -119,6 +131,9 @@ void call_indirect(CPU *c, uint32_t target) {
         }
     }
     fn(c);
+#if defined(__EMSCRIPTEN__) && !defined(PORT_NODE_BUILD)
+    if (menu_control_result) port_menu_mouse_control(c, menu_control_result);
+#endif
     sea_caps_probe_after(c,&sea_probe);
 }
 

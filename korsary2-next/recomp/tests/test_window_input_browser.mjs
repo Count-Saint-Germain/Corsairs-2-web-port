@@ -21,15 +21,16 @@ try {
   browser = await chromium.launch({ headless: true, ...(executablePath ? { executablePath } : { channel: 'chromium' }), args: ['--enable-unsafe-webgpu'] });
   const context = await browser.newContext({ viewport: { width: 1280, height: 720 }, deviceScaleFactor: 2 });
   const page = await context.newPage(), errors = [];
-  let menu = false, cabin = false;
+  let menuOpens = 0, cabin = false, options = false;
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', msg => {
     const line = msg.text();
-    if (/CreateFileA\(RESOURCE\\INI\\INTERFACES\\mainmenu\.ini\) snapshot/i.test(line)) menu = true;
+    if (/CreateFileA\(RESOURCE\\INI\\INTERFACES\\mainmenu\.ini\) snapshot/i.test(line)) menuOpens++;
+    if (/CreateFileA\(RESOURCE\\INI\\INTERFACES\\option_screen\.ini\) snapshot/i.test(line)) options = true;
     if (line.includes('tut_deck.gm')) cabin = true;
   });
-  const waitUntil = async (predicate, label) => {
-    const deadline = Date.now() + 120000;
+  const waitUntil = async (predicate, label, timeout = 120000) => {
+    const deadline = Date.now() + timeout;
     while (!predicate() && Date.now() < deadline) await page.waitForTimeout(200);
     assert.ok(predicate(), `${label} did not load`);
   };
@@ -55,9 +56,13 @@ try {
   };
   await page.goto(`http://127.0.0.1:${server.address().port}/?log&mute`);
   await page.locator('#play').waitFor({ state: 'visible', timeout: 120000 }); await page.locator('#play').click();
-  await waitUntil(() => menu, 'main menu'); await waitFrame(c => c.blue > 0.35 && c.brown < 0.3, 'main menu');
-  await page.keyboard.press('Enter'); await waitUntil(() => cabin, 'opening cabin');
+  await waitUntil(() => menuOpens > 0, 'main menu'); await waitFrame(c => c.blue > 0.35 && c.brown < 0.3, 'main menu');
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(() => getComputedStyle(document.getElementById('canvas')).cursor === 'progress',
+    null, { timeout: 30000 });
+  await waitUntil(() => cabin, 'opening cabin');
   await waitFrame(c => c.brown > 0.5, 'opening cabin');
+  await page.waitForFunction(() => getComputedStyle(document.getElementById('canvas')).cursor === 'none');
   // The cabin can render before the engine finishes activating its input.
   await page.waitForTimeout(4000);
   await page.evaluate(() => {
@@ -67,15 +72,24 @@ try {
   });
   await page.mouse.click(600, 300);
   assert.equal(await page.evaluate(() => document.pointerLockElement), null, 'windowed game click must not capture pointer');
+  await page.mouse.move(200, 610);
+  const previousMenuOpens = menuOpens;
   await page.keyboard.down('Escape'); await page.waitForTimeout(150); await page.keyboard.up('Escape');
+  await waitUntil(() => menuOpens > previousMenuOpens, 'main menu after Esc');
   await waitFrame(c => c.blue > 0.35 && c.brown < 0.3, 'game menu after Esc');
   await page.mouse.move(600, 320, { steps: 5 }); await page.mouse.click(600, 320);
   assert.equal(await page.evaluate(() => document.pointerLockElement), null, 'menu click must not capture pointer');
   const buttons = await page.evaluate(() => window.testButtons);
   assert.ok(buttons.filter(([b, down]) => b === 0 && down === 1).length >= 2, 'game and menu clicks reach guest');
   assert.ok(buttons.filter(([b, down]) => b === 0 && down === 0).length >= 2, 'clicks are released');
+  // The menu starts with its own cursor center. Advance directly to the
+  // visible Settings button even when the OS pointer began far from center.
+  await page.mouse.move(652, 449);
+  await page.waitForTimeout(350);
+  await page.mouse.click(652, 449, { delay: 100 });
+  await waitUntil(() => options, 'settings selected by its window coordinates', 15000);
   assert.deepEqual(errors, []);
-  console.log(`Windowed game: clicks, Esc and no pointer lock PASS (${browser.version()})`);
+  console.log(`Windowed game: clicks, Esc, absolute Settings selection and no pointer lock PASS (${browser.version()})`);
 } finally {
   await browser?.close();
   if (server.listening) await new Promise(ok => server.close(ok));

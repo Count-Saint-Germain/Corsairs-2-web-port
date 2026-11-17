@@ -4,6 +4,7 @@
 
 #include <pthread.h>
 #include <limits.h>
+#include <math.h>
 #if defined(__EMSCRIPTEN__) && !defined(PORT_NODE_BUILD)
 #include <emscripten.h>
 /* The browser owns the window and its page-lifetime save locks. Ask the page
@@ -300,6 +301,9 @@ W(SetCursor) { RET(1, 0); }
 W(ShowCursor) { RET(1, ARG(0) ? 0 : -1); }
 static int32_t g_mouse_x = 512, g_mouse_y = 384;
 static pthread_mutex_t g_cursor_lock = PTHREAD_MUTEX_INITIALIZER;
+/* The PCS_CONTROLS Update routine (rebased to 0x00891910) reads the
+   cursor then centers it again. Only the calls in this pair consume motion. */
+enum { PCS_CURSOR_READ = 0x00891929u, PCS_CURSOR_RECENTER = 0x008919c6u };
 static int32_t cursor_add(int32_t value, int delta) {
     int64_t result=(int64_t)value+(int64_t)delta;
     return result > INT32_MAX ? INT32_MAX : result < INT32_MIN ? INT32_MIN : (int32_t)result;
@@ -312,15 +316,71 @@ void user32_mouse_move(int dx,int dy) {
 W(GetCursorPos) {
     pthread_mutex_lock(&g_cursor_lock);
     uint32_t x=(uint32_t)g_mouse_x,y=(uint32_t)g_mouse_y;
+    if (R32(c->esp) == PCS_CURSOR_READ) {
+        /* Consume at the read, so events arriving before the paired reset
+           remain available for the next poll. GetWindowRect is origin-based. */
+        g_mouse_x = g_screen_w / 2;
+        g_mouse_y = g_screen_h / 2;
+    }
     pthread_mutex_unlock(&g_cursor_lock);
     W32(ARG(0),x); W32(ARG(0)+4,y); RET(1,1);
 }
 W(SetCursorPos) {
+    int32_t x = (int32_t)ARG(0), y = (int32_t)ARG(1);
+    if (R32(c->esp) == PCS_CURSOR_RECENTER && x == g_screen_w / 2 && y == g_screen_h / 2) RET(2, 1);
     pthread_mutex_lock(&g_cursor_lock);
-    g_mouse_x=(int32_t)ARG(0); g_mouse_y=(int32_t)ARG(1);
+    g_mouse_x = x;
+    g_mouse_y = y;
     pthread_mutex_unlock(&g_cursor_lock);
     RET(2,1);
 }
+
+#ifndef PORT_NODE_BUILD
+static float g_menu_mouse_x = -1.f, g_menu_mouse_y = -1.f;
+
+int netplay_on(void);
+#ifdef __EMSCRIPTEN__
+EMSCRIPTEN_KEEPALIVE
+#endif
+void input_mouse_position(float x, float y) {
+    if (netplay_on()) return;
+    pthread_mutex_lock(&g_cursor_lock);
+    g_menu_mouse_x = x;
+    g_menu_mouse_y = y;
+    pthread_mutex_unlock(&g_cursor_lock);
+}
+
+/* XINTERFACE's cursor update at guest 0x00ae2340 reads ITurnV and ITurnH
+   into adjacent control-state structures before updating the cursor quad
+   and hit testing. Replace those two deltas when the page has a position.
+   Outside this call site, mouse movement still comes from relative input. */
+void port_menu_mouse_control(CPU *c, uint32_t result) {
+    uint32_t self = c->esi;
+    if (result != c->esp + 0x20u || !self || (uint64_t)self + 0xc4u > GUEST_SPACE ||
+        (uint64_t)c->esp + 0x2cu > GUEST_SPACE) return;
+
+    pthread_mutex_lock(&g_cursor_lock);
+    float x = g_menu_mouse_x, y = g_menu_mouse_y;
+    pthread_mutex_unlock(&g_cursor_lock);
+    if (!(x >= 0.f && x <= 1.f && y >= 0.f && y <= 1.f)) return;
+
+    uint32_t width = R32(self + 0x74u), height = R32(self + 0x78u);
+    if (!width || !height || width > 16384u || height > 16384u) return;
+    float cursor_x = RF32(self + 0xb4u), cursor_y = RF32(self + 0xb8u);
+    if (!(cursor_x >= 0.f && cursor_x <= width && cursor_y >= 0.f && cursor_y <= height)) return;
+    /* The virtual cursor stores the center of its quad. The INI-defined
+       offsets are added to this point before the guest tests a hit. */
+    float target_x = x * (float)(width - 1) - (int32_t)R32(self + 0xbcu);
+    float target_y = y * (float)(height - 1) - (int32_t)R32(self + 0xc0u);
+    target_x = fminf((float)(width - 1), fmaxf(0.f, target_x));
+    target_y = fminf((float)(height - 1), fmaxf(0.f, target_y));
+    float dx = target_x - cursor_x, dy = cursor_y - target_y;
+    WF32(c->esp + 0x18u, dy);
+    W32(c->esp + 0x1cu, dy != 0.f);
+    WF32(c->esp + 0x24u, dx);
+    W32(c->esp + 0x28u, dx != 0.f);
+}
+#endif
 
 /* ------------------------------------------------------------------ keyboard */
 

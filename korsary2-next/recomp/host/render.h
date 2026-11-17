@@ -13,7 +13,7 @@ typedef struct RenderBackend {
     void (*draw)(Device *d, uint32_t prim, uint32_t prim_count, uint32_t start_vertex, uint32_t num_vertices,
                  const uint8_t *vertices_up, uint32_t up_stride,
                  const void *indices, int index32, uint32_t start_index);
-    void (*present)(Device *d);
+    void (*present)(Device *d, int loading_screen);
     void (*destroy_texture)(Texture *t);
     /* render targets: copy GPU contents into the surface's guest memory before the CPU reads it, and
        push CPU writes back to the GPU */

@@ -689,8 +689,22 @@ async function hookInput(M, net, consumeTouchPress = () => false) {
   const canvas = $('canvas');
   window.addEventListener('keydown', noteGameInput, true);
   window.addEventListener('mousedown', noteGameInput, true);
-  // A mouse-accessible alternative complements F10 when the browser reserves Esc.
-  // An actual pointer lock hides the OS pointer, so F10 also works while locked.
+  const resetOnTransition = (release) => {
+    window.addEventListener('blur', release);
+    document.addEventListener('visibilitychange', () => { if (document.hidden) release(); });
+    document.addEventListener('fullscreenchange', release);
+    document.addEventListener('webkitfullscreenchange', release);
+  };
+  // The grave key is available even when the browser owns Esc or hides the
+  // pointer. Keep system combinations such as Command+` available.
+  const gameKeyCode = (e) => {
+    // macOS browsers can toggle their window fullscreen independently of the page.
+    if (e.code === 'KeyF' && e.ctrlKey && e.metaKey && !e.altKey && !e.shiftKey) return;
+    if (e.code !== 'Backquote' && !['`', '~', 'ё', 'Ё'].includes(e.key)) return e.code;
+    if (e.metaKey || e.altKey || e.ctrlKey) return;
+    return document.fullscreenElement || document.webkitFullscreenElement || document.pointerLockElement === canvas
+      ? 'Escape' : e.code;
+  };
   let pulseEscape = () => {};
   $('esc-fallback')?.addEventListener('click', () => pulseEscape());
   if (net) {
@@ -704,19 +718,24 @@ async function hookInput(M, net, consumeTouchPress = () => false) {
     let pulseTimer;
     pulseEscape = () => { clearTimeout(pulseTimer); set('fallback-button', 9, true); pulseTimer = setTimeout(() => set('fallback-button', 9, false), 100); };
     const key = (down) => (e) => {
-      const bit = down ? (e.code === 'F10' && window.escapeFallbackActive?.() ? 9 : NET_KEYS[e.code]) : held.get(e.code);
+      const bit = down ? NET_KEYS[gameKeyCode(e)] : held.get(e.code);
       if (bit === undefined) return;
       if (e.code !== 'Escape') e.preventDefault();
       if (!e.repeat) set(e.code, bit, down);
     };
     window.addEventListener('keydown', key(true));
     window.addEventListener('keyup', key(false));
-    window.addEventListener('blur', () => { clearTimeout(pulseTimer); held.clear(); netKeyBits = 0; });
+    resetOnTransition(() => {
+      clearTimeout(pulseTimer);
+      held.clear();
+      netKeyBits = netKeyPressed = 0;
+    });
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
     return;
   }
   // The touch panel uses the same bridge as keyboard/mouse, and is never
   // enabled for netplay. The explicit parameter permits desktop QA.
+  const clearMousePosition = () => M._input_mouse_position?.(-1, -1);
   let touchMux = null, touchControls = null;
   const wantsTouch = params.get('touch') === '1' || (params.get('touch') !== '0' &&
     window.matchMedia?.('(pointer: coarse)').matches);
@@ -726,15 +745,16 @@ async function hookInput(M, net, consumeTouchPress = () => false) {
       touchMux = createInputMux({ key: (u, d) => M._input_key_hid(u, d),
         button: (b, d) => M._input_mouse_button(b, d), move: (x, y) => M._input_mouse_move(x, y) });
       touchControls = mountTouchControls({ root: $('touch-controls'), lang: langState.lang, activity: noteGameInput, consumePress: consumeTouchPress, input: {
-        key: (u, d) => touchMux.key(1, u, d), button: (b, d) => touchMux.button(1, b, d),
-        move: (x, y) => touchMux.move(x, y),
+        key: (u, d) => touchMux.key(1, u, d),
+        button: (b, d) => { clearMousePosition(); touchMux.button(1, b, d); },
+        move: (x, y) => { clearMousePosition(); touchMux.move(x, y); },
       } });
     } catch (e) { console.warn('Touch controls unavailable:', e); touchMux = null; }
   }
   const sendKey = (u, down) => touchMux ? touchMux.key(0, u, down) : M._input_key_hid(u, down);
   const sendButton = (b, down) => touchMux ? touchMux.button(0, b, down) : M._input_mouse_button(b, down);
-  // A keyup or mouseup may happen in another tab or application. Release only
-  // inputs this page pressed when focus leaves, otherwise movement can stick.
+  // A keyup or mouseup may happen during a fullscreen or focus transition.
+  // Release the inputs this page pressed so movement cannot stick.
   const heldKeys = new Map(), heldKeySources = new Map();
   const heldButtons = new Set();
   const setKey = (u, source, down) => {
@@ -746,7 +766,7 @@ async function hookInput(M, net, consumeTouchPress = () => false) {
   let pulseTimer;
   pulseEscape = () => { clearTimeout(pulseTimer); setKey(41, 'fallback-button', true); pulseTimer = setTimeout(() => setKey(41, 'fallback-button', false), 100); };
   const key = (down) => (e) => {
-    const u = down ? (e.code === 'F10' && window.escapeFallbackActive?.() ? 41 : HID[e.code]) : heldKeys.get(e.code);
+    const u = down ? HID[gameKeyCode(e)] : heldKeys.get(e.code);
     if (u === undefined || e.repeat) return;
     // Escape remains available to the browser when Keyboard Lock is absent or denied.
     // A granted lock is handled by the fullscreen listener before this handler.
@@ -762,49 +782,70 @@ async function hookInput(M, net, consumeTouchPress = () => false) {
   };
   const releaseHeldInput = () => {
     clearTimeout(pulseTimer);
+    clearMousePosition();
+    touchControls?.releaseAll();
     for (const u of heldKeySources.keys()) sendKey(u, 0);
     releaseButtons();
     heldKeys.clear();
     heldKeySources.clear();
   };
-  window.addEventListener('blur', releaseHeldInput);
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) releaseHeldInput();
-  });
+  resetOnTransition(releaseHeldInput);
   // Esc can release Pointer Lock without blurring the page. A mouseup outside
   // the canvas may then never arrive, leaving a button held in the guest.
   let hadPointerLock = document.pointerLockElement === canvas;
   document.addEventListener('pointerlockchange', () => {
     const hasPointerLock = document.pointerLockElement === canvas;
-    if (hadPointerLock && !hasPointerLock) releaseButtons();
+    if (hadPointerLock && !hasPointerLock) {
+      clearMousePosition();
+      releaseButtons();
+    }
     hadPointerLock = hasPointerLock;
     // A pending fullscreen capture may resolve after fullscreen has ended.
     if (hasPointerLock && !(document.fullscreenElement || document.webkitFullscreenElement)) {
       try { document.exitPointerLock?.(); } catch {}
     }
   });
-  // In a normal window pointer lock gives Escape to the browser instead of
-  // the game. Use ordinary relative motion there. Fullscreen can capture the
-  // pointer so camera movement is not constrained by screen edges.
-  canvas.addEventListener('mousedown', (e) => {
-    if ((document.fullscreenElement || document.webkitFullscreenElement) && document.pointerLockElement !== canvas) {
-      const p = canvas.requestPointerLock?.();
-      if (p && p.catch) p.catch(() => {});
+  // Match the renderer's centered 4:3 surface within the drawing buffer.
+  // Convert CSS coordinates through the buffer only to locate its bars.
+  // The normalized position is independent of the pixel ratio and the guest
+  // interface's virtual resolution. Relative motion still drives the camera.
+  const setMousePosition = (e, rect) => {
+    if (!M._input_mouse_position || !Number.isFinite(e.clientX)) return;
+    if (document.pointerLockElement === canvas || e.sourceCapabilities?.firesTouchEvents) {
+      clearMousePosition();
+      return;
     }
-    const b = [0, 2, 1][e.button] ?? 0;
+    const { width, height } = canvas;
+    if (!rect.width || !rect.height || !width || !height) return;
+    const pictureWidth = Math.min(width, Math.floor(height * 4 / 3));
+    const pictureHeight = Math.min(height, Math.floor(width * 3 / 4));
+    const x = ((e.clientX - rect.left) * width / rect.width - Math.floor((width - pictureWidth) / 2)) / pictureWidth;
+    const y = ((e.clientY - rect.top) * height / rect.height - Math.floor((height - pictureHeight) / 2)) / pictureHeight;
+    M._input_mouse_position(Math.max(0, Math.min(x, 1)), Math.max(0, Math.min(y, 1)));
+  };
+  const browserButtons = [0, 2, 1];
+  canvas.addEventListener('mouseenter', (e) => setMousePosition(e, canvas.getBoundingClientRect()));
+  canvas.addEventListener('mousedown', (e) => {
+    const b = browserButtons[e.button];
+    if (b === undefined || heldButtons.has(b)) return;
+    setMousePosition(e, canvas.getBoundingClientRect());
+    // Fullscreen can capture the pointer so moving the camera has no edge.
+    if ((document.fullscreenElement || document.webkitFullscreenElement) && document.pointerLockElement !== canvas) {
+      try { canvas.requestPointerLock?.()?.catch?.(() => {}); }
+      catch { /* The same click still reaches the game if capture fails. */ }
+    }
     heldButtons.add(b);
     sendButton(b, 1);
   });
   window.addEventListener('mouseup', (e) => {
-    const b = [0, 2, 1][e.button] ?? 0;
+    const b = browserButtons[e.button];
     if (heldButtons.delete(b)) sendButton(b, 0);
   });
   // Relative movement is adjusted for the visible horizontal stretch so the
   // game's cursor travels the same distance as the pointer in viewport mode.
   function createMouseMotionMapper(canvas, stage) {
     let fractionalX = 0, fractionalY = 0;
-    return (movementX, movementY) => {
-      const r = canvas.getBoundingClientRect();
+    return (movementX, movementY, r = canvas.getBoundingClientRect()) => {
       const stretched = !stage.classList.contains('aspect-preserve') &&
         !canvas.closest('main')?.classList.contains('touch-playing');
       const scaleX = stretched && r.width > 0 && r.height > 0 ? (r.height * 4 / 3) / r.width : 1;
@@ -819,8 +860,17 @@ async function hookInput(M, net, consumeTouchPress = () => false) {
   }
   const mapMouseMotion = createMouseMotionMapper(canvas, $('stage'));
   canvas.addEventListener('mousemove', (e) => {
-    const [dx, dy] = mapMouseMotion(e.movementX, e.movementY);
-    M._input_mouse_move(dx, dy);
+    // A mouseup outside the browser may be missed even without a blur.
+    for (const b of heldButtons) {
+      if (typeof e.buttons === 'number' && !(e.buttons & (1 << b))) {
+        heldButtons.delete(b);
+        sendButton(b, 0);
+      }
+    }
+    const rect = canvas.getBoundingClientRect();
+    setMousePosition(e, rect);
+    const [dx, dy] = mapMouseMotion(e.movementX, e.movementY, rect);
+    if (dx || dy) M._input_mouse_move(dx, dy);
   });
   canvas.addEventListener('contextmenu', (e) => e.preventDefault());
   return touchControls;
@@ -1245,7 +1295,21 @@ async function run(session) {
         location.replace(destination.href);
         return true;
       };
-      const frame = () => { if (exitRequested()) return; if (!videoBlocksInput()) poll(M); pollVideo(); M._port_gpu_pump(1); requestAnimationFrame(frame); };
+      let loadingScreen = false;
+      const frame = () => {
+        if (exitRequested()) return;
+        if (!videoBlocksInput()) poll(M);
+        pollVideo();
+        M._port_gpu_pump(1);
+        // The loading picture has no guest cursor and can stay on screen while
+        // the game worker waits for resources. Use the browser's cursor there.
+        const loading = !!M._port_loading_screen_active?.();
+        if (loading !== loadingScreen) {
+          loadingScreen = loading;
+          canvas.classList.toggle('loading-screen', loadingScreen);
+        }
+        requestAnimationFrame(frame);
+      };
       requestAnimationFrame(frame);
       setInterval(() => { if (!exitRequested()) M._port_gpu_pump(0); }, 1);   // readbacks mid-frame are answered without waiting for vsync
       // Online, a hidden tab still has to present frames (browsers pause requestAnimationFrame there), or the
@@ -1457,8 +1521,9 @@ function setupFullscreen() {
   let keyboardLocked = false, generation = 0, noticeTimer;
   // A double press is a convenience only while the browser has granted
   // Keyboard Lock. Esc is otherwise reserved by the browser itself.
-  let escapeDown = false, escapeReleasedAt = null;
-  const resetEscapeSequence = () => { escapeDown = false; escapeReleasedAt = null; };
+  let escapeDown = false, escapePressedAt = null;
+  const resetEscapeSequence = () => { escapeDown = false; escapePressedAt = null; };
+  const fullscreenShortcutKeys = new Set();
   window.escapeFallbackActive = () => active() ? !keyboardLocked : document.pointerLockElement === canvas;
   const notice = (text) => {
     const el = $('fs-notice'); if (!el) return;
@@ -1480,7 +1545,7 @@ function setupFullscreen() {
     const escapeButton = $('esc-fallback');
     if (escapeButton) {
       escapeButton.classList.toggle('hidden', !window.escapeFallbackActive());
-      const description = uiText('Игровая клавиша Esc (также F10; на Mac — Fn+F10)', 'Game Escape key (also F10; on Mac use Fn+F10)');
+      const description = uiText('Игровая клавиша Esc (также ~ / Ё)', 'Game Escape key (also the grave/tilde key)');
       escapeButton.title = description; escapeButton.setAttribute('aria-label', description);
     }
   };
@@ -1512,26 +1577,36 @@ function setupFullscreen() {
       // held key cannot accidentally leave fullscreen. Forward the first
       // press/release to the game and consume only the second press.
       if (e.type === 'keyup') {
-        if (escapeDown) { escapeDown = false; escapeReleasedAt = e.timeStamp; }
+        escapeDown = false;
       } else if (!e.repeat && !escapeDown) {
-        const elapsed = e.timeStamp - escapeReleasedAt;
-        if (escapeReleasedAt !== null && elapsed >= 0 && elapsed <= 600) {
+        const elapsed = e.timeStamp - escapePressedAt;
+        if (escapePressedAt !== null && elapsed >= 0 && elapsed <= 600) {
           resetEscapeSequence(); e.stopImmediatePropagation();
           (document.exitFullscreen || document.webkitExitFullscreen)?.call(document)?.catch?.(() => {});
-        } else { escapeDown = true; escapeReleasedAt = null; }
+        } else { escapeDown = true; escapePressedAt = e.timeStamp; }
       }
       return;
     }
-    if (!fullscreenAvailable || (e.code !== 'Enter' && e.code !== 'NumpadEnter') || !e.altKey) return;
+    if (!fullscreenAvailable || (e.code !== 'Enter' && e.code !== 'NumpadEnter')) return;
+    if (e.type === 'keyup') {
+      if (!fullscreenShortcutKeys.delete(e.code)) return;
+    } else if (!fullscreenShortcutKeys.has(e.code)) {
+      if (!e.altKey || e.repeat) return;
+      fullscreenShortcutKeys.add(e.code);
+      toggle();
+    }
     e.preventDefault(); e.stopImmediatePropagation();
-    if (e.type === 'keydown' && !e.repeat) toggle();
   };
   window.addEventListener('keydown', swallow, true);
   window.addEventListener('keyup', swallow, true);
-  window.addEventListener('blur', resetEscapeSequence);
+  const resetKeyboardShortcuts = () => { resetEscapeSequence(); fullscreenShortcutKeys.clear(); };
+  window.addEventListener('blur', resetKeyboardShortcuts);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) resetKeyboardShortcuts(); });
   const sync = async () => {
     const serial = ++generation;
     resetEscapeSequence();
+    clearTimeout(noticeTimer);
+    $('fs-notice')?.classList.add('hidden');
     keyboardLocked = false; labels();
     if (!active()) {
       try { navigator.keyboard?.unlock?.(); } catch {}
@@ -1540,8 +1615,7 @@ function setupFullscreen() {
       if (document.pointerLockElement === canvas) { try { document.exitPointerLock?.(); } catch {} }
       return;
     }
-    // Chromium requires the site's keyboard-lock permission. A denial or an
-    // unsupported browser leaves its normal Escape-to-exit behavior intact.
+    // A rejected lock or an unsupported browser keeps native Escape handling.
     try {
       if (!navigator.keyboard?.lock) throw new Error('unsupported');
       await navigator.keyboard.lock(['Escape']);
@@ -1550,8 +1624,8 @@ function setupFullscreen() {
       keyboardLocked = true; labels();
     } catch {
       if (serial === generation && active()) notice(uiText(
-        'Браузер не разрешил использовать Esc в полноэкранном режиме. Для меню игры используйте F10 (на Mac — Fn+F10) или кнопку Esc.',
-        'The browser did not allow Escape in fullscreen. Use F10 (Fn+F10 on Mac) or the Esc button for the game menu.'));
+        'Для игрового меню используйте клавишу ~ / Ё (без Shift) или кнопку Esc.',
+        'For the game menu, press the grave/tilde key (without Shift) or use the Esc button.'));
     }
   };
   document.addEventListener('fullscreenchange', sync);

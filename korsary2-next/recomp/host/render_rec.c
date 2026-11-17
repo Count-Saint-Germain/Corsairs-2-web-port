@@ -991,11 +991,12 @@ static int rec_init(Device *d) {
 #endif
 }
 
-static void rec_present_impl(Device *d) {
+static void rec_present_impl(Device *d, int loading_screen) {
     CmdPresent *c = cmd_alloc(CMD_PRESENT, sizeof *c);
     if (!c) return;
     c->frame = d->frame;
-    c->screenshot = (uint32_t)want_screenshot(d->frame);
+    c->screenshot = (uint8_t)want_screenshot(d->frame);
+    c->loading_screen = loading_screen;
     cmd_end();
 #ifdef __EMSCRIPTEN__
     /* During a save-load episode the frames must not race the display: a load is ~1300 ordinary
@@ -1091,7 +1092,11 @@ static void rec_draw(Device *d, uint32_t prim, uint32_t prim_count, uint32_t sta
     rec_draw_impl(d, prim, prim_count, start_vertex, num_vertices, vertices_up, up_stride, indices, index32, start_index);
     rec_leave();
 }
-static void rec_present(Device *d) { rec_enter(); rec_present_impl(d); rec_leave(); }
+static void rec_present(Device *d, int loading_screen) {
+    rec_enter();
+    rec_present_impl(d, loading_screen);
+    rec_leave();
+}
 static int rec_readback(Device *d, Surface *s) { rec_enter(); int ok=rec_readback_impl(d, s); rec_leave(); return ok; }
 static int rec_upload_surface(Device *d, Surface *s) { rec_enter(); int ok=rec_upload_surface_impl(d, s); rec_leave(); return ok; }
 static void rec_destroy_texture(Texture *t) { rec_enter(); rec_destroy_texture_impl(t); rec_leave(); }

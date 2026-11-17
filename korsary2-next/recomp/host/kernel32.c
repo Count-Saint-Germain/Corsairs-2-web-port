@@ -2660,19 +2660,28 @@ static uint32_t copy_file_strict(const char *src, const char *dst, int fail_if_e
 
 /* ------------------------------------------------------------------ load pacing */
 
-/* While the engine loads (save-menu header reads, the save restore, the script recompile and the
-   location load - about 1300 ordinary engine frames), the browser game thread must not race the
+/* While the engine loads (the save restore, script recompile and location load - about 1300
+   ordinary engine frames), the browser game thread must not race the
    display: Present would wait for requestAnimationFrame every frame and stretch the whole load to
-   60 fps of wall time. A read-open of a SAVE file starts a load episode; any successful file open
-   or read re-arms the deadline, so the load's silent compute stretch (about 10 s with no file
+   60 fps of wall time. Opening a SAVE file from the engine's restore routine starts the episode.
+   Later file activity re-arms the deadline, so the load's silent compute stretch (about 10 s with no file
    traffic) keeps it alive. It ends on its own 12 s after the last file activity. Node builds never
    race the display (web stubs), PORT_PACE60 and the deterministic netplay clock are untouched. */
 #define LOAD_PACE_GAP_US 12000000ull   /* 12 s of file silence ends an episode */
 
+/* ENGINE.exe's filesystem Open method (0x42a73b) calls CreateFileA. Its stack frame
+   points back to the restore routine (0x41b5fd) only for the actual state load.
+   Save menu metadata reads also call Open, from the extension data reader
+   (0x4102cc). They must keep the normal one-frame presentation limit. */
+static int engine_restore_open(const CPU *c) {
+    return R32(c->esp) == 0x0042a763u &&
+        (uint64_t)c->ebp + 8 <= GUEST_SPACE && R32(c->ebp + 4) == 0x0041b7b3u;
+}
+
 static uint64_t g_load_pace_until_us;
-static void fs_activity(int save_read_open) {
+static void fs_activity(int restore_open) {
     uint64_t now = (uint64_t)(host_seconds() * 1e6);
-    if (save_read_open) {
+    if (restore_open) {
         __atomic_store_n(&g_load_pace_until_us, now + LOAD_PACE_GAP_US, __ATOMIC_RELAXED);
     } else if (now < __atomic_load_n(&g_load_pace_until_us, __ATOMIC_RELAXED)) {
         __atomic_store_n(&g_load_pace_until_us, now + LOAD_PACE_GAP_US, __ATOMIC_RELAXED);
@@ -2830,7 +2839,7 @@ W(CreateFileA) {
     x->write_open = (fl & (O_WRONLY | O_RDWR | O_TRUNC)) != 0;
     x->save_read_activity = disp == 3 && (access & 0x80000000u) &&
         (save_file_under(host, g_game_root) || save_file_under(host, g_user_root));
-    fs_activity(x->save_read_activity);
+    fs_activity(x->save_read_activity && engine_restore_open(c));
     if (!x->write_open && disp == 3 && snapshot_enabled() && !file_path_write_open(host))
         file_snapshot(x, fd, name);   /* read-only open: serve reads from a one-shot buffer */
     if (reservation) {   /* publish the handle and mark the open established under the registry lock */

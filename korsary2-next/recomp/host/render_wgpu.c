@@ -1174,6 +1174,12 @@ static void pace_60hz(void) {
 }
 #endif
 
+#ifdef __EMSCRIPTEN__
+/* The page thread owns both this flag and submission to the visible canvas. */
+static int g_loading_screen_active;
+EMSCRIPTEN_KEEPALIVE int port_loading_screen_active(void) { return g_loading_screen_active; }
+#endif
+
 static void exec_present(const CmdPresent *c) {
     begin_frame();
     use_backbuffer();
@@ -1181,8 +1187,6 @@ static void exec_present(const CmdPresent *c) {
     submit();
 #ifndef __EMSCRIPTEN__
     if (c->screenshot) { char path[256]; snprintf(path, sizeof path, "/tmp/port_frame_%u.png", c->frame); capture_png(path); }
-#else
-    (void)c;
 #endif
     g_frame_open = 0;
     /* copy the back buffer to the window */
@@ -1221,6 +1225,7 @@ static void exec_present(const CmdPresent *c) {
         if (pace < 0) pace = getenv("PORT_PACE60") != NULL;
         if (pace) pace_60hz();
 #else
+        g_loading_screen_active = c->loading_screen;
         wgpuTextureRelease(cur.texture);   /* the browser presents the canvas when this task ends */
 #endif
     } else {

@@ -25,17 +25,36 @@ coverage and remaining issues, not a guarantee that every game situation works.
 
 ## Open issues and limits
 
-- **Mouse input in Brave and Vivaldi:** a player reports slow menu cursor movement
-  in windowed mode, while fullscreen feels responsive, and previously reported
-  intermittent left-click failures. Windowed clicks no longer request Pointer
-  Lock, so Escape is available to the game; fullscreen may still capture the
-  pointer. An isolated automated game run exercised menu clicking and Escape,
-  but did not measure latency with a physical mouse. The reported slowdown and
-  intermittent left-click issue need confirmation in the player's browsers.
-- **Fullscreen Escape:** double Escape requires a granted Keyboard Lock. An
-  isolated Brave run did not expose that API with its default protections; in
-  such a browser the first Escape remains under browser control. Chromium with
-  the API granted passed the single- and double-Escape browser test.
+- **Mouse and menus:** with the pointer free, menus use its position in the
+  rendered picture at either aspect setting. The previous relative conversion
+  made cursor speed depend on window height and could leave the game cursor
+  offset after opening a menu. Camera input stays relative. The host now
+  preserves motion that arrives during a game cursor recenter, and the browser
+  releases held input on fullscreen and focus transitions. Automated Brave
+  opened Settings and Save from the pause menu and exercised the F2 interface.
+  The Chromium regression selected Settings by its window coordinates.
+- **Loading:** in isolated macOS Retina windows, Brave and Vivaldi submitted
+  about 120 game frames/s at the start menu and 11–12 frames/s while loading the
+  opening cabin. The browser animation callback kept running at about 120 Hz.
+  The browser now shows its progress cursor on loading frames while the pointer
+  is free. The save list keeps ordinary presentation pacing, and an actual
+  restore still enables the faster loading path. A fresh save and restore passed
+  in Chromium.
+- **Fullscreen Escape:** Chromium passed the single- and double-Escape test
+  with Keyboard Lock active. The API was absent in Brave 1.98.63 with its
+  default protections. In a private window of Vivaldi 8.3.4191.44 on macOS, the
+  API was exposed, but all three fullscreen lock requests failed with
+  `InvalidStateError`. The browser exited fullscreen on the first Escape.
+  The grave/tilde key opened and closed the game menu while staying in
+  fullscreen, including closing it with the pointer captured. Keyboard Lock
+  in a regular Vivaldi profile still needs verification. A minimal page also
+  reproduced the rejection after the fullscreen transition and on a fresh
+  click. In Vivaldi's own fullscreen window, Escape opened and closed the
+  game menu. The game lets Control+Command+F reach the browser so it can
+  enter and leave that mode.
+- **Input coverage:** the macOS measurements used scripted input. Physical
+  mouse latency and the reported intermittent left-click problem across a
+  fight, a conversation and a door transition remain open.
 - **Guest heap exhaustion:** the original cause was not established. A change
   improved a synthetic fragmentation case, but does not prove the error is
   eliminated. The runtime can emit a diagnostic snapshot if it recurs.
@@ -49,7 +68,6 @@ coverage and remaining issues, not a guarantee that every game situation works.
 - Hosting tests, extended play and listening to audio were outside the agreed
   scope. The ready build has not been verified on a public deployment.
 
-Because the reported mouse issue remains unresolved, publication readiness is
-not yet established. See the [hosting guide](hosting.md) for deployment
-requirements and the [architecture](../PORT_SPECIFICATION.md) for implementation
-and storage boundaries.
+Publication readiness still needs physical mouse and target-browser checks.
+See the [hosting guide](hosting.md) for deployment requirements and the
+[architecture](../PORT_SPECIFICATION.md) for implementation and storage boundaries.
