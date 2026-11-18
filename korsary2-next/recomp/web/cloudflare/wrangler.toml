@@ -10,7 +10,7 @@ bucket_name = "korsary2-web"
 
 # Netplay rooms (worker.js: NetplayRoom)
 [[durable_objects.bindings]]
-name = "korsary2-web"
+name = "ROOMS"
 class_name = "NetplayRoom"
 
 [[migrations]]

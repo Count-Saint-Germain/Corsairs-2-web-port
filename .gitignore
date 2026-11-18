@@ -36,5 +36,6 @@
 **/.live-upload-token
 *.log
 /dist-real-*/
+/cloudflare-static/
 !/distribution/build/
 !/distribution/build/**

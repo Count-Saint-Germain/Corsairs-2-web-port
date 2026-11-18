@@ -1,5 +1,7 @@
 // Optional English-overlay + lazy integration smoke test. K2_LAZY_SITE points
-// to a prepared disposable site. The default browser context is ephemeral.
+// to a prepared disposable site. K2_LAZY_TEST_URL can instead target an
+// isolated local Worker backed by disposable R2 storage. The default browser
+// context is ephemeral.
 // To create and reload a real save, set K2_ENGLISH_SAVE_TEST=1 and give
 // K2_ENGLISH_PROFILE a dedicated profile path which will be retained.
 import assert from 'node:assert/strict';
@@ -20,7 +22,8 @@ const serve=await createStaticHandler(site,{requireIndex:true});
 const server=http.createServer((req,res)=>serve(req,res).catch(error=>{if(!res.headersSent)res.writeHead(500);res.end(String(error));}));
 let browser, context;
 try {
-  await new Promise((ok,fail)=>{server.once('error',fail);server.listen(0,'127.0.0.1',ok);});
+  const externalUrl = process.env.K2_LAZY_TEST_URL;
+  if (!externalUrl) await new Promise((ok,fail)=>{server.once('error',fail);server.listen(0,'127.0.0.1',ok);});
   if (process.env.K2_ENGLISH_PROFILE) {
     context=await chromium.launchPersistentContext(process.env.K2_ENGLISH_PROFILE,{headless:true,channel:'chromium',args:['--enable-unsafe-webgpu'],viewport:{width:1280,height:720}});
   } else {
@@ -28,7 +31,10 @@ try {
     context=await browser.newContext({viewport:{width:1280,height:720}});
   }
   const page=context.pages()[0]||await context.newPage(), errors=[], log=[], resources=new Set();
-  page.on('pageerror',e=>errors.push(e.message));
+  page.on('pageerror',e=>{ errors.push(e.message); if(process.env.K2_TEST_DEBUG) console.error('[pageerror]',e.message); });
+  if(process.env.K2_TEST_DEBUG) page.on('console',m=>{if(m.type()==='error') console.error('[browser]',m.text());});
+  if(process.env.K2_TEST_DEBUG) page.on('requestfailed',r=>console.error('[request failed]',new URL(r.url()).pathname,r.failure()?.errorText));
+  if(process.env.K2_TEST_DEBUG) page.on('response',r=>{if(r.status()>=400)console.error('[HTTP]',r.status(),new URL(r.url()).pathname);});
   page.on('console',m=>{const s=m.text();if(s.startsWith('[lang]')||s.startsWith('[lazy-result]')||s.includes('[overlay]')||(s.includes('[file]')&&s.includes('SAVE')))log.push(s);if(s.startsWith('[lazy-result] '))try{resources.add(JSON.parse(s.slice('[lazy-result] '.length)).path);}catch{}});
   const waitFrame=async predicate=>{
     const deadline=Date.now()+90000;let result;
@@ -46,7 +52,9 @@ try {
     }while(Date.now()<deadline);
     throw Error('Timed out waiting for game frame '+JSON.stringify(result));
   };
-  await page.goto(`http://127.0.0.1:${server.address().port}/?lazy=1&lang=en&log&mute`,{waitUntil:'domcontentloaded'});
+  const url = new URL(externalUrl || `http://127.0.0.1:${server.address().port}/`);
+  for (const [key, value] of [['lazy','1'], ['lang','en'], ['log',''], ['mute','']]) url.searchParams.set(key, value);
+  await page.goto(url.href,{waitUntil:'domcontentloaded'});
   await page.waitForFunction(()=>window.langInfo?.lang==='en'&&window.langInfo?.overlay==='ready'&&!document.querySelector('#play').disabled,null,{timeout:180000});
   assert.equal(await page.evaluate(()=>window.langInfo.installed),'installed');
   await page.locator('#play').click();
@@ -111,5 +119,5 @@ try {
 } finally {
   await context?.close();
   await browser?.close();
-  await new Promise(ok=>server.close(ok));
+  if (server.listening) await new Promise(ok=>server.close(ok));
 }

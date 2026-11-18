@@ -65,7 +65,22 @@ async function serve(request, env, url) {
   let key = decodeURIComponent(url.pathname.slice(1));
   if (key === '' || key.endsWith('/')) key += 'index.html';
   if (key === 'robots.txt') return respond('User-agent: *\nDisallow: /\n', 200, { 'Content-Type': TYPES.txt });
-  const obj = await env.BUCKET.get(key, { range: request.headers, onlyIf: request.headers });
+  const rangeHeader = request.headers.get('Range');
+  // The loader uses single-byte ranges. Ignore unsupported/malformed Range
+  // headers instead of claiming a full response is a partial response.
+  const match = rangeHeader && /^bytes=(\d*)-(\d*)$/i.exec(rangeHeader);
+  const range = match && (match[1] || match[2]) ? match : null;
+  const rangeHeaders = new Headers(request.headers);
+  if (!range) rangeHeaders.delete('Range');
+  let obj;
+  try { obj = await env.BUCKET.get(key, { range: rangeHeaders, onlyIf: request.headers }); }
+  catch (error) {
+    // R2 may reject an unsatisfiable range before returning object metadata.
+    if (!range || !/10039|invalidrange|range not satisfiable/i.test(String(error))) throw error;
+    const head = await env.BUCKET.head(key);
+    if (!head) return respond('Not found', 404, { 'Content-Type': TYPES.txt });
+    return respond(null, 416, { 'Content-Range': `bytes */${head.size}`, 'Content-Length': '0', 'Accept-Ranges': 'bytes' });
+  }
   if (!obj) return respond('Not found', 404, { 'Content-Type': TYPES.txt });
   const headers = new Headers(ISOLATION);
   obj.writeHttpMetadata(headers);
@@ -85,9 +100,32 @@ async function serve(request, env, url) {
     headers.delete('Content-Encoding');
     headers.set('Cache-Control', headers.get('Cache-Control') + ', no-transform');
   }
-  if (!('body' in obj)) return new Response(null, { status: 304, headers });   // onlyIf (If-None-Match) matched
+  if (!('body' in obj)) {
+    // Failed If-Match/If-Unmodified-Since are precondition failures, whereas
+    // GET/HEAD If-None-Match and If-Modified-Since can return not modified.
+    const ifMatch = request.headers.get('If-Match');
+    const ifUnmodified = request.headers.get('If-Unmodified-Since');
+    const matched = ifMatch && (ifMatch.trim() === '*' || ifMatch.split(',').some(tag => tag.trim() === obj.httpEtag));
+    const cutoff = ifUnmodified ? Date.parse(ifUnmodified) : NaN;
+    const uploaded = obj.uploaded ? Math.floor(new Date(obj.uploaded).getTime() / 1000) * 1000 : NaN;
+    const precondition = (ifMatch && !matched) || (!ifMatch && Number.isFinite(cutoff) && uploaded > cutoff);
+    return new Response(null, { status: precondition ? 412 : 304, headers });
+  }
+  if (range) {
+    const start = range[1] === '' ? null : Number(range[1]);
+    const end = range[2] === '' ? null : Number(range[2]);
+    const invalid = (start !== null && (!Number.isSafeInteger(start) || start >= obj.size)) ||
+      (end !== null && !Number.isSafeInteger(end)) ||
+      (start === null && (!end || obj.size === 0)) || (start !== null && end !== null && end < start);
+    if (invalid) {
+      await obj.body.cancel();
+      headers.set('Content-Range', `bytes */${obj.size}`);
+      headers.set('Content-Length', '0');
+      return new Response(null, { status: 416, headers });
+    }
+  }
   let status = 200;
-  if (obj.range && request.headers.has('Range')) {
+  if (obj.range && range) {
     const offset = obj.range.offset ?? (obj.size - obj.range.suffix);
     const length = obj.range.length ?? (obj.size - offset);
     headers.set('Content-Range', `bytes ${offset}-${offset + length - 1}/${obj.size}`);

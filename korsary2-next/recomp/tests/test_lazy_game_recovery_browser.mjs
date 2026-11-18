@@ -1,6 +1,7 @@
 // Optional full-game integration test. K2_LAZY_SITE must point to a prepared
-// experimental site, not the normal distribution. No existing browser profile
-// or save is opened; the ephemeral context does not create a game save.
+// site. K2_LAZY_TEST_URL may point to an isolated local Worker with a disposable
+// bucket; when set, Playwright injects failures before forwarding requests.
+// No existing browser profile or save is opened; the context is ephemeral.
 import assert from 'node:assert/strict';
 import http from 'node:http';
 import { access } from 'node:fs/promises';
@@ -33,10 +34,21 @@ const server = http.createServer((req, res) => {
 });
 let browser;
 try {
-  await new Promise((ok, fail) => { server.once('error', fail); server.listen(0, '127.0.0.1', ok); });
+  const externalUrl = process.env.K2_LAZY_TEST_URL;
+  if (!externalUrl) await new Promise((ok, fail) => { server.once('error', fail); server.listen(0, '127.0.0.1', ok); });
   browser = await chromium.launch({ headless: true, channel: 'chromium', args: ['--enable-unsafe-webgpu'] });
   const context = await browser.newContext({ viewport: { width: 1280, height: 720 } });
   const page = await context.newPage();
+  if (externalUrl) await page.route('**/*', async route => {
+    const request = route.request(), url = new URL(request.url());
+    const range = request.headers().range;
+    const key = range && url.pathname.startsWith('/game/_k2pack/') ? `${url.pathname} ${range}` : null;
+    if (armed && key && (!failedKey || failedKey === key)) {
+      failedKey ||= key; failureCount++;
+      return route.fulfill({ status: 503, contentType: 'text/plain', body: 'Injected temporary test failure' });
+    }
+    return route.continue();
+  });
   // The engine renders to WebGPU rather than accessible DOM nodes. Inspect a
   // downsampled screenshot in memory: the Russian main menu is predominantly
   // blue, whereas the opening cabin is predominantly brown. Ignore dark pixels
@@ -75,7 +87,9 @@ try {
     if (!line.startsWith('[lazy-result] ')) return;
     try { resources.add(JSON.parse(line.slice('[lazy-result] '.length)).path); } catch {}
   });
-  await page.goto(`http://127.0.0.1:${server.address().port}/?log&mute`, { waitUntil: 'domcontentloaded' });
+  const url = new URL(externalUrl || `http://127.0.0.1:${server.address().port}/`);
+  url.searchParams.set('log', ''); url.searchParams.set('mute', '');
+  await page.goto(url.href, { waitUntil: 'domcontentloaded' });
   await page.locator('#play').waitFor({ state: 'visible', timeout: 120000 });
   armed = true;
   await page.locator('#play').click();
@@ -98,5 +112,5 @@ try {
   console.log(`Full-game recovery: PASS (${failureCount} HTTP 503 responses; ${stats.installed} resources installed)`);
 } finally {
   await browser?.close();
-  await new Promise(resolveClose => server.close(resolveClose));
+  if (server.listening) await new Promise(resolveClose => server.close(resolveClose));
 }

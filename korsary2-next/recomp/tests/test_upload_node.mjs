@@ -8,7 +8,7 @@ import { run, call, remoteInfo, remoteSize, decide, manifestProblems } from '../
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 
 class FakeBucket {
-  constructor(old = false) { this.objects = new Map(); this.puts = []; this.parts = new Map(); this.old = old; this.corrupt = false; }
+  constructor(old = false) { this.objects = new Map(); this.puts = []; this.parts = new Map(); this.aborts = []; this.old = old; this.corrupt = false; }
   put(key, data, digest = null) { this.objects.set(key, {size: data.length, sha256: digest}); }
   async transport(base, token, key, {method='GET', query={}, body, headers={}}={}) {
     const digest = headers['X-Content-SHA256'] ?? null;
@@ -20,6 +20,7 @@ class FakeBucket {
     if (query.mpu === 'create') { this.parts.set('id', {key, lengths: [], digest}); return {uploadId:'id'}; }
     if (query.uploadId) {
       const object = this.parts.get(query.uploadId);
+      if (query.abort) { this.aborts.push(object.key); this.parts.delete(query.uploadId); return {aborted:true}; }
       if (query.part) { object.lengths.push(body.length); return {partNumber: query.part, etag: 'e'}; }
       const size = object.lengths.reduce((a,b)=>a+b,0), stored = this.old ? null : object.digest;
       this.puts.push([key,size,digest]); this.objects.set(key,{size,sha256:stored});
@@ -115,6 +116,7 @@ test('multipart retries transient errors and fails after four unsuccessful attem
  const alwaysFail=async (...args)=>{if(args[3]?.query?.part)throw new Error('offline');return orig(...args);};
  await write('game/big',Buffer.alloc(11000,4));
  await assert.rejects(upload({singleMax:4096,partSize:4096,transport:alwaysFail}),/offline/);
+ assert.deepEqual(bucket.aborts,['game/big']);
 });
 
 test('real HTTP transport sends token and uploads objects before the manifest',async t=>{
@@ -140,4 +142,27 @@ test('decision table handles all metadata combinations and HTTP failures propaga
  ];
  for(const [info,size,local,trust,expected] of cases)assert.equal(decide(info,size,local,trust)[0],expected);
  await assert.rejects(remoteInfo('u','t','game/x',async()=>{const e=new Error('HTTP 500');e.status=500;throw e;}),/500/);
+});
+
+test('rejects save directories and invalid manifests before contacting the Worker', async t => {
+  const { root, write, upload } = await fixture(t);
+  let calls = 0;
+  const noNetwork = async () => { calls++; throw new Error('unexpected network request'); };
+  await write('game/SAVE/test-slot', 'private save');
+  await assert.rejects(upload({ transport: noNetwork }), /protected save directory/);
+  assert.equal(calls, 0);
+  assert.equal(await fs.readFile(path.join(root, 'game/SAVE/test-slot'), 'utf8'), 'private save');
+  await fs.rm(path.join(root, 'game/SAVE'), { recursive: true }); // fixture only
+  for (const bad of [
+    '{', '{}', JSON.stringify({ files: [{ path: '../secret' }] }),
+    JSON.stringify({ files: [{ path: 'x', pack: 4 }], packs: [] }),
+    JSON.stringify({ files: [{ path: 'x', enc: 'unknown' }] }),
+  ]) {
+    await write('game/manifest.json', bad);
+    await assert.rejects(upload({ transport: noNetwork }), /nothing was uploaded/);
+    assert.equal(calls, 0);
+  }
+  await fs.rm(path.join(root, 'game/manifest.json'));
+  await assert.rejects(upload({ transport: noNetwork }), /missing game\/manifest.json/);
+  assert.equal(calls, 0);
 });

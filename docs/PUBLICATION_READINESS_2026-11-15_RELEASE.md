@@ -1,6 +1,6 @@
 # Project status
 
-Last reviewed: 17 November 2026. This is a short record of the current build's
+Last reviewed: 18 November 2026. This is a short record of the current build's
 coverage and remaining issues, not a guarantee that every game situation works.
 
 ## Current build
@@ -65,8 +65,18 @@ coverage and remaining issues, not a guarantee that every game situation works.
   a real iPhone and Safari have not been tested.
 - The supplied game data lacks two voice files reported by the engine log;
   their audible effect has not been assessed.
-- Hosting tests, extended play and listening to audio were outside the agreed
-  scope. The ready build has not been verified on a public deployment.
+- **Hosting:** the R2 Worker and a disposable local R2 emulator received
+  the complete distribution (458 files, about 1.40 GB). An isolated browser
+  installed the English layer, loaded the cabin on demand, created a save and
+  loaded it after restart. Another run recovered after four injected HTTP 503
+  responses. A second Worker serves the game through Cloudflare Static Assets
+  on the Free plan without R2. On the public site, ranges were compared with
+  the original files and an isolated Chromium session loaded the opening cabin,
+  created a save and loaded it after restarting. A separate Russian-language
+  browser run recovered from four injected HTTP 503 responses. Static range
+  responses read the full asset inside the Worker, so heavy concurrent use
+  remains untested.
+  Extended play and listening to audio were not performed.
 
 Publication readiness still needs physical mouse and target-browser checks.
 See the [hosting guide](hosting.md) for deployment requirements and the

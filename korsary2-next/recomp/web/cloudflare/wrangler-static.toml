@@ -1,0 +1,11 @@
+# Free Workers Static Assets variant; prepare cloudflare-static/ first.
+name = "corsairs-2-streaming"
+main = "static-worker.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[assets]
+directory = "../../../../cloudflare-static"
+binding = "ASSETS"
+run_worker_first = ["/game/_k2pack/*", "/game-en/_k2pack/*", "/videos/*"]
+not_found_handling = "none"

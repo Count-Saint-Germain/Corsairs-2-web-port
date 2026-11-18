@@ -54,9 +54,10 @@ export async function uploadFile(base, token, key, file, sha256 = null, { transp
   const { size } = await fsp.stat(file);
   const headers = sha256 ? { 'X-Content-SHA256': sha256 } : {};
   if (size <= singleMax) return transport(base, token, key, { method: 'PUT', body: await fsp.readFile(file), headers });
-  const { uploadId } = await transport(base, token, key, { method: 'POST', query: { mpu: 'create' }, headers });
   const parts = [], handle = await fsp.open(file, 'r');
+  let uploadId;
   try {
+    ({ uploadId } = await transport(base, token, key, { method: 'POST', query: { mpu: 'create' }, headers }));
     let offset = 0, n = 0;
     while (offset < size) {
       const buf = Buffer.alloc(Math.min(partSize, size - offset));
@@ -76,8 +77,15 @@ export async function uploadFile(base, token, key, file, sha256 = null, { transp
       parts.push(answer); offset += filled;
       out(`    part ${n} (${(offset / 1e6).toFixed(0)}/${(size / 1e6).toFixed(0)} MB)`);
     }
+    return await transport(base, token, key, { method: 'POST', query: { uploadId, complete: '1' }, body: JSON.stringify(parts), headers });
+  } catch (error) {
+    // An abandoned multipart upload occupies R2 storage until it is aborted.
+    if (uploadId) {
+      try { await transport(base, token, key, { method: 'POST', query: { uploadId, abort: '1' } }); }
+      catch { out(`    could not abort multipart upload for ${key}; R2 will expire it`); }
+    }
+    throw error;
   } finally { await handle.close(); }
-  return transport(base, token, key, { method: 'POST', query: { uploadId, complete: '1' }, body: JSON.stringify(parts), headers });
 }
 
 export async function collect(dist) {
@@ -85,6 +93,9 @@ export async function collect(dist) {
   async function walk(dir) {
     for (const entry of await fsp.readdir(dir, { withFileTypes: true })) {
       const full = path.join(dir, entry.name);
+      // Never publish a player's data if a distribution was prepared incorrectly.
+      if (entry.isDirectory() && /^(?:SAVE|SAVE_META|SAVE_TX)$/i.test(entry.name))
+        throw new Error(`distribution contains a protected save directory: ${full}; nothing was uploaded`);
       if (entry.isSymbolicLink()) throw new Error(`distribution contains a symlink: ${full}`);
       if (entry.isDirectory()) await walk(full);
       else if (entry.isFile()) {
@@ -100,23 +111,31 @@ export async function collect(dist) {
 
 export async function manifestProblems(dist, keys) {
   const available = new Set(keys), missing = [];
+  const validPath = value => typeof value === 'string' && value.length > 0 &&
+    !value.includes('\\') && !value.includes('\0') &&
+    value.split('/').every(part => part && part !== '.' && part !== '..');
   for (const tree of TREES) {
-    let wanted;
-    try {
-      const manifest = JSON.parse(await fsp.readFile(path.join(dist, tree, 'manifest.json'), 'utf8'));
-      if (!Array.isArray(manifest.files) || (manifest.packs && !Array.isArray(manifest.packs))) continue;
-      wanted = manifest.files.map(e => {
-        if (e.pack != null) {
-          if (!Number.isInteger(e.pack) || e.pack < 0 || !manifest.packs?.[e.pack] || typeof manifest.packs[e.pack].path !== 'string') throw new Error('invalid pack index');
-          return tree + manifest.packs[e.pack].path;
-        }
-        if (typeof e.path !== 'string') throw new Error('invalid path');
-        return tree + e.path + ({ gzip: '.gz', br: '.br' }[e.enc] ?? '');
-      });
-    } catch { continue; }
-    for (const key of new Set(wanted)) if (!available.has(key)) missing.push(key);
+    let manifest;
+    try { manifest = JSON.parse(await fsp.readFile(path.join(dist, tree, 'manifest.json'), 'utf8')); }
+    catch (error) {
+      if (tree !== 'game/' && error.code === 'ENOENT' && !keys.some(key => key.startsWith(tree))) continue;
+      throw new Error(`invalid or missing ${tree}manifest.json; nothing was uploaded`);
+    }
+    if (!Array.isArray(manifest.files) || (manifest.packs !== undefined && !Array.isArray(manifest.packs)))
+      throw new Error(`invalid ${tree}manifest.json; nothing was uploaded`);
+    for (const entry of manifest.files) {
+      if (!entry || !validPath(entry.path) || (entry.enc != null && !['gzip', 'br'].includes(entry.enc)))
+        throw new Error(`invalid file in ${tree}manifest.json; nothing was uploaded`);
+      let key;
+      if (entry.pack != null) {
+        if (!Number.isInteger(entry.pack) || entry.pack < 0 || !validPath(manifest.packs?.[entry.pack]?.path))
+          throw new Error(`invalid pack in ${tree}manifest.json; nothing was uploaded`);
+        key = tree + manifest.packs[entry.pack].path;
+      } else key = tree + entry.path + ({ gzip: '.gz', br: '.br' }[entry.enc] ?? '');
+      if (!available.has(key)) missing.push(key);
+    }
   }
-  return missing;
+  return [...new Set(missing)];
 }
 
 export async function run(base, token, dist, { trustSize = false, dryRun = false, out = console.log, transport = call, partSize = PART, singleMax = SINGLE_MAX } = {}) {

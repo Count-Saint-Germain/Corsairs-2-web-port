@@ -4,6 +4,10 @@ English | [Русский](README.ru.md) | [Українська](README.uk.md)
 
 ![Corsairs 2 gameplay at the harbor](screenshot.jpg)
 
+**[Play in your browser](https://corsairs-2-streaming.web-port.workers.dev/)**
+
+Saves are stored in your browser for each site address. Use the launcher's backup and import controls to move saves from a local installation.
+
 A browser port of Corsairs 2 (Sea Dogs 2 / Pirates of the Caribbean 1.03, the 1C release). The game's x86 executables are statically translated into C and compiled to WebAssembly. The port's compatibility layer implements the required Windows, Direct3D 8, audio, and input interfaces; the browser renders graphics using WebGPU.
 
 The repository contains a ready-to-run build with game data, the port's source code and tools, and generated C code for rebuilding it. The original game engine source code is not included. Game data and the English language layer can be restored from the distribution for further development without a separate copy of the original repack.
@@ -155,4 +159,4 @@ The `korsary2-work/game/` working copy, local SDK, build caches, browser profile
 
 To publish, host the contents of `distribution/` on a static HTTPS host with correct MIME types, Range support, and COOP/COEP/CORP headers. The `_headers` file contains rules for compatible platforms; other hosts require separate configuration. Before opening the site to users, check actual HTTP responses, `crossOriginIsolated`, installation, and saving/loading. See the [hosting guide](docs/hosting.md).
 
-The streaming build has undergone short local game, save/load and recovery checks; the touch panel was tested using phone emulation in a browser. A real iPhone and Safari have not yet been tested. Long playthroughs, listening to audio, and hosting checks were outside the requested scope. See the [readiness report](docs/PUBLICATION_READINESS_2026-11-15_RELEASE.md) for the precise coverage and remaining limitations.
+The streaming build has undergone short game, save/load and recovery checks; the touch panel was tested using phone emulation in a browser. A real iPhone and Safari have not yet been tested. Long playthroughs and listening to audio were outside the requested scope. The public site uses Cloudflare Workers Static Assets; the optional R2 configuration was checked locally. See the [readiness report](docs/PUBLICATION_READINESS_2026-11-15_RELEASE.md) for the precise coverage and remaining limitations.

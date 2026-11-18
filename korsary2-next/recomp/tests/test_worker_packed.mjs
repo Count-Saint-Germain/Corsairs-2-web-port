@@ -100,4 +100,31 @@ const get = (path, headers = {}, method = 'GET') => worker.fetch(new Request('ht
   assert.equal(w.headers.get('Cache-Control'), 'no-cache');
   console.log('ok - .br: непрозрачные байты, без Content-Encoding, no-transform, Range; k2br.wasm отдаётся как application/wasm');
 }
+
+{
+  const name = '/game/_k2pack/0000-0123456789ab.pack';
+  for (const value of ['bytes=5000-', 'bytes=5-2', 'bytes=-0']) {
+    const r = await get(name, { Range: value });
+    assert.equal(r.status, 416, value);
+    assert.equal(r.headers.get('Content-Range'), `bytes */${pack.length}`);
+    assert.equal(r.headers.get('Cross-Origin-Opener-Policy'), 'same-origin');
+  }
+  const malformed = await get(name, { Range: 'bytes=bad' });
+  assert.equal(malformed.status, 200);
+  assert.equal(malformed.headers.get('Content-Range'), null);
+  assert.deepEqual(Buffer.from(await malformed.arrayBuffer()), pack);
+  console.log('ok - unsatisfiable ranges return 416; malformed ranges receive the full object');
+}
+{
+  const conditional = { ALLOW_PUBLIC: '1', BUCKET: { async get() {
+    return { size: 5, httpEtag: '"current"', writeHttpMetadata() {} };
+  } } };
+  const notModified = await worker.fetch(new Request('https://h.example/x', { headers: { 'If-None-Match': '"current"' } }), conditional);
+  assert.equal(notModified.status, 304);
+  const precondition = await worker.fetch(new Request('https://h.example/x', { headers: { 'If-Match': '"wrong"' } }), conditional);
+  assert.equal(precondition.status, 412);
+  const matchedThenNotModified = await worker.fetch(new Request('https://h.example/x', { headers: { 'If-Match': '"current"', 'If-None-Match': '"current"' } }), conditional);
+  assert.equal(matchedThenNotModified.status, 304);
+  console.log('ok - conditional requests distinguish failed If-Match from not modified');
+}
 console.log('worker (game/*.gz, game/*.br, game/_k2pack/*.pack): PASS');
