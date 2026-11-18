@@ -9,8 +9,10 @@ static uint8_t memory[8192];
 uint8_t *g_mem = memory;
 static CPU cpu;
 static int netplay;
+static double now = 100.0;
 
 int netplay_on(void) { return netplay; }
+double host_seconds(void) { return now; }
 
 enum { STACK = 0x1000, POINT = 0x1200, INTERFACE = 0x1400 };
 
@@ -59,8 +61,14 @@ int main(void) {
     W32(INTERFACE + 0xbc, (uint32_t)-16);
     W32(INTERFACE + 0xc0, (uint32_t)-16);
 
+    assert(!port_menu_mouse_active());
     input_mouse_position(0.25f, 0.75f);
     port_menu_mouse_control(&cpu, STACK + 0x20);
+    assert(port_menu_mouse_active());
+    now += 0.7;
+    assert(!port_menu_mouse_active());
+    port_menu_mouse_control(&cpu, STACK + 0x20);
+    assert(port_menu_mouse_active());
     assert(RF32(STACK + 0x24) == -164.25f && RF32(STACK + 0x18) == -150.25f);
     assert(R32(STACK + 0x28) == 1 && R32(STACK + 0x1c) == 1);
 

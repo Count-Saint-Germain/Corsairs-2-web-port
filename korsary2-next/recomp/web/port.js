@@ -765,7 +765,9 @@ async function hookInput(M, net, consumeTouchPress = () => false) {
   };
   let pulseTimer;
   pulseEscape = () => { clearTimeout(pulseTimer); setKey(41, 'fallback-button', true); pulseTimer = setTimeout(() => setKey(41, 'fallback-button', false), 100); };
+  let lastEscapeAt = -Infinity;
   const key = (down) => (e) => {
+    if (down && e.code === 'Escape') lastEscapeAt = Date.now();
     const u = down ? HID[gameKeyCode(e)] : heldKeys.get(e.code);
     if (u === undefined || e.repeat) return;
     // Escape remains available to the browser when Keyboard Lock is absent or denied.
@@ -793,17 +795,45 @@ async function hookInput(M, net, consumeTouchPress = () => false) {
   // Esc can release Pointer Lock without blurring the page. A mouseup outside
   // the canvas may then never arrive, leaving a button held in the guest.
   let hadPointerLock = document.pointerLockElement === canvas;
+  let windowCapturePending = false, windowCapture = false, deliberateUnlock = false;
+  const fullscreen = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+  const menuActive = () => !!M._port_menu_mouse_active?.();
+  const loading = () => canvas.classList?.contains('loading-screen');
+  const unlockForMenu = () => {
+    if (windowCapture && document.pointerLockElement === canvas && !fullscreen() && (menuActive() || loading())) {
+      deliberateUnlock = true;
+      try { document.exitPointerLock?.(); } catch { deliberateUnlock = false; }
+    }
+  };
+  document.addEventListener('pointerlockerror', () => { windowCapturePending = false; });
   document.addEventListener('pointerlockchange', () => {
     const hasPointerLock = document.pointerLockElement === canvas;
     if (hadPointerLock && !hasPointerLock) {
       clearMousePosition();
       releaseButtons();
+      // Browsers may consume Escape to release pointer lock before delivering
+      // a key event. In a focused window, forward that Escape once to the game.
+      if (windowCapture && !deliberateUnlock && !fullscreen() && !document.hidden && document.hasFocus?.() !== false) {
+        const releasedAt = Date.now();
+        setTimeout(() => {
+          if (!document.hidden && document.hasFocus?.() !== false && document.pointerLockElement !== canvas &&
+              !menuActive() && lastEscapeAt < releasedAt - 100) pulseEscape();
+        }, 80);
+      }
+      windowCapture = false;
+      deliberateUnlock = false;
     }
     hadPointerLock = hasPointerLock;
-    // A pending fullscreen capture may resolve after fullscreen has ended.
-    if (hasPointerLock && !(document.fullscreenElement || document.webkitFullscreenElement)) {
-      try { document.exitPointerLock?.(); } catch {}
+    if (hasPointerLock && !fullscreen()) {
+      if (windowCapturePending && !menuActive() && !loading()) windowCapture = true;
+      else {
+        // A fullscreen capture can resolve after fullscreen has ended; a menu
+        // can likewise open while a windowed capture request is pending.
+        deliberateUnlock = true;
+        try { document.exitPointerLock?.(); } catch { deliberateUnlock = false; }
+      }
     }
+    windowCapturePending = false;
   });
   // Match the renderer's centered 4:3 surface within the drawing buffer.
   // Convert CSS coordinates through the buffer only to locate its bars.
@@ -829,10 +859,14 @@ async function hookInput(M, net, consumeTouchPress = () => false) {
     const b = browserButtons[e.button];
     if (b === undefined || heldButtons.has(b)) return;
     setMousePosition(e, canvas.getBoundingClientRect());
-    // Fullscreen can capture the pointer so moving the camera has no edge.
-    if ((document.fullscreenElement || document.webkitFullscreenElement) && document.pointerLockElement !== canvas) {
-      try { canvas.requestPointerLock?.()?.catch?.(() => {}); }
-      catch { /* The same click still reaches the game if capture fails. */ }
+    // Capture in the 3D scene, but leave the system pointer free in menus.
+    // The guest indicator is required in a window; older builds retain their
+    // previous behavior rather than accidentally capturing a menu click.
+    const canCaptureWindow = typeof M._port_menu_mouse_active === 'function' && !menuActive() && !loading() && !e.sourceCapabilities?.firesTouchEvents;
+    if ((fullscreen() || canCaptureWindow) && document.pointerLockElement !== canvas && typeof canvas.requestPointerLock === 'function') {
+      windowCapturePending = !fullscreen();
+      try { canvas.requestPointerLock?.()?.catch?.(() => { windowCapturePending = false; }); }
+      catch { windowCapturePending = false; /* The click still reaches the game. */ }
     }
     heldButtons.add(b);
     sendButton(b, 1);
@@ -873,7 +907,7 @@ async function hookInput(M, net, consumeTouchPress = () => false) {
     if (dx || dy) M._input_mouse_move(dx, dy);
   });
   canvas.addEventListener('contextmenu', (e) => e.preventDefault());
-  return touchControls;
+  return { releaseAll: () => touchControls?.releaseAll(), syncPointerLock: unlockForMenu };
 }
 
 // Gamepads (Gamepad API, polled every animation frame). Browsers only expose a pad after a button press
@@ -1301,6 +1335,7 @@ async function run(session) {
         if (!videoBlocksInput()) poll(M);
         pollVideo();
         M._port_gpu_pump(1);
+        touchControls?.syncPointerLock?.();
         // The loading picture has no guest cursor and can stay on screen while
         // the game worker waits for resources. Use the browser's cursor there.
         const loading = !!M._port_loading_screen_active?.();

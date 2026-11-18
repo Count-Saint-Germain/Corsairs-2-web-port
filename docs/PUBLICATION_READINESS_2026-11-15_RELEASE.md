@@ -32,7 +32,10 @@ coverage and remaining issues, not a guarantee that every game situation works.
   preserves motion that arrives during a game cursor recenter, and the browser
   releases held input on fullscreen and focus transitions. Automated Brave
   opened Settings and Save from the pause menu and exercised the F2 interface.
-  The Chromium regression selected Settings by its window coordinates.
+  In windowed gameplay, a scene click now captures the pointer so the camera
+  can turn past the window edge; menus release it. Chromium and Brave checks
+  covered capture, Escape, menu release and selecting Settings by its window
+  coordinates. Physical mouse testing is still needed.
 - **Loading:** in isolated macOS Retina windows, Brave and Vivaldi submitted
   about 120 game frames/s at the start menu and 11–12 frames/s while loading the
   opening cabin. The browser animation callback kept running at about 120 Hz.

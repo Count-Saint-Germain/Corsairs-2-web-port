@@ -6,6 +6,8 @@ English | [Русский](README.ru.md) | [Українська](README.uk.md)
 
 **[Play in your browser](https://corsairs-2-streaming.web-port.workers.dev/)**
 
+The site is a test deployment for demonstration purposes. It has limitations and may be taken offline at any time.
+
 Saves are stored in your browser for each site address. Use the launcher's backup and import controls to move saves from a local installation.
 
 A browser port of Corsairs 2 (Sea Dogs 2 / Pirates of the Caribbean 1.03, the 1C release). The game's x86 executables are statically translated into C and compiled to WebAssembly. The port's compatibility layer implements the required Windows, Direct3D 8, audio, and input interfaces; the browser renders graphics using WebGPU.
@@ -80,7 +82,7 @@ New installations start with effects at 10% and dialogue at 90%. Existing player
 
 By default the game fills the browser viewport by stretching the original 4:3 image horizontally. Move the mouse to reveal the **4:3** button in the bottom-right corner to restore undistorted proportions (with side bars on a wide screen); use the same button to fill the viewport again. The choice is saved in the browser. The touch layout keeps its 4:3 game area.
 
-Use **Alt+Enter** (Option+Enter on a Mac) or the corner button for native fullscreen. While Keyboard Lock holds Esc, one press reaches the game and two presses within 600 ms leave fullscreen. Holding Esc or using Alt+Enter also leaves fullscreen. If Keyboard Lock is unavailable or denied, the browser handles the fullscreen Esc shortcut. When the pointer is free, menu clicks follow its position and loading screens show the browser’s progress cursor. The camera uses relative movement. In a window it stops tracking outside the game area. Fullscreen can capture the pointer on click.
+Use **Alt+Enter** (Option+Enter on a Mac) or the corner button for native fullscreen. While Keyboard Lock holds Esc, one press reaches the game and two presses within 600 ms leave fullscreen. Holding Esc or using Alt+Enter also leaves fullscreen. If Keyboard Lock is unavailable or denied, the browser handles the fullscreen Esc shortcut. Click in the 3D scene to capture the pointer for unrestricted camera movement; it is released in menus. When free, the pointer controls menu selection and shows the browser’s progress cursor on loading screens.
 
 In game fullscreen, the **grave/tilde key** also opens or closes the game menu. Press it without Shift, on the key usually to the left of 1. If the browser reserves Esc, an **Esc** button also appears near the bottom-right corner.
 

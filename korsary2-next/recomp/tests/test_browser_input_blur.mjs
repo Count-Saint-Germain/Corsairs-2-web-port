@@ -23,6 +23,7 @@ canvas.height = 1080;
 const fallback = new Target();
 const timers = new Map();
 let nextTimer = 0;
+let fakeNow = 0;
 const setFakeTimeout = fn => { const id = ++nextTimer; timers.set(id, fn); return id; };
 const clearFakeTimeout = id => timers.delete(id);
 const events = [];
@@ -33,9 +34,9 @@ const module = {
 };
 const stage = {classList: {contains: () => true}};
 const hookInput = runInNewContext(`(${source.slice(start, end)})`, {
-  window: win, document: doc, $: id => id === 'esc-fallback' ? fallback : id === 'stage' ? stage : canvas, params: new URLSearchParams(), HID: { KeyF: 9, KeyW: 26, ShiftLeft: 225, Escape: 41, Backquote: 53, F10: 67 }, noteGameInput: () => {}, setTimeout: setFakeTimeout, clearTimeout: clearFakeTimeout,
+  window: win, document: doc, $: id => id === 'esc-fallback' ? fallback : id === 'stage' ? stage : canvas, params: new URLSearchParams(), HID: { KeyF: 9, KeyW: 26, ShiftLeft: 225, Escape: 41, Backquote: 53, F10: 67 }, noteGameInput: () => {}, setTimeout: setFakeTimeout, clearTimeout: clearFakeTimeout, Date: {now: () => fakeNow},
 });
-await hookInput(module, false);
+const controls = await hookInput(module, false);
 let lockRequests = 0;
 canvas.requestPointerLock = () => { lockRequests++; };
 canvas.emit('mousedown', { button: 0 }); win.emit('mouseup', { button: 0 });
@@ -167,6 +168,38 @@ doc.pointerLockElement = canvas;
 canvas.emit('mousemove', {clientX: 480, clientY: 270, movementX: 9, movementY: 2, buttons: 0});
 assert.deepEqual(events.slice(-2), [['position', -1, -1], ['move', 9, 2]]);
 doc.pointerLockElement = null;
+
+// A modern build can capture the pointer in a window only while the guest is
+// in the 3D scene. Menus release it and retain absolute cursor positioning.
+let menuActive = 0, sceneLocks = 0;
+module._port_menu_mouse_active = () => menuActive;
+doc.fullscreenElement = null; doc.hidden = false;
+canvas.requestPointerLock = () => { sceneLocks++; doc.pointerLockElement = canvas; doc.emit('pointerlockchange'); };
+doc.exitPointerLock = () => { doc.pointerLockElement = null; doc.emit('pointerlockchange'); };
+canvas.emit('mousedown', {button: 0, clientX: 480, clientY: 270}); win.emit('mouseup', {button: 0});
+assert.equal(sceneLocks, 1, 'a scene click captures the pointer');
+assert.equal(doc.pointerLockElement, canvas);
+menuActive = 1; controls.syncPointerLock();
+assert.equal(doc.pointerLockElement, null, 'opening a menu releases windowed capture');
+assert.equal(timers.size, 0, 'a menu-triggered unlock must not synthesize Escape');
+canvas.emit('mousedown', {button: 0, clientX: 480, clientY: 270}); win.emit('mouseup', {button: 0});
+assert.equal(sceneLocks, 1, 'menu clicks leave the pointer free');
+
+// When the browser consumes Escape to unlock, the game receives one Escape.
+menuActive = 0; fakeNow = 1000; timers.clear(); events.length = 0;
+canvas.emit('mousedown', {button: 0, clientX: 480, clientY: 270}); win.emit('mouseup', {button: 0});
+doc.exitPointerLock();
+let pendingTimers = [...timers.values()]; timers.clear(); for (const fn of pendingTimers) fn();
+assert.deepEqual(events.slice(-1), [['key', 41, 1]], 'consumed Escape opens the game menu');
+pendingTimers = [...timers.values()]; timers.clear(); for (const fn of pendingTimers) fn();
+assert.deepEqual(events.slice(-2), [['key', 41, 1], ['key', 41, 0]]);
+// When the browser does deliver the key, unlocking must not generate a
+// second Escape (which would immediately close the newly opened menu).
+fakeNow = 2000; events.length = 0;
+canvas.emit('mousedown', {button: 0, clientX: 480, clientY: 270}); win.emit('mouseup', {button: 0});
+win.emit('keydown', {code: 'Escape'}); doc.exitPointerLock(); win.emit('keyup', {code: 'Escape'});
+pendingTimers = [...timers.values()]; timers.clear(); for (const fn of pendingTimers) fn();
+assert.deepEqual(events.filter(([type]) => type === 'key'), [['key', 41, 1], ['key', 41, 0]]);
 
 const netWin = new Target(), netDoc = new Target(), netCanvas = new Target(), netFallback = new Target();
 netDoc.fullscreenElement = netCanvas;

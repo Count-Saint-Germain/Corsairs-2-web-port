@@ -337,8 +337,20 @@ W(SetCursorPos) {
 
 #ifndef PORT_NODE_BUILD
 static float g_menu_mouse_x = -1.f, g_menu_mouse_y = -1.f;
+static double g_menu_mouse_update_at = -1.0;
 
 int netplay_on(void);
+#ifdef __EMSCRIPTEN__
+EMSCRIPTEN_KEEPALIVE
+#endif
+int port_menu_mouse_active(void) {
+    double now = host_seconds();
+    pthread_mutex_lock(&g_cursor_lock);
+    double last = g_menu_mouse_update_at;
+    pthread_mutex_unlock(&g_cursor_lock);
+    /* Allow for slow loading frames without treating an old menu as active. */
+    return last >= 0.0 && now >= last && now - last < 0.6;
+}
 #ifdef __EMSCRIPTEN__
 EMSCRIPTEN_KEEPALIVE
 #endif
@@ -360,6 +372,7 @@ void port_menu_mouse_control(CPU *c, uint32_t result) {
         (uint64_t)c->esp + 0x2cu > GUEST_SPACE) return;
 
     pthread_mutex_lock(&g_cursor_lock);
+    g_menu_mouse_update_at = host_seconds();
     float x = g_menu_mouse_x, y = g_menu_mouse_y;
     pthread_mutex_unlock(&g_cursor_lock);
     if (!(x >= 0.f && x <= 1.f && y >= 0.f && y <= 1.f)) return;
