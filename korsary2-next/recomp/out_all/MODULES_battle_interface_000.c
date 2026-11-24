@@ -18499,7 +18499,7 @@ L_00b6d133:;
     c->ecx = (uint32_t)(R32((uint32_t)(c->esi))); /* mov ecx, dword ptr [esi] */
     W32((uint32_t)(c->esi + 0x11cu), (uint32_t)(c->eax)); /* mov dword ptr [esi + 0x11c], eax */
     { uint32_t v_ = 0x8u; PUSH32(c, v_); } /* push 8 */
-    { uint32_t v_ = 0x390u; PUSH32(c, v_); } /* push 0x390 */
+    { uint32_t v_ = 0x3a8u; PUSH32(c, v_); } /* sea HUD: 39 vertices, 24 bytes each */
     c->edx = (uint32_t)(R32((uint32_t)(c->ecx))); /* mov edx, dword ptr [ecx] */
     { uint32_t v_ = 0x104u; PUSH32(c, v_); } /* push 0x104 */
     { uint32_t t_ = R32((uint32_t)(c->edx + 0x100u)); PUSH32(c, 0x00b6d19du); call_indirect(c, t_); } /* call dword ptr [edx + 0x100] */

@@ -19,6 +19,7 @@ EXE=$(node "$P/tools/configure.mjs" --print-exe)   # also regenerates host/port_
 node "$R/translator/x86toc.mjs" --manifest "$R/data/images.json" "$R/$OUT" --all --per-file 300 $TFLAG
 # The translator regenerates every .c file; apply guest fixups before hashing.
 node "$R/translator/fix_root_aref.mjs" --manifest "$R/data/images.json" --out "$R/$OUT"
+node "$R/translator/fix_battle_compass.mjs" --manifest "$R/data/images.json" --out "$R/$OUT"
 mkdir -p "$R/build/$OBJ"
 cd "$R"
 ls $OUT/*.c | while read f; do

@@ -37,6 +37,7 @@ OUT=out_all
 cd "$R"
 [ -d "$OUT" ] || { echo "run build.sh first (it generates $OUT/)"; exit 1; }
 node "$R/translator/fix_root_aref.mjs" --manifest "$R/data/images.json" --out "$R/$OUT"
+node "$R/translator/fix_battle_compass.mjs" --manifest "$R/data/images.json" --out "$R/$OUT"
 mkdir -p "$B/obj" "$B/host" "$B/node" "$B/www"
 
 # сгенерированные объекты: клон штатного, если актуален; иначе сборка без флага диагностики

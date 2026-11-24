@@ -16,6 +16,7 @@ cd "$R"
 node "$P/tools/configure.mjs"   # host/port_config.h, web/port-config.js
 [ -d "$OUT" ] || { echo "run build.sh first (it generates $OUT/)"; exit 1; }
 node "$R/translator/fix_root_aref.mjs" --manifest "$R/data/images.json" --out "$R/$OUT"
+node "$R/translator/fix_battle_compass.mjs" --manifest "$R/data/images.json" --out "$R/$OUT"
 
 # generated code: one object per translator output file, rebuilt when the source or flags change
 ls $OUT/*.c | while read f; do
