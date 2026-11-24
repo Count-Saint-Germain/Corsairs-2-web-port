@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "gameWasmSha256": "e76dddc0888c2a758e8ef8d7c75efb5a30a36f97668c1767c197741f972f32c8",
+  "gameJsSha256": "4cf3eac9796dd918b86f54aeef865470d54d0ba820c3f78bda138f2652e7a40b",
+  "gameManifestVersion": "76201461179e",
+  "gameEnManifestVersion": "ec9e925620d4",
+  "gitCommit": "d19b873d3f530bad8df3b3b170c95eeda9d19d3c",
+  "gitDirty": true,
+  "generatedAt": "2026-11-24T07:18:38.932Z"
+}

@@ -75,6 +75,64 @@ const startFailed = (e) => {
 };
 const mb = (n) => (n / 1e6).toFixed(0);
 
+// Crash reporting (docs/defensive-lifetime-plan.md, layers 0–2): a bounded console
+// ring, runtime markers, global error hooks and the report bundle behind the crash
+// overlay. If the module fails to load the launcher works exactly as before — every
+// call below is guarded with `?.`, and hooks record without changing behavior.
+let crash = null;
+const crashReady = import('./crash-report.mjs').then((m) => {
+  crash = m.createCrashReporter();
+  crash.installGlobalHooks();
+  crash.onFatal((reason, detail) => showCrashOverlay({ fatal: true, reason, detail }));
+  crash.onWatchdog((info) => showCrashOverlay({ fatal: false, reason: 'watchdog', ...info }));
+  return crash;
+}).catch((e) => { console.warn('crash reporting unavailable:', e); return null; });
+
+// One readable dead-end per incident: never auto-reloads, never hides the cause line.
+// "Keep waiting" (watchdog variant only) re-arms a fresh watchdog window.
+let crashOverlayShown = false;
+async function showCrashOverlay({ fatal, reason, detail = '', activeMs = 0 }) {
+  if (crashOverlayShown) return;
+  crashOverlayShown = true;
+  try { if (document.pointerLockElement) document.exitPointerLock(); } catch { /* not captured */ }
+  $('crash-title').textContent = uiText(fatal ? 'Игра аварийно завершилась' : 'Игра не отвечает',
+    fatal ? 'The game has crashed' : 'The game is not responding');
+  let message = uiText(
+    'Сохранения в безопасности: они хранятся отдельно и не удаляются. Прогресс с момента последнего сохранения в игре может быть потерян.',
+    'Your saves are safe: they are stored separately and are never deleted. Progress since the last in-game save may be lost.');
+  if (reason) message += `\n${reason}${detail ? ': ' + detail : ''}`;
+  if (!fatal && activeMs) message += '\n' + uiText(
+    `Экран загрузки без прогресса: ${Math.round(activeMs / 1000)} с.`,
+    `Loading screen without progress: ${Math.round(activeMs / 1000)} s.`);
+  $('crash-message').textContent = message;
+  $('crash-download').textContent = uiText('Скачать отчёт', 'Download report');
+  $('crash-reload').textContent = uiText('Перезагрузить страницу', 'Reload the page');
+  $('crash-dismiss').textContent = uiText('Продолжить ждать', 'Keep waiting');
+  $('crash-download').onclick = async () => { const report = await crash?.saveReport(reason || 'unknown', detail); if (report) crash.downloadReport(report); };
+  $('crash-reload').onclick = () => location.reload();
+  $('crash-dismiss').onclick = () => {
+    crashOverlayShown = false;
+    $('crash-overlay').classList.add('hidden');
+    crash?.dismissWatchdog();
+  };
+  $('crash-dismiss').classList.toggle('hidden', fatal);
+  $('crash-overlay').classList.remove('hidden');
+  $('crash-reload').focus();
+  // The identity line and the stored report fill in the background: a slow fetch must
+  // not delay the buttons.
+  (async () => {
+    const id = await crash?.fetchIdentity?.();
+    $('crash-build').textContent = !id || id.error
+      ? uiText('Сборка: версия неизвестна (build/identity.json недоступен)', 'Build: version unknown (build/identity.json unavailable)')
+      : uiText('Сборка:', 'Build:') + ' ' + [
+          id.gameManifestVersion ? `manifest ${id.gameManifestVersion}` : null,
+          id.gameWasmSha256 ? `wasm ${String(id.gameWasmSha256).slice(0, 12)}` : null,
+          id.gitCommit ? `commit ${String(id.gitCommit).slice(0, 10)}${id.gitDirty ? ' (dirty)' : ''}` : null,
+        ].filter(Boolean).join(' · ');
+  })();
+  crash?.saveReport(reason || 'unknown', detail);   // pre-store, so a reload keeps the report
+}
+
 // ------------------------------------------------------------------ game files in OPFS
 
 async function targetDir(target, create) {
@@ -1197,10 +1255,18 @@ async function run(session) {
       const script = document.createElement('script');
       script.src = 'build/game.js';
       await new Promise((ok, fail) => { script.onload = ok; script.onerror = fail; document.head.appendChild(script); });
+      crash?.setRuntimeStarted(true);   // from here a wasm abort is a crash, not a startup error
+      try {
+        crash?.setVersions({
+          manifestVersion: installedManifest?.version ?? lazyPlan?.version ?? null,
+          gameEnManifestVersion: english ? (await readMarker(OVERLAY_TARGET))?.version ?? null : null,
+        });
+      } catch { /* versions stay unknown and the report says so */ }
       const M = await createPort({
         arguments: ['/opfs/' + OPFS_DIR],
-        print: (t) => console.log(t),
-        printErr: (t) => console.log(t),
+        print: (t) => { crash?.note(t); console.log(t); },
+        printErr: (t) => { crash?.note(t); console.log(t); },
+        onAbort: (what) => crash?.notifyFatal('wasm abort', what),
         preRun: [(m) => {
           if (params.has('mute')) m.ENV.PORT_NO_AUDIO = '1';
           if (params.has('log')) m.ENV.PORT_LOG = '1';
@@ -1343,10 +1409,18 @@ async function run(session) {
           loadingScreen = loading;
           canvas.classList.toggle('loading-screen', loadingScreen);
         }
+        if (!loading) crash?.progressSeen();   // a rendered frame: the game answers
         requestAnimationFrame(frame);
       };
       requestAnimationFrame(frame);
       setInterval(() => { if (!exitRequested()) M._port_gpu_pump(0); }, 1);   // readbacks mid-frame are answered without waiting for vsync
+      // Watchdog (layer 0): the loading screen staying up alone for minutes raises
+      // suspicion and opens the report card — it never reloads on its own. A visible
+      // lazy-recovery dialog is its own UI and keeps the watchdog quiet.
+      crash?.armWatchdog({
+        loadingActive: () => !!M._port_loading_screen_active?.(),
+        busy: () => !!document.querySelector('#lazy-recovery:not(.hidden)'),
+      });
       // Online, a hidden tab still has to present frames (browsers pause requestAnimationFrame there), or the
       // lockstep would freeze every other player with it.
       if (session) setInterval(() => { if (document.hidden) { poll(M); M._port_gpu_pump(1); } }, 16);
@@ -1371,6 +1445,20 @@ function brand() {
 
 async function boot() {
   brand();
+  // A report stored by the previous crashed session (crash-report.mjs keeps only the
+  // latest one): offer it before it is overwritten by a new incident.
+  crashReady.then(() => {
+    const stored = crash?.getStoredReport?.();
+    if (!stored) return;
+    $('crash-restore-text').textContent = uiText(
+      `Предыдущая сессия завершилась аварийно (${stored.at}). Отчёт сохранён в браузере.`,
+      `The previous session crashed (${stored.at}). The report is kept in the browser.`);
+    $('crash-restore-download').textContent = uiText('Скачать отчёт', 'Download report');
+    $('crash-restore-clear').textContent = uiText('Убрать', 'Dismiss');
+    $('crash-restore-download').onclick = () => crash?.downloadReport(stored);
+    $('crash-restore-clear').onclick = () => { crash?.clearStoredReport(); $('crash-restore').classList.add('hidden'); };
+    $('crash-restore').classList.remove('hidden');
+  });
   if (!crossOriginIsolated) { startupStatus('Игра не может запуститься: сервер не настроил изоляцию страницы. Сообщите об этом владельцу сайта.', 'The game cannot start because this site has not enabled cross-origin isolation. Please tell the site owner.'); return; }
   if (!navigator.gpu) { startupStatus('В этом браузере недоступен WebGPU. Попробуйте актуальную версию Chrome, Edge или Safari.', 'This browser has no WebGPU. Try a current version of Chrome, Edge or Safari.'); return; }
   // navigator.gpu can exist with no usable adapter (GPU or driver blocklisted, hardware acceleration off,
