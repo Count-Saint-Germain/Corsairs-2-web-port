@@ -1,4 +1,4 @@
-/* Crash reporting for the launcher (defensive layer 0–2, docs/defensive-lifetime-plan.md):
+/* Crash reporting for the launcher:
  * a bounded console ring, a bounded ring of runtime markers, global error hooks, a
  * loading-screen watchdog and one report bundle that turns an emergency into evidence.
  *

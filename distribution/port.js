@@ -75,7 +75,7 @@ const startFailed = (e) => {
 };
 const mb = (n) => (n / 1e6).toFixed(0);
 
-// Crash reporting (docs/defensive-lifetime-plan.md, layers 0–2): a bounded console
+// Crash reporting: a bounded console
 // ring, runtime markers, global error hooks and the report bundle behind the crash
 // overlay. If the module fails to load the launcher works exactly as before — every
 // call below is guarded with `?.`, and hooks record without changing behavior.

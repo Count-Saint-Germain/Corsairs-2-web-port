@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Build identity (docs/defensive-lifetime-plan.md, layer 1): hash the shipped runtime
+// Build identity: hash the shipped runtime
 // and record the manifest versions plus the git state, so any crash report is pinned
 // to the exact build that produced it. Regenerate after every engine rebuild:
 //

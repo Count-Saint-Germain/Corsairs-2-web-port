@@ -1,4 +1,4 @@
-// Build identity (docs/defensive-lifetime-plan.md, layer 1): the committed
+// Build identity: the committed
 // distribution/build/identity.json must describe the actual shipped bytes. A stale
 // file fails here loudly — regenerate with:
 //
